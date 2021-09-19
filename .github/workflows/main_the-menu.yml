@@ -14,13 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - task: Npm@1
-      displayName: 'Install npm 7'
-      inputs:
-        command: 'custom'
-        workingDir: $(Build.Repository.LocalPath)
-        verbose: false
-        customCommand: 'i -g npm@next-7'
     - uses: actions/checkout@v2
 
     - name: Set up Node.js version
@@ -30,7 +23,7 @@ jobs:
         
     - name: npm install and build
       run: |
-        npm install
+        npm prune --production
         npm run build --prod
       working-directory: .
 
