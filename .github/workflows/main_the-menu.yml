@@ -23,7 +23,7 @@ jobs:
         
     - name: npm install and build
       run: |
-        npm prune --production
+        npm install
         npm run build --prod
       working-directory: .
 
