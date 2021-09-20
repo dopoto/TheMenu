@@ -50,6 +50,6 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'the-menu'
+        app-name: 'the-menu-front-end'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_53c3b4094f954a59a186519a45b5d009 }}
         package: ./dist/FrontEend
