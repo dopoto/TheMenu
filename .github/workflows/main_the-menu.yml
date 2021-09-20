@@ -53,4 +53,4 @@ jobs:
         app-name: 'the-menu'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_53c3b4094f954a59a186519a45b5d009 }}
-        package: .
+        package: ./dist/the-menu-front-end
