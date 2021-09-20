@@ -52,4 +52,5 @@ jobs:
       with:
         app-name: 'the-menu-front-end'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_53c3b4094f954a59a186519a45b5d009 }}
+        slot-name: 'production'
         package: ./dist/FrontEend
