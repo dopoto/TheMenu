@@ -4,6 +4,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("https://localhost:4210/",
+                                "https://the-menu-backend.azurewebsites.net/");
+        });
+});
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -18,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BackEnd v1"));
 }
-
+app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
