@@ -21,3 +21,9 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
   workingDirectory: ./FrontEnd
+  
+  # Publish Artifacts
+- task: PublishBuildArtifacts@1
+  inputs:
+    artifactName: dist
+    pathtoPublish: 'dist'
