@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v2
 
@@ -20,12 +20,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-
+        
     - name: npm install and build
       run: |
         npm install
         npm run build --prod
-      working-directory: .
+      working-directory: ./FrontEnd
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v2
@@ -50,7 +50,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'the-menu'
-        slot-name: 'production'
+        app-name: 'the-menu-front-end'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_53c3b4094f954a59a186519a45b5d009 }}
-        package: .
+        slot-name: 'production'
+        package: ./dist/FrontEend
