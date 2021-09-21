@@ -12,8 +12,8 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.x'
-  displayName: 'Install Node.js'
+    versionSpec: '16.6.2'
+  displayName: 'Install Node.js 16.6.2'
 
 - script: |
     npm install -g @angular/cli
@@ -22,8 +22,8 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: ./FrontEnd
   
-  # Publish Artifacts
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Output'
   inputs:
-    artifactName: dist
-    pathtoPublish: 'FrontEnd'
+    targetPath: dist
+    artifact: dist
