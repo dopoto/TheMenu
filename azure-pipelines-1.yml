@@ -12,7 +12,7 @@ variables:
   dotNetVersion: '6.0.x'
   targetRuntime: 'linux-x64'
   azureSPNName: 'azure-service-connection' # AzureDevOps portal > [Your Project] > Settings | Initially defined in Azure Portal > App Registrations. See https://subhankarsarkar.com/dot-net6-azure-web-app-deployment-using-azure-devops-pipeline/
-  azureAppServiceName: 'the-menu-backend' #get it from your Azure portal
+  azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
 
 # Build the app for .NET 6 framework
 steps:
