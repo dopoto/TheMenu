@@ -25,5 +25,5 @@ steps:
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Output'
   inputs:
-    targetPath: dist
-    artifact: dist
+    targetPath: FrontEnd
+    artifact: FrontEnd
