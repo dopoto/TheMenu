@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'https://the-menu-backend.azurewebsites.net'
+  apiEndpoint: '',
+  version: 'DEV'
 };
 
 /*

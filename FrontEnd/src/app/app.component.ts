@@ -23,6 +23,7 @@ export class AppComponent {
   }
 
   title = 'FrontEnd';
+  version = environment.version;
 }
 
 interface WeatherForecast {

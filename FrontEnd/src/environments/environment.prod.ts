@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiEndpoint: '//the-menu-backend.azurewebsites.net'
+  version: 'PROD',
+  apiEndpoint: ' -- SET IN AZURE DEVOPS PIPELINE -- ',
 };
