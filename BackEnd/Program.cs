@@ -1,17 +1,17 @@
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddEnvironmentVariables();
 
 // Add services to the container.
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        builder =>
-        {
-            builder.WithOrigins("https://localhost:4210/",
-                                "https://the-menu-backend.azurewebsites.net/");
-        });
+    var frontEndUrl = builder.Configuration["FrontEndUrl"];
+    options.AddDefaultPolicy(builder => { builder.WithOrigins(frontEndUrl); });
 });
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
@@ -25,7 +25,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BackEnd v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheMenu BackEnd v1"));
 }
 app.UseCors();
 app.UseAuthorization();
