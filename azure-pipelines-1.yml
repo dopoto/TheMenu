@@ -37,10 +37,10 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'TheMenuBackend'
 
-#Publish it to the Azure App Service
-- task: AzureWebApp@1
-  inputs:
-    appType: webAppLinux
-    azureSubscription: $(azureSPNName) #this is the name of the SPN
-    appName: $(azureAppServiceName) #App Service's unique name
-    package: $(Build.ArtifactStagingDirectory)/**/*.zip
+# #Publish it to the Azure App Service
+# - task: AzureWebApp@1
+#   inputs:
+#     appType: webAppLinux
+#     azureSubscription: $(azureSPNName) #this is the name of the SPN
+#     appName: $(azureAppServiceName) #App Service's unique name
+#     package: $(Build.ArtifactStagingDirectory)/**/*.zip
