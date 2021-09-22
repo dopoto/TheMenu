@@ -25,6 +25,14 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: ./FrontEnd
   
+- task: qetza.replacetokens.replacetokens-task.replacetokens@2
+  displayName: 'Replace tokens in **/environment.*'
+  inputs:
+    targetFiles: '**/environment.*'
+    actionOnMissing: fail
+    tokenPrefix: '#{'
+    tokenSuffix: '}#'
+
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Output'
   inputs:
