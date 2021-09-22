@@ -12,8 +12,7 @@ export class AppComponent {
 
   constructor(http: HttpClient) {
     http
-      //.get<WeatherForecast[]>(environment.apiEndpoint + '/weatherforecast')
-      .get<WeatherForecast[]>('/weatherforecast')
+      .get<WeatherForecast[]>(environment.apiEndpoint + '/weatherforecast')
       .subscribe(
         (result) => {
           this.forecasts = result;
