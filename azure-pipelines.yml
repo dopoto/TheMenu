@@ -19,6 +19,19 @@ steps:
     versionSpec: '16.6.2'
   displayName: 'Install Node.js 16.6.2'
 
+- task: replacetokens@4
+  inputs:
+    targetFiles: '**/environments/environment.*'
+    encoding: 'auto'
+    tokenPattern: 'default'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    useLegacyPattern: false
+    enableTelemetry: true
+
 - script: |
     npm install -g @angular/cli
     npm install
@@ -35,18 +48,7 @@ steps:
 #     tokenSuffix: '}#'
 #     aadSqlPassword: 
 
-- task: replacetokens@4
-  inputs:
-    targetFiles: '**/environment.*'
-    encoding: 'auto'
-    tokenPattern: 'default'
-    writeBOM: true
-    actionOnMissing: 'warn'
-    keepToken: false
-    actionOnNoFiles: 'continue'
-    enableTransforms: false
-    useLegacyPattern: false
-    enableTelemetry: true
+
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Output'
