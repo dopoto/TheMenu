@@ -4,6 +4,6 @@
  * */
 export const environment = {
   production: true,
-  version: 'PROD',
   apiEndpoint: '#{apiEndpoint}#',
+  version: '#{version}#'
 };

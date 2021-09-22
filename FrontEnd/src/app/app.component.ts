@@ -24,6 +24,7 @@ export class AppComponent {
 
   title = 'FrontEnd';
   version = environment.version;
+  apiEndpoint = environment.apiEndpoint;
 }
 
 interface WeatherForecast {
