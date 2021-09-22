@@ -1,4 +1,5 @@
 # Node.js with Angular
+
 # Build a Node.js project that uses Angular.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
@@ -25,13 +26,27 @@ steps:
   displayName: 'npm install and build'
   workingDirectory: ./FrontEnd
   
-- task: qetza.replacetokens.replacetokens-task.replacetokens@2
-  displayName: 'Replace tokens in **/environment.*'
+# - task: qetza.replacetokens.replacetokens-task.replacetokens@2
+#   displayName: 'Replace tokens in **/environment.*'
+#   inputs:
+#     targetFiles: '**/environment.*'
+#     actionOnMissing: fail
+#     tokenPrefix: '#{'
+#     tokenSuffix: '}#'
+#     aadSqlPassword: 
+
+- task: replacetokens@4
   inputs:
     targetFiles: '**/environment.*'
-    actionOnMissing: fail
-    tokenPrefix: '#{'
-    tokenSuffix: '}#'
+    encoding: 'auto'
+    tokenPattern: 'default'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    useLegacyPattern: false
+    enableTelemetry: true
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Output'
