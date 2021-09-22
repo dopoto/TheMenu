@@ -31,15 +31,8 @@ steps:
     targetPath: FrontEnd
     artifact: FrontEnd
 
-- task: replacetokens@3
-  inputs:
-    targetFiles: '$(Pipeline.Workspace)/FrontEnd/**/main*.js'
-    encoding: 'auto'
-    writeBOM: true
-    verbosity: 'detailed'
-    actionOnMissing: 'warn'
-    keepToken: false
-    tokenPrefix: '#{'
-    tokenSuffix: '}#'
-    useLegacyPattern: false
-    enableTelemetry: true
+# - task: FileTransform@1
+#   inputs:
+#     folderPath: '$(System.DefaultWorkingDirectory)/**/*.zip'
+#     fileType: 'json'
+#     targetFiles: '**/environment.ts'
