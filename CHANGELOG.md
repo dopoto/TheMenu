@@ -2,10 +2,14 @@
 
 ## Future plans
 - Google authentication
-- Angular 13
+- Frontend / backend unit tests
+- Cypress
 
-## [0.0.1] (2021-09-23)
-Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, separate Azure DevOps pipelines to build and deploy both apps.
+## [v0.0.2] (unreleased)
+- Angular 13 
+
+## [v0.0.1] (2021-09-23)
+Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, individual Azure DevOps pipelines to build and deploy frontend and backend.
 
 - New .NET 6 ASP.NET Core / Angular solution based on the [Visual Studio Standalone Angular template]
 - [SPN / Service Connection for Azure Devops pipelines]
@@ -20,8 +24,7 @@ Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in
 
 
 [0.0.1]: https://github.com/dopoto/TheMenu/releases/tag/0.0.1
-
-
+[0.0.2]: https://github.com/dopoto/TheMenu/compare/0.0.1...0.0.2
 
 
 [Visual Studio Standalone Angular template]: https://docs.microsoft.com/en-us/visualstudio/javascript/tutorial-asp-net-core-with-angular?view=vs-2022
