@@ -9,9 +9,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackEnd", "BackEnd\BackEnd.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A938922C-471D-4224-97F2-672D2FE6B6E7}"
 	ProjectSection(SolutionItems) = preProject
-		azure-pipelines-1.yml = azure-pipelines-1.yml
-		azure-pipelines.yml = azure-pipelines.yml
+		CHANGELOG.md = CHANGELOG.md
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{0015B332-1EC6-4FA1-89AF-5B1925B5D28D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzurePipelines", "AzurePipelines", "{9A4A5B68-EFA1-4EEE-AD1B-567462CF0D35}"
+	ProjectSection(SolutionItems) = preProject
+		Deployment\AzurePipelines\backend.yml = Deployment\AzurePipelines\backend.yml
+		Deployment\AzurePipelines\frontend.yml = Deployment\AzurePipelines\frontend.yml
 	EndProjectSection
 EndProject
 Global
@@ -33,6 +40,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0015B332-1EC6-4FA1-89AF-5B1925B5D28D} = {A938922C-471D-4224-97F2-672D2FE6B6E7}
+		{9A4A5B68-EFA1-4EEE-AD1B-567462CF0D35} = {0015B332-1EC6-4FA1-89AF-5B1925B5D28D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B6386C5E-A7B4-4221-9039-70DF391737F8}
