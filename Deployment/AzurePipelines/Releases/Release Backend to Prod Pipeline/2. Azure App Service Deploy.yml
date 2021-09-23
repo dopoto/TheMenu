@@ -1,0 +1,7 @@
+steps:
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Azure App Service Deploy: the-menu-backend-02'
+  inputs:
+    azureSubscription: 'azure-service-connection'
+    appType: webAppLinux
+    WebAppName: 'the-menu-backend-02'
