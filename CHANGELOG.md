@@ -4,7 +4,7 @@
 - Google authentication
 - Angular 13
 
-## [v0.0.1] (2021-09-23)
+## [0.0.1] (2021-09-23)
 Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, separate Azure DevOps pipelines to build and deploy both apps.
 
 - New .NET 6 ASP.NET Core / Angular solution based on the [Visual Studio Standalone Angular template]
@@ -19,7 +19,7 @@ Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in
 
 
 
-[v0.0.1]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v0.0.1
+[0.0.1]: https://github.com/dopoto/TheMenu/releases/tag/0.0.1
 
 
 
