@@ -1,15 +1,18 @@
 # Changelog
 
 ## Future plans
-- Google authentication
-- Frontend / backend unit tests
+- Frontend / backend unit tests + pipeline runners
 - Cypress
+- Feature flags
+- ApplicationInsights integration for frontend and backend
+- NGRX
 
 ## [v0.0.2] (unreleased)
 - Angular 13 
+- Sign In with Google authentication - [Google external login setup in ASP.NET Core]
 
 ## [v0.0.1] (2021-09-23)
-Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, individual Azure DevOps pipelines to build and deploy frontend and backend.
+*Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, individual Azure DevOps pipelines to build and deploy frontend and backend.*
 
 - New .NET 6 ASP.NET Core / Angular solution based on the [Visual Studio Standalone Angular template]
 - [SPN / Service Connection for Azure Devops pipelines]
@@ -34,3 +37,4 @@ Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in
 [How can I inject Azure DevOps pipeline run number in a build artifact file?]: https://stackoverflow.com/questions/69278412/how-can-i-inject-azure-devops-pipeline-run-number-in-a-build-artifact-file
 [Angular app in Azure Storage Account]: https://ppolyzos.com/2019/01/18/publish-an-angular-web-app-to-azure-using-github-azuredevops-azure-storage-account/
 [Build Pipeline with Azure DevOps – AppSettings.json Transformations]: https://adilraza.ie/2-build-pipeline-with-azure-devops-appsettings-json-transformations/
+[Google external login setup in ASP.NET Core]: https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows#enable-secret-storage

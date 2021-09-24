@@ -10,11 +10,20 @@ builder.Services.AddCors(options =>
 {
     var frontEndUrl = builder.Configuration["FrontEndUrl"];
     var allowedOrigins = new[] { frontEndUrl };
-    options.AddDefaultPolicy(builder => { 
-        builder.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod(); 
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod();
     });
 });
 builder.Services.AddControllers();
+//builder.Services.AddAuthentication()
+//    .AddGoogle(options =>
+//    {
+//        IConfigurationSection googleAuthNSection =
+//            builder.Configuration.GetSection("Authentication:Google");
+//        options.ClientId = googleAuthNSection["ClientId"];
+//        options.ClientSecret = googleAuthNSection["ClientSecret"];
+//    });
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new() { Title = "BackEnd", Version = "v1" });
