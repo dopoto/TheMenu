@@ -17,13 +17,16 @@ variables:
 steps:
 
 ## NOTE: An Azure Devops parameter should be set for each property in \Models\AppSecret.cs
-- displayName: 'Update AppSettings file with secrets'
-  powershell: | 
-    $pathToJson = "Backend/appsettings.json"
-    $a = Get-Content $pathToJson | ConvertFrom-Json
-    $a.AppSettings.GoogleSignInClientId = ${{parameters.GoogleSignInClientId}}
-    $a.AppSettings.GoogleSignInClientSecret =  ${{parameters.GoogleSignInClientSecret}} 
-    $a | ConvertTo-Json | set-content $pathToJson
+- task: PowerShell@2
+  displayName: 'Update AppSettings file with secrets'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $pathToJson = "Backend/appsettings.json"
+      $a = Get-Content $pathToJson | ConvertFrom-Json
+      $a.AppSettings.GoogleSignInClientId = ${{parameters.GoogleSignInClientId}}
+      $a.AppSettings.GoogleSignInClientSecret =  ${{parameters.GoogleSignInClientSecret}} 
+      $a | ConvertTo-Json | set-content $pathToJson
 
 - task: UseDotNet@2
   displayName: 'Build .NET 6 Application'
