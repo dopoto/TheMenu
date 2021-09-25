@@ -11,6 +11,7 @@
 - Angular 13 
 - Sign In with Google authentication - [Google external login setup in ASP.NET Core], [How to Sign in with Google Using Angular and ASP.NET Core Web API]
 - Set up app secrets [Safe storage of app secrets in development in ASP.NET Core]
+- Populate secrets in AzureDevops - [Using secrets safely in development with .NET Core]
 - EntityFramework Core Code First - [Tutorial: Get started with EF Core in an ASP.NET MVC web app]
 
 ## [v0.0.1] (2021-09-23)
@@ -42,4 +43,5 @@
 [Google external login setup in ASP.NET Core]: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/social/google-logins?view=aspnetcore-5.0
 [How to Sign in with Google Using Angular and ASP.NET Core Web API]: https://code-maze.com/how-to-sign-in-with-google-angular-aspnet-webapi/
 [Safe storage of app secrets in development in ASP.NET Core]: https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows#enable-secret-storage
+[Using secrets safely in development with .NET Core]: https://samlearnsazure.blog/2020/06/17/using-secrets-safely-in-development-with-net-core/
 [Tutorial: Get started with EF Core in an ASP.NET MVC web app]: - https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0
