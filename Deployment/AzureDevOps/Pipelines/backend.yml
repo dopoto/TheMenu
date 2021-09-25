@@ -32,8 +32,8 @@ steps:
     script: |
       $pathToJson = "BackEnd/appsettings.json"
       $a = Get-Content $pathToJson | ConvertFrom-Json
-      $a.AppSettings.GoogleSignInClientId = $(GoogleSignInClientId)
-      $a.AppSettings.GoogleSignInClientSecret =  $(GoogleSignInClientSecret)
+      $a.AppSettings.GoogleSignInClientId = "$(GoogleSignInClientId)"
+      $a.AppSettings.GoogleSignInClientSecret =  "$(GoogleSignInClientSecret)"
       $a | ConvertTo-Json | set-content $pathToJson
 
 - task: UseDotNet@2
