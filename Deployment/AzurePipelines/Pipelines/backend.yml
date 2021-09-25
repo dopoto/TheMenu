@@ -14,29 +14,41 @@ variables:
   azureSPNName: 'azure-service-connection' # AzureDevOps portal > [Your Project] > Settings | Initially defined in Azure Portal > App Registrations. See https://subhankarsarkar.com/dot-net6-azure-web-app-deployment-using-azure-devops-pipeline/
   azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
 
-# Build the app for .NET 6 framework
 steps:
+
+## NOTE: An Azure Devops parameter should be set for each property in \Models\AppSecret.cs
+- displayName: 'Update AppSettings file with secrets'
+  powershell: | 
+    $pathToJson = "Backend/appsettings.json"
+    $a = Get-Content $pathToJson | ConvertFrom-Json
+    $a.AppSettings.GoogleSignInClientId = ${{parameters.GoogleSignInClientId}}
+    $a.AppSettings.GoogleSignInClientSecret =  ${{parameters.GoogleSignInClientSecret}} 
+    $a | ConvertTo-Json | set-content $pathToJson
+
 - task: UseDotNet@2
+  displayName: 'Build .NET 6 Application'
   inputs:
     version: $(dotNetVersion)
     includePreviewVersions: true
 - script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'Build .NET 6 Application'
 
-# Publish it as .NET 6 self-contained application for linux runtime
 - task: DotNetCoreCLI@2
+  displayName: 'Publish app as .NET 6 self-contained application for Linux runtime'
   inputs:
     command: publish
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --framework $(dotNetFramework) --runtime $(targetRuntime) --self-contained --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
-# Package the file and uploads them as an artifact of the build
 - task: PublishPipelineArtifact@1
+  displayName: 'Package the file and upload it as artifact of the build'    
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'TheMenuBackend'
 
+##
+## NOT IN USE - USING Release instead. See Releases\Release Backend to Prod Pipeline
+##
 # #Publish it to the Azure App Service
 # - task: AzureWebApp@1
 #   inputs:
