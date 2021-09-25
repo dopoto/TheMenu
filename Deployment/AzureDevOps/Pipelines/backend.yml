@@ -30,7 +30,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $pathToJson = "/BackEnd/appsettings.json"
+      $pathToJson = "BackEnd/appsettings.json"
       $a = Get-Content $pathToJson | ConvertFrom-Json
       $a.AppSettings.GoogleSignInClientId = $(GoogleSignInClientId)
       $a.AppSettings.GoogleSignInClientSecret =  $(GoogleSignInClientSecret)
