@@ -7,12 +7,20 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  buildConfiguration: 'Release'
-  dotNetFramework: 'net6.0'
-  dotNetVersion: '6.0.x'
-  targetRuntime: 'linux-x64'
-  azureSPNName: 'azure-service-connection' # AzureDevOps portal > [Your Project] > Settings | Initially defined in Azure Portal > App Registrations. See https://subhankarsarkar.com/dot-net6-azure-web-app-deployment-using-azure-devops-pipeline/
-  azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
+- group: PROD
+- name: buildConfiguration
+  value: 'Release'
+- name: dotNetFramework
+  value: 'net6.0'
+- name: dotNetVersion
+  value: '6.0.x'
+- name: targetRuntime
+  value: 'linux-x64'
+- name: azureSPNName
+  value: 'azure-service-connection' # AzureDevOps portal > [Your Project] > Settings | Initially defined in Azure Portal > App Registrations. See https://subhankarsarkar.com/dot-net6-azure-web-app-deployment-using-azure-devops-pipeline/
+#  azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
+
+
 
 steps:
 
@@ -22,10 +30,10 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $pathToJson = "Backend/appsettings.json"
+      $pathToJson = "BackEnd/appsettings.json"
       $a = Get-Content $pathToJson | ConvertFrom-Json
-      $a.AppSettings.GoogleSignInClientId = ${{parameters.GoogleSignInClientId}}
-      $a.AppSettings.GoogleSignInClientSecret =  ${{parameters.GoogleSignInClientSecret}} 
+      $a.GoogleSignInClientId = '$(GoogleSignInClientId)'
+      $a.GoogleSignInClientSecret =  '$(GoogleSignInClientSecret)'
       $a | ConvertTo-Json | set-content $pathToJson
 
 - task: UseDotNet@2
