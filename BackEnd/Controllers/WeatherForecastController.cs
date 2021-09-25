@@ -26,8 +26,7 @@ namespace BackEnd.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var clientId = _configuration.Get<AppSecrets>().GoogleSignInClientId;
-
+            var clientId = _configuration.Get<EnvironmentSpecificSettings>().GoogleSignInClientId;
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

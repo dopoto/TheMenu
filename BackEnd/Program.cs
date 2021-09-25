@@ -3,16 +3,18 @@ using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>();
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddUserSecrets<AppSecrets>()
+    .AddUserSecrets<EnvironmentSpecificSettings>()
     .AddEnvironmentVariables();
 
 // Add services to the container.
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(environmentSettings.SqlDbConnectionString)
+);
 
 builder.Services.AddCors(options =>
 {
@@ -28,9 +30,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddAuthentication().AddGoogle(options =>
 {
-    var appSecrets = builder.Configuration.Get<AppSecrets>();
-    options.ClientId = appSecrets.GoogleSignInClientId;
-    options.ClientSecret = appSecrets.GoogleSignInClientSecret;
+    options.ClientId = environmentSettings.GoogleSignInClientId;
+    options.ClientSecret = environmentSettings.GoogleSignInClientSecret;
 });
 
 builder.Services.AddSwaggerGen(c =>

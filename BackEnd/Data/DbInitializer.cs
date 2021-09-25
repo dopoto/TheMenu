@@ -6,7 +6,7 @@ namespace TheMenu.BackEnd.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            var x = new AppSecrets();
+            var x = new EnvironmentSpecificSettings();
             context.Database.EnsureCreated();
 
             // Look for any users.
