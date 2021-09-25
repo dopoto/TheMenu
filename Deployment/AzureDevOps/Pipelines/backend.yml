@@ -7,6 +7,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
+- group: PROD
   buildConfiguration: 'Release'
   dotNetFramework: 'net6.0'
   dotNetVersion: '6.0.x'
