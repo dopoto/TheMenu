@@ -6,7 +6,6 @@ namespace TheMenu.BackEnd.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            var x = new EnvironmentSpecificSettings();
             context.Database.EnsureCreated();
 
             // Look for any users.
@@ -17,7 +16,7 @@ namespace TheMenu.BackEnd.Data
 
             var users = new User[]
             {
-            new User {ID= Guid.NewGuid(), Email="user@example.com", CreatedDate = DateTime.Now}
+                new User {ID= Guid.NewGuid(), Email="user@example.com", CreatedDate = DateTime.Now}
             };
             foreach (User s in users)
             {
