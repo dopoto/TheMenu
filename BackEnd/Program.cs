@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheMenu.BackEnd.Data;
+using TheMenu.BackEnd.Interfaces;
 using TheMenu.BackEnd.Models;
+using TheMenu.BackEnd.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>();
@@ -15,6 +17,7 @@ builder.Configuration
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(environmentSettings.SqlDbConnectionString)
 );
+builder.Services.AddScoped<IDataRepository<User>, UsersService>();
 
 builder.Services.AddCors(options =>
 {

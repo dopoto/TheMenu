@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { take } from 'rxjs';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -8,27 +10,26 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  public forecasts?: WeatherForecast[];
-
   constructor(http: HttpClient) {
     http
-      .get<WeatherForecast[]>(environment.apiEndpoint + '/weatherforecast')
-      .subscribe(
-        (result) => {
-          this.forecasts = result;
-        },
-        (error) => console.error(error)
-      );
+      .get<number>(environment.apiEndpoint + '/diagnose/app-health')
+      .pipe(take(1))
+      .subscribe({
+        next: (data: number) => (this.appHealth = data),
+        error: (err) => console.log(err), //TODO
+      });
+
+    http
+      .get<number>(environment.apiEndpoint + '/diagnose/database-health')
+      .pipe(take(1))
+      .subscribe({
+        next: (data: number) => (this.dbHealth = data),
+        error: (err) => console.log(err), //TODO
+      });
   }
 
   title = 'FrontEnd';
   version = environment.version;
-  apiEndpoint = environment.apiEndpoint;
-}
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  appHealth: number;
+  dbHealth: number;
 }

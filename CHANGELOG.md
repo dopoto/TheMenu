@@ -6,6 +6,10 @@
 - Feature flags
 - ApplicationInsights integration for frontend and backend
 - NGRX
+- EF migrations
+- NSwag
+- Authorize for all endpoints by default
+- Fix nullable-related warnings
 
 ## [v0.0.2] (unreleased)
 - Angular 13 
@@ -14,6 +18,7 @@
 - Populate secrets in AzureDevops - [Using secrets safely in development with .NET Core]
 - EntityFramework Core Code First - [Tutorial: Get started with EF Core in an ASP.NET MVC web app]
 - ApplicationInsights - backend
+- Diagnose / ping
 
 ## [v0.0.1] (2021-09-23)
 *Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, individual Azure DevOps pipelines to build and deploy frontend and backend.*

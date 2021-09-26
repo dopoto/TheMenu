@@ -35,7 +35,7 @@
 
         public string? SqlDbConnectionString { get; set; }
 
-        public string FrontEndUrl { get; set; }
+        public string? FrontEndUrl { get; set; }
 
         public string? ApplicationInsightsConnectionString { get; set; }
 
