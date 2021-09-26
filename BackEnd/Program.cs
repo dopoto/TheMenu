@@ -12,9 +12,9 @@ builder.Configuration
 
 // Add services to the container.
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(environmentSettings.SqlDbConnectionString)
-);
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseSqlServer(environmentSettings.SqlDbConnectionString)
+//);
 
 builder.Services.AddCors(options =>
 {
@@ -54,20 +54,20 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<AppDbContext>();
-        DbInitializer.Initialize(context);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred creating the DB.");
-    }
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    try
+//    {
+//        var context = services.GetRequiredService<AppDbContext>();
+//        DbInitializer.Initialize(context);
+//    }
+//    catch (Exception ex)
+//    {
+//        var logger = services.GetRequiredService<ILogger<Program>>();
+//        logger.LogError(ex, "An error occurred creating the DB.");
+//    }
+//}
 
 
 app.Run();
