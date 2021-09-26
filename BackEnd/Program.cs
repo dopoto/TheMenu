@@ -7,7 +7,7 @@ var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddUserSecrets<EnvironmentSpecificSettings>()
+    .AddUserSecrets<EnvironmentSpecificSettings>(optional: true)
     .AddEnvironmentVariables();
 
 // Add services to the container.

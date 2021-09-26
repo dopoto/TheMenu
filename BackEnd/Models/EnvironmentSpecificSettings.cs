@@ -25,20 +25,20 @@
         /// The Google SignIn app OAuth client ID.
         /// <see cref="https://developers.google.com/identity/sign-in/web/sign-in"/>
         /// </summary>
-        public string GoogleSignInClientId {  get; set; }
+        public string? GoogleSignInClientId {  get; set; }
 
         /// <summary>
         /// The Google SignIn app OAuth client secret.
         /// <see cref="https://developers.google.com/identity/sign-in/web/sign-in"/>
         /// </summary>
-        public string GoogleSignInClientSecret { get; set; }
+        public string? GoogleSignInClientSecret { get; set; }
 
-        public string SqlDbConnectionString { get; set; }
+        public string? SqlDbConnectionString { get; set; }
 
         public string FrontEndUrl { get; set; }
 
-        public string ApplicationInsightsConnectionString { get; set; }
+        public string? ApplicationInsightsConnectionString { get; set; }
 
-        public string ApplicationInsightsInstrumentationKey { get; set; }
+        public string? ApplicationInsightsInstrumentationKey { get; set; }
     }   
 }
