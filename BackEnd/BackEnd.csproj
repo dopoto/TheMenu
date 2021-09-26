@@ -8,6 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TheMenu.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <AssemblyName>TheMenu.$(MSBuildProjectName)</AssemblyName>
+    <VersionPrefix>0.0.1</VersionPrefix>
     <ApplicationInsightsResourceId>/subscriptions/bc1147f0-62fa-4c84-b4ca-e734292b133f/resourceGroups/the-menu-resource-group/providers/microsoft.insights/components/the-menu-dev-app-insights</ApplicationInsightsResourceId>
   </PropertyGroup>
 

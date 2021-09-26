@@ -18,7 +18,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddCors(options =>
 {
-    var frontEndUrl = builder.Configuration["FrontEndUrl"];
+    var frontEndUrl = environmentSettings.FrontEndUrl;
     var allowedOrigins = new[] { frontEndUrl };
     options.AddDefaultPolicy(builder =>
     {
