@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TheMenu.BackEnd.Models;
-
 namespace BackEnd.Controllers
 {
     [ApiController]
@@ -26,13 +24,11 @@ namespace BackEnd.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var clientId = _configuration.Get<EnvironmentSpecificSettings>().GoogleSignInClientId;
-
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = clientId + Summaries[Random.Shared.Next(Summaries.Length)]
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
         }

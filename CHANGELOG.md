@@ -13,6 +13,7 @@
 - Set up app secrets [Safe storage of app secrets in development in ASP.NET Core]
 - Populate secrets in AzureDevops - [Using secrets safely in development with .NET Core]
 - EntityFramework Core Code First - [Tutorial: Get started with EF Core in an ASP.NET MVC web app]
+- ApplicationInsights - backend
 
 ## [v0.0.1] (2021-09-23)
 *Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, individual Azure DevOps pipelines to build and deploy frontend and backend.*

@@ -12,9 +12,7 @@ A sample .NET 6 / Angular project.
 - Angular dev environment
 - A Google OAuth app (https://developers.google.com/identity/sign-in/web/sign-in)
 
-### One time steps
-
-Go through  
+### TODO
 
 ### Running the app
 
