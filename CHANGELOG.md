@@ -12,6 +12,7 @@
 - Fix nullable-related warnings
 - Localization
 - Content-Security-Policy
+- Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser> https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-6.0&tabs=visual-studio#add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser
 
 ## [v0.0.2] (unreleased)
 - Angular 13 
@@ -22,6 +23,7 @@
 Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1d895c3ce195ba983b1e03d ""Some tools (like EF migrations) use Program.CreateHostBuilder to access the application's IServiceProvider to execute custom logic in the context of the application, these tools have been updated to use a new technique to achieve the same thing. We will work with the ecosystem to make sure tools are all updated to use the new model."
 - ApplicationInsights - backend
 - Diagnose / ping
+- ASP.NET Identity + EntityFramework Core Migrations [Scaffold Identity in ASP.NET Core projects], [Tutorial: Get started with EF Core in an ASP.NET MVC web app]
 
 ## [v0.0.1] (2021-09-23)
 *Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, individual Azure DevOps pipelines to build and deploy frontend and backend.*
@@ -54,3 +56,5 @@ Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1
 [Safe storage of app secrets in development in ASP.NET Core]: https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows#enable-secret-storage
 [Using secrets safely in development with .NET Core]: https://samlearnsazure.blog/2020/06/17/using-secrets-safely-in-development-with-net-core/
 [Tutorial: Get started with EF Core in an ASP.NET MVC web app]: - https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0
+[ASP.NET Core Identity]: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-6.0&tabs=visual-studio#scaffold-identity-into-a-razor-project-without-existing-authorization
+[Scaffold Identity in ASP.NET Core projects]: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-6.0&tabs=visual-studio#scaffold-identity-into-a-razor-project-without-existing-authorization

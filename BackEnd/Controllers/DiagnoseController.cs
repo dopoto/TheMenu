@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Interfaces;
 using TheMenu.BackEnd.Models;
 
@@ -10,14 +11,14 @@ namespace BackEnd.Controllers
     {
         private readonly ILogger<DiagnoseController> _logger;
         private readonly IConfiguration _configuration;
-        private readonly IDataRepository<User> _usersService;
+        private readonly TheMenuBackEndContext _dbContext;
 
         public DiagnoseController(ILogger<DiagnoseController> logger,
-            IConfiguration configuration, IDataRepository<User> usersService)
+            IConfiguration configuration, TheMenuBackEndContext dbContext)
         {
             _logger = logger;
             _configuration = configuration;
-            _usersService = usersService;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
@@ -44,8 +45,7 @@ namespace BackEnd.Controllers
             try
             {
                 // TODO Replace with lighter check
-                IEnumerable<User> users = _usersService.GetAll();
-                return users.Count() > 0 ? 1 : 0;
+                return _dbContext.Users.Any() ? 1 : 0;
             }
             catch
             {

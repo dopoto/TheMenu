@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TheMenu.BackEnd.Data;
-using TheMenu.BackEnd.Interfaces;
 using TheMenu.BackEnd.Models;
-using TheMenu.BackEnd.Services;
+using TheMenu.BackEnd.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>();
 
 builder.Configuration
@@ -13,31 +14,17 @@ builder.Configuration
     .AddUserSecrets<EnvironmentSpecificSettings>(optional: true)
     .AddEnvironmentVariables();
 
-//builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-//{
-//    options.User.RequireUniqueEmail = false;
-//})
-//    //.AddEntityFrameworkStores<Providers.Database.EFProvider.DataContext>()
-//    .AddDefaultTokenProviders();
-
-builder.Services.AddIdentity<User, IdentityRole>(opt =>
-{
-
-    opt.User.RequireUniqueEmail = true;
-
-    opt.Lockout.AllowedForNewUsers = true;
-    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
-    opt.Lockout.MaxFailedAccessAttempts = 3;
-})
- //.AddEntityFrameworkStores<RepositoryContext>()
- .AddDefaultTokenProviders();
+var connectionString = builder.Configuration.GetConnectionString("TheMenuBackEndContextConnection");
+builder.Services.AddDbContext<TheMenuBackEndContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<TheMenuBackEndUser>(
+    options => options.SignIn.RequireConfirmedAccount = true
+)
+.AddEntityFrameworkStores<TheMenuBackEndContext>();
 
 // Add services to the container.
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(environmentSettings.SqlDbConnectionString)
-);
-builder.Services.AddScoped<IDataRepository<User>, UsersService>();
+//builder.Services.AddScoped<IDataRepository<User>, UsersService>();
 
 builder.Services.AddCors(options =>
 {
@@ -72,6 +59,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheMenu BackEnd v1"));
 }
 app.UseCors();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -82,13 +70,13 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<AppDbContext>();
+        var context = services.GetRequiredService<TheMenuBackEndContext>();
         DbInitializer.Initialize(context);
     }
     catch (Exception ex)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred creating the DB.");
+        //var logger = services.GetRequiredService<ILogger<Program>>();
+        //logger.LogError(ex, "An error occurred creating the DB.");
     }
 }
 
