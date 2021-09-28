@@ -1,10 +1,10 @@
-﻿using TheMenu.BackEnd.Models;
+﻿using TheMenu.BackEnd.Areas.Identity.Data;
 
 namespace TheMenu.BackEnd.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(AppDbContext context)
+        public static void Initialize(TheMenuBackEndContext context)
         {
             context.Database.EnsureCreated();
 
@@ -14,11 +14,11 @@ namespace TheMenu.BackEnd.Data
                 return;   // DB has been seeded
             }
 
-            var users = new User[]
+            var users = new TheMenuBackEndUser[]
             {
-                new User {ID= Guid.NewGuid(), Email="user@example.com", CreatedDate = DateTime.Now}
+                new TheMenuBackEndUser {Email="user@example.com"}
             };
-            foreach (User s in users)
+            foreach (TheMenuBackEndUser s in users)
             {
                 context.Users.Add(s);
             }

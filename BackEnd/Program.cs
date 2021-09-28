@@ -1,18 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheMenu.BackEnd.Data;
-using TheMenu.BackEnd.Interfaces;
 using TheMenu.BackEnd.Models;
-using TheMenu.BackEnd.Services;
-using Microsoft.AspNetCore.Identity;
 using TheMenu.BackEnd.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("TheMenuBackEndContextConnection");
-builder.Services.AddDbContext<TheMenuBackEndContext>(options =>
-    options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<TheMenuBackEndUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<TheMenuBackEndContext>();
+
 var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>();
 
 builder.Configuration
@@ -20,10 +13,17 @@ builder.Configuration
     .AddUserSecrets<EnvironmentSpecificSettings>(optional: true)
     .AddEnvironmentVariables();
 
+var connectionString = builder.Configuration.GetConnectionString("TheMenuBackEndContextConnection");
+builder.Services.AddDbContext<TheMenuBackEndContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<TheMenuBackEndUser>(
+    options => options.SignIn.RequireConfirmedAccount = true
+)
+.AddEntityFrameworkStores<TheMenuBackEndContext>();
+
 // Add services to the container.
 
-
-builder.Services.AddScoped<IDataRepository<User>, UsersService>();
+//builder.Services.AddScoped<IDataRepository<User>, UsersService>();
 
 builder.Services.AddCors(options =>
 {
@@ -69,7 +69,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<AppDbContext>();
+        var context = services.GetRequiredService<TheMenuBackEndContext>();
         DbInitializer.Initialize(context);
     }
     catch (Exception ex)
