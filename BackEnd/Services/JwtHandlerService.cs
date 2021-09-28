@@ -4,6 +4,8 @@ using System.Text;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using TheMenu.BackEnd.Areas.Identity.Data;
+using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Models;
 
 namespace TheMenu.BackEnd.Services
@@ -13,9 +15,9 @@ namespace TheMenu.BackEnd.Services
 		private readonly IConfiguration _configuration;
         private readonly IConfigurationSection _jwtSettings;
         private readonly IConfigurationSection _goolgeSettings;
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<TheMenuBackEndUser> _userManager;
 
-        public JwtHandlerService(IConfiguration configuration, UserManager<User> userManager)
+        public JwtHandlerService(IConfiguration configuration, UserManager<TheMenuBackEndUser> userManager)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -31,7 +33,7 @@ namespace TheMenu.BackEnd.Services
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        private async Task<List<Claim>> GetClaims(User user)
+        private async Task<List<Claim>> GetClaims(TheMenuBackEndUser user)
         {
             var claims = new List<Claim>
             {
@@ -59,7 +61,7 @@ namespace TheMenu.BackEnd.Services
             return tokenOptions;
         }
 
-        public async Task<string> GenerateToken(User user)
+        public async Task<string> GenerateToken(TheMenuBackEndUser user)
         {
             var signingCredentials = GetSigningCredentials();
             var claims = await GetClaims(user);

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Models;
 using TheMenu.BackEnd.Areas.Identity.Data;
+using TheMenu.BackEnd.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ builder.Services.AddDefaultIdentity<TheMenuBackEndUser>(
 .AddEntityFrameworkStores<TheMenuBackEndContext>();
 
 // Add services to the container.
+
+builder.Services.AddScoped<JwtHandlerService>();
 
 //builder.Services.AddScoped<IDataRepository<User>, UsersService>();
 

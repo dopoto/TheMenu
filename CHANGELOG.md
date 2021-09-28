@@ -1,6 +1,7 @@
 # Changelog
 
 ## Future plans
+- [Run EF Core Migrations in Azure DevOps]
 - Frontend / backend unit tests + pipeline runners
 - Cypress
 - Feature flags
@@ -58,3 +59,4 @@ Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1
 [Tutorial: Get started with EF Core in an ASP.NET MVC web app]: - https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-6.0
 [ASP.NET Core Identity]: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-6.0&tabs=visual-studio#scaffold-identity-into-a-razor-project-without-existing-authorization
 [Scaffold Identity in ASP.NET Core projects]: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-6.0&tabs=visual-studio#scaffold-identity-into-a-razor-project-without-existing-authorization
+[Run EF Core Migrations in Azure DevOps]: https://dotnetthoughts.net/run-ef-core-migrations-in-azure-devops/

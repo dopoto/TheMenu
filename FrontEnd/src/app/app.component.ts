@@ -32,8 +32,10 @@ export class AppComponent {
   }
 
   public externalLogin = () => {
+    debugger;
     this.authService.signInWithGoogle().then(
       (res) => {
+        debugger;
         const user: SocialUser = { ...res };
         console.log(user);
         const externalAuth: ExternalAuth = {

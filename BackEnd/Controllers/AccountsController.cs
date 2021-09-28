@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using TheMenu.BackEnd.Models;
 using TheMenu.BackEnd.Services;
+using TheMenu.BackEnd.Data;
+using TheMenu.BackEnd.Areas.Identity.Data;
 
 namespace TheMenu.BackEnd.Controllers
 {
@@ -9,10 +11,13 @@ namespace TheMenu.BackEnd.Controllers
     [Route("[controller]")]
     public class AccountsController : ControllerBase
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<TheMenuBackEndUser> _userManager;
         private readonly JwtHandlerService _jwtHandlerService;
 
-        public AccountsController(UserManager<User> userManager,
+        public AccountsController(
+            ILogger<AccountsController> logger,
+            IConfiguration configuration,
+            UserManager<TheMenuBackEndUser> userManager,
             JwtHandlerService jwtHandlerService)
         {
             _userManager = userManager;
@@ -22,14 +27,16 @@ namespace TheMenu.BackEnd.Controllers
         [HttpPost]
         [Route("external-login")]
         [EndpointName("/accounts/external-login")]
-        public async Task<IActionResult> ExternalLogin([FromBody] ExternalAuth externalAuth)
+        public async Task<IActionResult> ExternalLogin(
+            [FromBody] ExternalAuth externalAuth)
         {
             var payload = await _jwtHandlerService.VerifyGoogleToken(externalAuth);
             if (payload == null)
+            {
                 return BadRequest("Invalid External Authentication.");
-            var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
+            }
 
-            // TODO Revisit after implementing EF Core Migrations and adding identity tables (AspNetUsers etc)
+            var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
 
             var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             if (user == null)
@@ -38,23 +45,26 @@ namespace TheMenu.BackEnd.Controllers
 
                 if (user == null)
                 {
-                    // TODO user = new User { Email = payload.Email, UserName = payload.Email };
-                    user = new User { Email = payload.Email };
+                    user = new TheMenuBackEndUser { Email = payload.Email, UserName = payload.Email };
                     await _userManager.CreateAsync(user);
-                    await _userManager.AddToRoleAsync(user, "Viewer");
-                    await _userManager.AddLoginAsync(user, info);
+
+                    // TODO prepare and send an email for the email confirmation
+                    
+                    // TODO
+                    //await _userManager.AddToRoleAsync(user, "Viewer");
+                    //await _userManager.AddLoginAsync(user, info);
                 }
                 else
                 {
-                    await _userManager.AddLoginAsync(user, info);
+                    // TODO
+                    //await _userManager.AddLoginAsync(user, info);
                 }
             }
 
-            if (user == null) {
+            if (user == null)
                 return BadRequest("Invalid External Authentication.");
-            }
 
-            // TODO check for the Locked out account
+            //check for the Locked out account
 
             var token = await _jwtHandlerService.GenerateToken(user);
             return Ok(new AuthResponse { Token = token, IsAuthSuccessful = true });
