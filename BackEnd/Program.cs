@@ -3,8 +3,16 @@ using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Interfaces;
 using TheMenu.BackEnd.Models;
 using TheMenu.BackEnd.Services;
+using Microsoft.AspNetCore.Identity;
+using TheMenu.BackEnd.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("TheMenuBackEndContextConnection");
+builder.Services.AddDbContext<TheMenuBackEndContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<TheMenuBackEndUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<TheMenuBackEndContext>();
 var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>();
 
 builder.Configuration
@@ -14,9 +22,7 @@ builder.Configuration
 
 // Add services to the container.
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(environmentSettings.SqlDbConnectionString)
-);
+
 builder.Services.AddScoped<IDataRepository<User>, UsersService>();
 
 builder.Services.AddCors(options =>
@@ -52,6 +58,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheMenu BackEnd v1"));
 }
 app.UseCors();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -67,8 +74,8 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred creating the DB.");
+        //var logger = services.GetRequiredService<ILogger<Program>>();
+        //logger.LogError(ex, "An error occurred creating the DB.");
     }
 }
 
