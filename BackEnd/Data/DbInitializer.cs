@@ -16,7 +16,7 @@ namespace TheMenu.BackEnd.Data
 
             var users = new User[]
             {
-                new User {ID= Guid.NewGuid(), Email="user@example.com", CreatedDate = DateTime.Now}
+                new User {GuidId= Guid.NewGuid(), Email="user@example.com", CreatedDate = DateTime.Now}
             };
             foreach (User s in users)
             {

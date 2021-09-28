@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Interfaces;
 using TheMenu.BackEnd.Models;
@@ -11,6 +12,25 @@ builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddUserSecrets<EnvironmentSpecificSettings>(optional: true)
     .AddEnvironmentVariables();
+
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+//{
+//    options.User.RequireUniqueEmail = false;
+//})
+//    //.AddEntityFrameworkStores<Providers.Database.EFProvider.DataContext>()
+//    .AddDefaultTokenProviders();
+
+builder.Services.AddIdentity<User, IdentityRole>(opt =>
+{
+
+    opt.User.RequireUniqueEmail = true;
+
+    opt.Lockout.AllowedForNewUsers = true;
+    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+    opt.Lockout.MaxFailedAccessAttempts = 3;
+})
+ //.AddEntityFrameworkStores<RepositoryContext>()
+ .AddDefaultTokenProviders();
 
 // Add services to the container.
 

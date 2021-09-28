@@ -2,11 +2,9 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 
+<button class="btn btn-info" type="button" (click)="externalLogin()">Google</button>
 
-
-<p *ngIf="!appHealth"><em>Loading... Please refresh once the ASP.NET backend has started.</em></p>
-
-<p *ngIf="appHealth">AppHealth: {{appHealth}}</p>
-<p *ngIf="dbHealth">DbHealth: {{dbHealth}}</p>
+<p>AppHealth: {{appHealth}}</p>
+<p>DbHealth: {{dbHealth}}</p>

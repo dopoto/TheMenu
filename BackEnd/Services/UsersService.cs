@@ -20,7 +20,7 @@ namespace TheMenu.BackEnd.Services
         }
         public User Get(Guid id)
         {
-            return _appDbContext.Users.FirstOrDefault(e => e.ID == id);
+            return _appDbContext.Users.FirstOrDefault(e => e.Id == id.ToString());
         }
 
         public void Add(User entity)

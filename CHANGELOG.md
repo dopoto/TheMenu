@@ -10,13 +10,16 @@
 - NSwag
 - Authorize for all endpoints by default
 - Fix nullable-related warnings
+- Localization
+- Content-Security-Policy
 
 ## [v0.0.2] (unreleased)
 - Angular 13 
 - Sign In with Google authentication - [Google external login setup in ASP.NET Core], [How to Sign in with Google Using Angular and ASP.NET Core Web API]
 - Set up app secrets [Safe storage of app secrets in development in ASP.NET Core]
 - Populate secrets in AzureDevops - [Using secrets safely in development with .NET Core]
-- EntityFramework Core Code First - [Tutorial: Get started with EF Core in an ASP.NET MVC web app]
+- EntityFramework Core Code First Migrations - [Tutorial: Get started with EF Core in an ASP.NET MVC web app]. 
+Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1d895c3ce195ba983b1e03d ""Some tools (like EF migrations) use Program.CreateHostBuilder to access the application's IServiceProvider to execute custom logic in the context of the application, these tools have been updated to use a new technique to achieve the same thing. We will work with the ecosystem to make sure tools are all updated to use the new model."
 - ApplicationInsights - backend
 - Diagnose / ping
 

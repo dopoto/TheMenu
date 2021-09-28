@@ -1,10 +1,11 @@
-﻿namespace TheMenu.BackEnd.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace TheMenu.BackEnd.Models
 {
-    public class User
+    public class User : IdentityUser
     {
-        public Guid ID { get; set; }
+        public Guid GuidId { get; set; }
         
-        public string Email { get; set; }
 
         public DateTime CreatedDate { get; set; }      
     }
