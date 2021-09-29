@@ -24,8 +24,7 @@ variables:
 
 steps:
 
-
-- task:
+- task: UseDotNet@2
   displayName: New Manifest for tooling
   inputs:
     version: $(dotNetVersion)
