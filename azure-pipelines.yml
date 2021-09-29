@@ -131,18 +131,50 @@ steps:
 
 
 # v6.1
+# /usr/bin/bash --noprofile --norc /home/vsts/work/_temp/2619a099-9090-41ba-853d-64b4b7562f7b.sh
+# Creating this template will make changes to existing files:
+#   Overwrite   ./.config/dotnet-tools.json
+
+# Rerun the command and pass --force to accept and create.
+# You can invoke the tool using the following command: dotnet-ef
+# Tool 'dotnet-ef' (version '6.0.0-rc.1.21452.10') was successfully installed.
+# Tool 'dotnet-ef' was reinstalled with the latest stable version (version '6.0.0-rc.1.21452.10').
+# Tool 'dotnet-ef' (version '5.0.10') was restored. Available commands: dotnet-ef
+
+# Restore was successful.
+# Build started...
+# Build succeeded.
+# Specify --help for a list of available options and commands.
+# Unrecognized command or argument 'bundle'.
+# ##[error]Bash exited with code '1'.
+# - task: UseDotNet@2
+#   inputs:
+#     version: $(dotNetVersion)
+#     includePreviewVersions: true
+# - script: dotnet build --configuration $(buildConfiguration)
+# - task: CmdLine@2
+#   displayName: 'Execute EF Migrations 6.1'
+#   inputs:
+#     script: |
+#       dotnet new tool-manifest
+#       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
+#       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
+#       dotnet tool restore --interactive
+#       dotnet ef migrations bundle
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
+
+# v6.2
 - task: UseDotNet@2
   inputs:
     version: $(dotNetVersion)
     includePreviewVersions: true
 - script: dotnet build --configuration $(buildConfiguration)
 - task: CmdLine@2
-  displayName: 'Execute EF Migrations 6.1'
+  displayName: 'Execute EF Migrations 6.2'
   inputs:
     script: |
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
-      dotnet tool restore --interactive
       dotnet ef migrations bundle
     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
