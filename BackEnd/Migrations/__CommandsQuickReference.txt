@@ -1,0 +1,9 @@
+﻿### Adding a migration
+
+dotnet ef migrations add MigrationNameHere --project BackEnd
+
+
+
+### Updating the database to the current model in /Migrations
+
+dotnet ef database update --project BackEnd

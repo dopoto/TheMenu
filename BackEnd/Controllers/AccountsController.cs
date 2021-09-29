@@ -49,15 +49,13 @@ namespace TheMenu.BackEnd.Controllers
                     await _userManager.CreateAsync(user);
 
                     // TODO prepare and send an email for the email confirmation
-                    
-                    // TODO
-                    //await _userManager.AddToRoleAsync(user, "Viewer");
-                    //await _userManager.AddLoginAsync(user, info);
+
+                    await _userManager.AddToRoleAsync(user, "Owner");
+                    await _userManager.AddLoginAsync(user, info);
                 }
                 else
                 {
-                    // TODO
-                    //await _userManager.AddLoginAsync(user, info);
+                    await _userManager.AddLoginAsync(user, info);
                 }
             }
 
