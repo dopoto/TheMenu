@@ -164,6 +164,16 @@ steps:
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
 
 # v6.2
+# ERROR
+# /usr/bin/bash --noprofile --norc /home/vsts/work/_temp/32(...).sh
+# Creating this template will make changes to existing files:
+#   Overwrite   ./.config/dotnet-tools.json
+# Rerun the command and pass --force to accept and create.
+# You can invoke the tool using the following command: dotnet-ef
+# Tool 'dotnet-ef' (version '6.0.0-rc.1.21452.10') was successfully installed.
+# Tool 'dotnet-ef' was reinstalled with the latest stable version (version '6.0.0-rc.1.21452.10').
+# Run "dotnet tool restore" to make the "dotnet-ef" command available.
+# ##[error]Bash exited with code '1'.
 - task: UseDotNet@2
   inputs:
     version: $(dotNetVersion)
