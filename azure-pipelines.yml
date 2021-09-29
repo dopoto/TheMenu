@@ -35,6 +35,7 @@ steps:
 
 - task: efcore-migration-script-generator-task@0
   inputs:
+    installdependencies: true
     projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
     databasecontexts: 'TheMenuBackEndContext'
     startupprojectpath: '$(Build.SourcesDirectory)/BackEnd'
