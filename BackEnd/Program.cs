@@ -4,6 +4,9 @@ using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Models;
 using TheMenu.BackEnd.Areas.Identity.Data;
 using TheMenu.BackEnd.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,10 +21,12 @@ builder.Configuration
 var connectionString = builder.Configuration.GetConnectionString("TheMenuBackEndContextConnection");
 builder.Services.AddDbContext<TheMenuBackEndContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddDefaultIdentity<TheMenuBackEndUser>(
-    options => options.SignIn.RequireConfirmedAccount = true
-)
-.AddEntityFrameworkStores<TheMenuBackEndContext>();
+builder.Services
+    .AddDefaultIdentity<TheMenuBackEndUser>(
+        options => options.SignIn.RequireConfirmedAccount = true
+    )
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<TheMenuBackEndContext>();
 
 // Add services to the container.
 
@@ -41,11 +46,29 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 
-builder.Services.AddAuthentication().AddGoogle(options =>
-{
-    options.ClientId = environmentSettings.GoogleSignInClientId;
-    options.ClientSecret = environmentSettings.GoogleSignInClientSecret;
-});
+builder.Services
+    .AddAuthentication(opt => {
+        opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = environmentSettings.JwtValidIssuer,
+            ValidAudience = environmentSettings.JwtValidAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(environmentSettings.JwtSecretKey))
+        };
+    })
+    .AddGoogle(options =>
+    {
+        options.ClientId = environmentSettings.GoogleSignInClientId;
+        options.ClientSecret = environmentSettings.GoogleSignInClientSecret;
+    });
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -62,6 +85,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheMenu BackEnd v1"));
 }
 app.UseCors();
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
