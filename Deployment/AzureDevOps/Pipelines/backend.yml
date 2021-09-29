@@ -23,18 +23,18 @@ variables:
 
 
 steps:
-- task: DotNetCoreCLI@2
-  displayName: New Manifest for tool
-  inputs:
-    command: custom
-    custom: 'new '
-    arguments: tool-manifest
-- task: DotNetCoreCLI@2
-  displayName: Install EF Tool
-  inputs:
-    command: custom
-    custom: 'tool '
-    arguments: install dotnet-ef
+# - task: DotNetCoreCLI@2
+#   displayName: New Manifest for tool
+#   inputs:
+#     command: custom
+#     custom: 'new '
+#     arguments: tool-manifest
+# - task: DotNetCoreCLI@2
+#   displayName: Install EF Tool
+#   inputs:
+#     command: custom
+#     custom: 'tool '
+#     arguments: install dotnet-ef
 
 - task: UseDotNet@2
   displayName: Generate EF migrations script
