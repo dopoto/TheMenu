@@ -49,7 +49,7 @@ steps:
   inputs:
     version: $(dotNetVersion)
     includePreviewVersions: true
-- script: dotnet ef migrations script --output db.sql --context TheMenuBackEndContext  --idempotent
+- script: dotnet ef migrations script --output db.sql --project BackEnd --context TheMenuBackEndContext  --idempotent
 
 - task: PowerShell@2
   displayName: 'Update AppSettings file with secrets'
