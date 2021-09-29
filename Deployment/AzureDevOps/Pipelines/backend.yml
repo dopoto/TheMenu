@@ -63,6 +63,13 @@ steps:
     includePreviewVersions: true
 - script: dotnet build --configuration $(buildConfiguration)
 
+- task: UseDotNet@2
+  displayName: Restore dotnet tool
+  inputs:
+    version: $(dotNetVersion)
+    includePreviewVersions: true
+- script: dotnet tool restore
+
 - task: CmdLine@2
   displayName: EF Migration Bundle cmdline
   inputs:
@@ -76,13 +83,6 @@ steps:
 #     version: $(dotNetVersion)
 #     includePreviewVersions: true
 # - script: ./BackEnd/dotnet ef migrations bundle
-
-- task: UseDotNet@2
-  displayName: Restore dotnet tool
-  inputs:
-    version: $(dotNetVersion)
-    includePreviewVersions: true
-- script: dotnet tool restore
 
 
 - task: UseDotNet@2
