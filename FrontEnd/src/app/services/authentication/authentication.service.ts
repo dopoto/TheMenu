@@ -37,8 +37,7 @@ export class AuthenticationService {
   };
 
   public signInWithGoogle = () => {
-    // return this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    return Promise.resolve({} as any);
+    return this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   };
 
   public signOutExternal = () => {

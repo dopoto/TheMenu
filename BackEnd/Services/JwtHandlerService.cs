@@ -14,7 +14,7 @@ namespace TheMenu.BackEnd.Services
     {
 		private readonly IConfiguration _configuration;
         private readonly IConfigurationSection _jwtSettings;
-        private readonly IConfigurationSection _goolgeSettings;
+        private readonly EnvironmentSpecificSettings _settings;
         private readonly UserManager<TheMenuBackEndUser> _userManager;
 
         public JwtHandlerService(IConfiguration configuration, UserManager<TheMenuBackEndUser> userManager)
@@ -22,7 +22,7 @@ namespace TheMenu.BackEnd.Services
             _userManager = userManager;
             _configuration = configuration;
             _jwtSettings = _configuration.GetSection("JwtSettings");
-            _goolgeSettings = _configuration.GetSection("GoogleAuthSettings");
+            _settings = configuration.Get<EnvironmentSpecificSettings>();
         }
 
         private SigningCredentials GetSigningCredentials()
@@ -77,7 +77,7 @@ namespace TheMenu.BackEnd.Services
             {
                 var settings = new GoogleJsonWebSignature.ValidationSettings()
                 {
-                    Audience = new List<string>() { _goolgeSettings.GetSection("clientId").Value }
+                    Audience = new List<string>() { _settings.GoogleSignInClientId }
                 };
 
                 var payload = await GoogleJsonWebSignature.ValidateAsync(externalAuth.IdToken, settings);
