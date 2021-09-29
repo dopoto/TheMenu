@@ -68,7 +68,7 @@ steps:
   inputs:
     script: |
       dotnet ef migrations bundle
-    workingDirectory: '/BackEnd'
+    workingDirectory: '$(Build.ArtifactStagingDirectory)/BackEnd'
 
 # - task: UseDotNet@2
 #   displayName: EF Migration Bundle
