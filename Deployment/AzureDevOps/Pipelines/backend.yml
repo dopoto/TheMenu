@@ -35,6 +35,14 @@ steps:
     command: custom
     custom: 'tool '
     arguments: install dotnet-ef
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'custom'
+    projects: '**/*.csproj'
+    custom: 'ef migrations script'
+    arguments: '--output db.sql --context TheMenuBackEndContext  --idempotent'
+
 - task: PowerShell@2
   displayName: 'Update AppSettings file with secrets'
   inputs:
@@ -52,13 +60,6 @@ steps:
     version: $(dotNetVersion)
     includePreviewVersions: true
 - script: dotnet build --configuration $(buildConfiguration)
-
-- task: DotNetCoreCLI@2
-  displayName: Create SQL Scripts
-  inputs:
-    command: custom
-    custom: 'ef '
-    arguments: migrations script --output $(Build.SourcesDirectory)/SQL/dbscript.sql --idempotent --project $(Build.SourcesDirectory)/src/TheMenu.csproj --context TheMenuBackEndContext
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish app as .NET 6 self-contained application for Linux runtime'
@@ -103,7 +104,7 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: SQLScripts'
   inputs:
-    PathtoPublish: $(Build.SourcesDirectory)/SQL/dbscript.sql
+    PathtoPublish: $(Build.SourcesDirectory)/db.sql
     ArtifactName: SQLScripts
 
 ##
