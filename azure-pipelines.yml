@@ -24,10 +24,21 @@ variables:
 #  azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
 
 steps:
+# - task: efcore-migration-script-generator-task@0
+#   inputs:
+#     installdependencies: true
+#     projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj' # path to project that has your DbContext
+#     databasecontexts: 'TheMenuBackEndContext'
+#     startupprojectpath:'$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
+    
+
+
 - task: efcore-migration-script-generator-task@0
   inputs:
-    installdependencies: true
-    projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj' # path to project that has your DbContext
-    databasecontexts: 'YourDbContext'
-    startupprojectpath:'$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
+    projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
+    databasecontexts: 'TheMenuBackEndContext'
+    startupprojectpath: '$(Build.SourcesDirectory)/BackEnd'
+    targetfolder: '$(build.artifactstagingdirectory)/migrations'
+
+
 
