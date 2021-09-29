@@ -37,13 +37,6 @@ steps:
     includePreviewVersions: true
 - script: dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
 
-- task: UseDotNet@2
-  displayName: EF Migration Bundle
-  inputs:
-    version: $(dotNetVersion)
-    includePreviewVersions: true
-- script: dotnet ef migrations bundle
-
 # - task: DotNetCoreCLI@2
 #   displayName: Install dotnet-ef
 #   inputs:
@@ -68,6 +61,13 @@ steps:
     version: $(dotNetVersion)
     includePreviewVersions: true
 - script: dotnet build --configuration $(buildConfiguration)
+
+- task: UseDotNet@2
+  displayName: EF Migration Bundle
+  inputs:
+    version: $(dotNetVersion)
+    includePreviewVersions: true
+- script: dotnet ef migrations bundle  --project BackEnd
 
 - task: UseDotNet@2
   displayName: Generate EF migrations script
