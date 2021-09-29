@@ -78,6 +78,14 @@ steps:
 # - script: ./BackEnd/dotnet ef migrations bundle
 
 - task: UseDotNet@2
+  displayName: Restore dotnet tool
+  inputs:
+    version: $(dotNetVersion)
+    includePreviewVersions: true
+- script: dotnet tool restore
+
+
+- task: UseDotNet@2
   displayName: Generate EF migrations script
   inputs:
     version: $(dotNetVersion)
