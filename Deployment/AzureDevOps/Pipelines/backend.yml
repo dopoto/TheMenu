@@ -31,13 +31,20 @@ steps:
     includePreviewVersions: true
 - script: dotnet new tool-manifest
 
-- task: UseDotNet@2
-  displayName: Install dotnet-ef
-  inputs:
-    version: $(dotNetVersion)
-    includePreviewVersions: true
-- script: dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
+# - task: UseDotNet@2
+#   displayName: Install dotnet-ef
+#   inputs:
+#     version: $(dotNetVersion)
+#     includePreviewVersions: true
+# - script: dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
 # TODO Remove version above
+
+- task: CmdLine@2
+  displayName: EFinstall cmd
+  inputs:
+    script: |
+      dotnet tool uninstall --global dotnet-ef
+      dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
 
 - task: UseDotNet@2
   displayName: dotnet tool restore
@@ -81,7 +88,9 @@ steps:
       dotnet tool install -g dotnet-ef
       export PATH="$PATH:$HOME/.dotnet/tools/"
       cd $(build.sourcesdirectory)
-      dotnet ef migrations script --idempotent --no-build --configuration $(buildConfiguration) -p BackEnd -o $(build.artifactstagingdirectory)/migrations.sql
+      dotnet ef migrations script --output db.sql --project BackEnd --context TheMenuBackEndContext --connectionString '$(ConnectionStrings.TheMenuBackEndContextConnection)'  --idempotent
+      
+#dotnet ef migrations script --idempotent --no-build --configuration $(buildConfiguration) -p BackEnd -o $(build.artifactstagingdirectory)/migrations.sql
 
 - task: CmdLine@2
   displayName: EF Migration Bundle cmdline
