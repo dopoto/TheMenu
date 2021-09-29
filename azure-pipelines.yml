@@ -130,15 +130,19 @@ steps:
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
 
 
-# v6
+# v6.1
+- task: UseDotNet@2
+  inputs:
+    version: $(dotNetVersion)
+    includePreviewVersions: true
+- script: dotnet build --configuration $(buildConfiguration)
 - task: CmdLine@2
-  displayName: 'Execute EF Migrations 6'
+  displayName: 'Execute EF Migrations 6.1'
   inputs:
     script: |
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
       dotnet tool restore --interactive
-      dotnet build --configuration Release
       dotnet ef migrations bundle
     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
