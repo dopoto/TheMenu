@@ -144,7 +144,7 @@ steps:
 #       dotnet ef migrations bundle
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
 
-# v5.4
+# v5.5
 # /usr/bin/bash --noprofile --norc /home/vsts/work/_temp/32bd81f2-39ad-46c5-92fb-57debef125b8.sh
 # You can invoke the tool using the following command: dotnet-ef
 # Tool 'dotnet-ef' (version '6.0.0-rc.1.21452.10') was successfully installed.
@@ -157,8 +157,9 @@ steps:
 - task: UseDotNet@2
   inputs:
     version: 6.0.100-rc.1
+    includePreviewVersions: true
 - task: CmdLine@2
-  displayName: 'Execute EF Migrations 5.4'
+  displayName: 'Execute EF Migrations 5.5'
   inputs:
     script: |
       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
