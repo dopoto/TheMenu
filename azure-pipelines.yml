@@ -24,14 +24,32 @@ variables:
 #  azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
 
 steps:
+
+# v1 
+# ERROR
+# /usr/share/dotnet/sdk/5.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.TargetFrameworkInference.targets(141,5): error NETSDK1045: 
+# The current .NET SDK does not support targeting .NET 6.0.  Either target .NET 5.0 or lower, or use a version of the .NET SDK that supports .NET 6.0. [/home/vsts/work/1/s/BackEnd/BackEnd.csproj]
+
+# - task: CmdLine@2
+#   displayName: 'Execute EF Migrations'
+#   inputs:
+#     script: |
+#       nuget locals http-cache -clear
+#       dotnet new tool-manifest
+#       dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
+#       dotnet tool update --global dotnet-ef --version 6.0.0-preview.7.21378.4
+# #      dotnet tool restore --interactive
+
 # - task: efcore-migration-script-generator-task@0
 #   inputs:
 #     installdependencies: true
-#     projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj' # path to project that has your DbContext
+#     projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
 #     databasecontexts: 'TheMenuBackEndContext'
-#     startupprojectpath:'$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
-    
+#     startupprojectpath: '$(Build.SourcesDirectory)/BackEnd'
+#     targetfolder: '$(build.artifactstagingdirectory)/migrations'
 
+
+# v2
 - task: CmdLine@2
   displayName: 'Execute EF Migrations'
   inputs:
@@ -40,15 +58,5 @@ steps:
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
       dotnet tool update --global dotnet-ef --version 6.0.0-preview.7.21378.4
-#      dotnet tool restore --interactive
-
-- task: efcore-migration-script-generator-task@0
-  inputs:
-    installdependencies: true
-    projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
-    databasecontexts: 'TheMenuBackEndContext'
-    startupprojectpath: '$(Build.SourcesDirectory)/BackEnd'
-    targetfolder: '$(build.artifactstagingdirectory)/migrations'
-
-
-
+      dotnet ef migrations bundle
+ 
