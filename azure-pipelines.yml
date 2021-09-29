@@ -106,67 +106,39 @@ steps:
 #       dotnet ef migrations bundle
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
 
-# v4
-# ERROR
-# /usr/bin/bash --noprofile --norc /home/vsts/work/_temp/504130bd-0011-44db-97d7-1f242f05d572.sh
-# Microsoft (R) Build Engine version 16.11.0+0538acc04 for .NET
-#   Determining projects to restore...
-# /usr/share/dotnet/sdk/5.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.TargetFrameworkInference.targets(141,5): error NETSDK1045: The current .NET SDK does not support targeting .NET 6.0.  Either target .NET 5.0 or lower, or use a version of the .NET SDK that supports .NET 6.0. [/home/vsts/work/1/s/BackEnd/BackEnd.csproj]
-# Build FAILED.
-# /usr/share/dotnet/sdk/5.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.TargetFrameworkInference.targets(141,5): error NETSDK1045: The current .NET SDK does not support targeting .NET 6.0.  Either target .NET 5.0 or lower, or use a version of the .NET SDK that supports .NET 6.0. [/home/vsts/work/1/s/BackEnd/BackEnd.csproj]
-#     0 Warning(s)
-#     1 Error(s)
-# Time Elapsed 00:00:00.50
-# Getting ready...
-# Creating this template will make changes to existing files:
-#   Overwrite   ./.config/dotnet-tools.json
-# Rerun the command and pass --force to accept and create.
-# You can invoke the tool using the following command: dotnet-ef
-# Tool 'dotnet-ef' (version '6.0.0-rc.1.21452.10') was successfully installed.
-# Tool 'dotnet-ef' was reinstalled with the latest stable version (version '6.0.0-rc.1.21452.10').
-#   Determining projects to restore...
-#   Restored /tmp/cyqdafyl.5ko/restore.csproj (in 485 ms).
-# Tool 'dotnet-ef' (version '5.0.10') was restored. Available commands: dotnet-ef
-# Restore was successful.
-# Build started...
-# Build failed. Use dotnet build to see the errors.
-# ##[error]Bash exited with code '1'.
-
+# v5.7
+# The Entity Framework tools version '5.0.10' is older than that of the runtime '6.0.0-rc.1.21452.10'. Update the tools for the latest features and bug fixes. See https://aka.ms/AAc1fbw for more information.
+# System.ArgumentException: The string argument 'connectionString' cannot be empty.
+#    at Microsoft.EntityFrameworkCore.Utilities.Check.NotEmpty(String value, String parameterName)
+#    at Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions.UseSqlServer(DbContextOptionsBuilder optionsBuilder, String connectionString, Action`1 sqlServerOptionsAction)
+#    at Program.<>c__DisplayClass0_0.<<Main>$>b__0(DbContextOptionsBuilder options) in /home/vsts/work/1/s/BackEnd/Program.cs:line 18
+# - task: UseDotNet@2
+#   inputs:
+#     version: $(dotNetVersion)
+#     includePreviewVersions: true
+# - script: dotnet build --configuration $(buildConfiguration)
+#   displayName: 'Build .NET 6 Application'
 # - task: CmdLine@2
-#   displayName: 'Execute EF Migrations 4'
+#   displayName: 'Execute EF Migrations 5.7'
 #   inputs:
 #     script: |
-#       dotnet build --configuration Release
-#       dotnet new tool-manifest
 #       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
 #       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
-#       dotnet tool restore --interactive
-#       dotnet ef migrations bundle
+#       dotnet tool restore
+#       dotnet build
+#       dotnet ef migrations script –startup-project $(Build.SourcesDirectory)\BackEnd -o $(build.artifactstagingdirectory)\migrations\scripts.sql -i
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
 
-# v5.7
-# /usr/bin/bash --noprofile --norc /home/vsts/work/_temp/32bd81f2-39ad-46c5-92fb-57debef125b8.sh
-# You can invoke the tool using the following command: dotnet-ef
-# Tool 'dotnet-ef' (version '6.0.0-rc.1.21452.10') was successfully installed.
-# Tool 'dotnet-ef' was reinstalled with the latest stable version (version '6.0.0-rc.1.21452.10').
-# Tool 'dotnet-ef' (version '5.0.10') was restored. Available commands: dotnet-ef
-# Restore was successful.
-# Build started...
-# Build failed. Use dotnet build to see the errors.
-# ##[error]Bash exited with code '1'.
-- task: UseDotNet@2
-  inputs:
-    version: $(dotNetVersion)
-    includePreviewVersions: true
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'Build .NET 6 Application'
+
+# v6
 - task: CmdLine@2
-  displayName: 'Execute EF Migrations 5.7'
+  displayName: 'Execute EF Migrations 6'
   inputs:
     script: |
+      dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
-      dotnet tool restore
-      dotnet build
-      dotnet ef migrations script –startup-project $(Build.SourcesDirectory)\BackEnd -o $(build.artifactstagingdirectory)\migrations\scripts.sql -i
+      dotnet tool restore --interactive
+      dotnet build --configuration Release
+      dotnet ef migrations bundle
     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
