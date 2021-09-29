@@ -30,5 +30,4 @@ steps:
     projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj' # path to project that has your DbContext
     databasecontexts: 'YourDbContext'
     startupprojectpath:'$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
-    targetfolder: '$(build.artifactstagingdirectory)/migrations'
 
