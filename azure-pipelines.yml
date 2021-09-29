@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: PROD
+- name: buildConfiguration
+  value: 'Release'
+- name: dotNetFramework
+  value: 'net6.0'
+- name: dotNetVersion
+  value: '6.0.x'
+- name: targetRuntime
+  value: 'linux-x64'
+- name: azureSPNName
+  value: 'azure-service-connection' # AzureDevOps portal > [Your Project] > Settings | Initially defined in Azure Portal > App Registrations. See https://subhankarsarkar.com/dot-net6-azure-web-app-deployment-using-azure-devops-pipeline/
+#  azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
+
+steps:
+- task: efcore-migration-script-generator-task@0
+  inputs:
+    installdependencies: true # required for net 3.1+
+    projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj' # path to project that has your DbContext
+    databasecontexts: 'YourDbContext'
+    startupprojectpath:'$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
+    targetfolder: '$(build.artifactstagingdirectory)/migrations'
+
