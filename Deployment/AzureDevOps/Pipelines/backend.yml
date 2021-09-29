@@ -29,17 +29,17 @@ steps:
   inputs:
     script: |
       nuget locals http-cache -clear
-      dotnet tool uninstall --global dotnet-ef
+      dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
       dotnet tool update --global dotnet-ef --version 6.0.0-preview.7.21378.4
       dotnet tool restore --interactive
       dotnet ef migrations script --output db.sql --project BackEnd --context TheMenuBackEndContext --connectionString '$(ConnectionStrings.TheMenuBackEndContextConnection)'  --idempotent
-- task: UseDotNet@2
-  displayName: New Manifest for tooling
-  inputs:
-    version: $(dotNetVersion)
-    includePreviewVersions: true
-- script: dotnet new tool-manifest
+# - task: UseDotNet@2
+#   displayName: New Manifest for tooling
+#   inputs:
+#     version: $(dotNetVersion)
+#     includePreviewVersions: true
+# - script: dotnet new tool-manifest
 
 # - task: UseDotNet@2
 #   displayName: Install dotnet-ef
@@ -49,19 +49,19 @@ steps:
 # - script: dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
 # TODO Remove version above
 
-- task: CmdLine@2
-  displayName: EFinstall cmd
-  inputs:
-    script: |
-      dotnet tool uninstall --global dotnet-ef
-      dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
+# - task: CmdLine@2
+#   displayName: EFinstall cmd
+#   inputs:
+#     script: |
+#       dotnet tool uninstall --global dotnet-ef
+#       dotnet tool install --global dotnet-ef --version 6.0.0-preview.7.21378.4
 
-- task: UseDotNet@2
-  displayName: dotnet tool restore
-  inputs:
-    version: $(dotNetVersion)
-    includePreviewVersions: true
-- script: dotnet tool restore
+# - task: UseDotNet@2
+#   displayName: dotnet tool restore
+#   inputs:
+#     version: $(dotNetVersion)
+#     includePreviewVersions: true
+# - script: dotnet tool restore
 
 # - task: DotNetCoreCLI@2
 #   displayName: Install dotnet-ef
