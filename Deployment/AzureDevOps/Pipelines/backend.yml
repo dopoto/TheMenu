@@ -79,16 +79,17 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
 
 # TODO test:
-- task: Bash@3
-  displayName: 'Bash3'
-  inputs:
-    targetType: 'inline'
-    script: |
-      cd ..
-      dotnet tool install -g dotnet-ef
-      export PATH="$PATH:$HOME/.dotnet/tools/"
-      cd $(build.sourcesdirectory)
-      dotnet ef migrations script --output db.sql --project BackEnd --context TheMenuBackEndContext  --connectionString '$(ConnectionStrings.TheMenuBackEndContextConnection)' --idempotent
+# ERROR Unrecognized option '--connectionString'
+# - task: Bash@3
+#   displayName: 'Bash3'
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       cd ..
+#       dotnet tool install -g dotnet-ef
+#       export PATH="$PATH:$HOME/.dotnet/tools/"
+#       cd $(build.sourcesdirectory)
+#       dotnet ef migrations script --output db.sql --project BackEnd --context TheMenuBackEndContext  --connectionString '$(ConnectionStrings.TheMenuBackEndContextConnection)' --idempotent
       
 #dotnet ef migrations script --idempotent --no-build --configuration $(buildConfiguration) -p BackEnd -o $(build.artifactstagingdirectory)/migrations.sql
 
