@@ -25,6 +25,7 @@ Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1
 - ApplicationInsights - backend
 - Diagnose / ping
 - ASP.NET Identity + EntityFramework Core Migrations [Scaffold Identity in ASP.NET Core projects], [Tutorial: Get started with EF Core in an ASP.NET MVC web app]
+- Angular routing
 
 ## [v0.0.1] (2021-09-23)
 *Angular 12 app hosted in an Azure storage account + .NET 6 ASP.NET app hosted in an Azure app service, individual Azure DevOps pipelines to build and deploy frontend and backend.*
