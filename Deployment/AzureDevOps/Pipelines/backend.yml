@@ -72,15 +72,16 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
 
 # TODO test:
-# - task: Bash@3
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       cd ..
-#       dotnet tool install -g dotnet-ef
-#       export PATH="$PATH:$HOME/.dotnet/tools/"
-#       cd $(build.sourcesdirectory)
-#       dotnet ef migrations script --idempotent --no-build --configuration $(buildConfiguration) -p <MyProject> -o $(build.artifactstagingdirectory)/migrations.sql
+- task: Bash@3
+  displayName: 'Bash3'
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd ..
+      dotnet tool install -g dotnet-ef
+      export PATH="$PATH:$HOME/.dotnet/tools/"
+      cd $(build.sourcesdirectory)
+      dotnet ef migrations script --idempotent --no-build --configuration $(buildConfiguration) -p BackEnd -o $(build.artifactstagingdirectory)/migrations.sql
 
 - task: CmdLine@2
   displayName: EF Migration Bundle cmdline
