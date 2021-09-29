@@ -67,7 +67,7 @@ steps:
   inputs:
     version: $(dotNetVersion)
     includePreviewVersions: true
-- script: dotnet ef migrations bundle  --project BackEnd
+- script: dotnet ef migrations bundle  --project BackEnd --connectionString '$(ConnectionStrings.TheMenuBackEndContextConnection)'
 
 - task: UseDotNet@2
   displayName: Generate EF migrations script
