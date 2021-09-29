@@ -144,12 +144,13 @@ steps:
 #       dotnet ef migrations bundle
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
 
-# v5
+# v5.1
 - task: CmdLine@2
-  displayName: 'Execute EF Migrations 5'
+  displayName: 'Execute EF Migrations 5.1'
   inputs:
     script: |
       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
+      dotnet tool restore
       dotnet ef migrations script –startup-project $(Build.SourcesDirectory)\BackEnd -o $(build.artifactstagingdirectory)\migrations\scripts.sql -i
     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
