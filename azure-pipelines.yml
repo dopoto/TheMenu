@@ -77,13 +77,14 @@ steps:
 #     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
 
 
-# v3
+# v3.1
 - task: CmdLine@2
-  displayName: 'Execute EF Migrations'
+  displayName: 'Execute EF Migrations 3.1'
   inputs:
     script: |
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
+      dotnet tool restore --interactive
       dotnet ef migrations bundle
     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
