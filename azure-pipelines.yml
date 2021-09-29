@@ -50,11 +50,38 @@ steps:
 
 
 # v2.2
+# ERROR
+# /usr/bin/bash --noprofile --norc /home/vsts/work/_temp/f2174772-a5b0-4027-9fd1-40ab7e09e1be.sh
+# Clearing NuGet HTTP cache: /home/vsts/.local/share/NuGet/v3-cache
+# Local resources cleared.
+# Getting ready...
+# Creating this template will make changes to existing files:
+#   Overwrite   ./.config/dotnet-tools.json
+# Rerun the command and pass --force to accept and create.
+# You can invoke the tool using the following command: dotnet-ef
+# Tool 'dotnet-ef' (version '6.0.0-preview.7.21378.4') was successfully installed.
+# Tool 'dotnet-ef' was reinstalled with the latest stable version (version '6.0.0-preview.7.21378.4').
+# Run "dotnet tool restore" to make the "dotnet-ef" command available.
+# ##[error]Bash exited with code '1'.
+# Finishing: Execute EF Migrations
+
+# - task: CmdLine@2
+#   displayName: 'Execute EF Migrations'
+#   inputs:
+#     script: |
+#       nuget locals http-cache -clear
+#       dotnet new tool-manifest
+#       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
+#       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
+#       dotnet ef migrations bundle
+#     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
+
+
+# v3
 - task: CmdLine@2
   displayName: 'Execute EF Migrations'
   inputs:
     script: |
-      nuget locals http-cache -clear
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
       dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
