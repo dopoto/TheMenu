@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { from, Observable, of, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt'; //TODO
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
@@ -10,17 +11,17 @@ import { AuthResponse } from 'src/app/core/models/auth-response';
 import { AuthData } from 'src/app/core/models/auth-data';
 import { AuthState } from 'src/app/core/models/auth-state';
 import { AuthError } from 'src/app/core/models/auth-error';
+import { AppState } from '../../store/app.states';
+import { LogIn, LogInSuccess } from '../../store/actions/user.actions';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthenticationService {
-    private _authDataSub = new Subject<AuthData>();
-    public authChanged$ = this._authDataSub.asObservable();
-
     constructor(
         private _http: HttpClient,
-        private _externalAuthService: SocialAuthService
+        private _externalAuthService: SocialAuthService,
+        private store: Store<AppState>
     ) {
         this._externalAuthService.authState.subscribe((user) => {
             console.log('Logged inL ' + JSON.stringify(user));
@@ -50,8 +51,7 @@ export class AuthenticationService {
                         state: AuthState.SignedInWithGoogle,
                         data: socialUser,
                     };
-                    this.sendAuthStateChangeNotification(authData);
-                    //TODO this._router.navigate([this._returnUrl]);
+                    this.store.dispatch(new LogInSuccess(authData));
                 } else {
                     this.signOutExternal();
                 }
@@ -66,7 +66,7 @@ export class AuthenticationService {
                     state: AuthState.AuthenticationError,
                     data: authError,
                 };
-                this.sendAuthStateChangeNotification(authData);
+                //this.sendAuthStateChangeNotification(authData);
                 this.signOutExternal();
             },
         });
@@ -97,7 +97,7 @@ export class AuthenticationService {
         const authData: AuthData = {
             state: AuthState.AnonymousUser, data: null
         };
-        this.sendAuthStateChangeNotification(authData);
+        //this.sendAuthStateChangeNotification(authData);
         this._externalAuthService.signOut();
     };
 
@@ -105,9 +105,6 @@ export class AuthenticationService {
         return this._http.post<AuthResponse>(route, body);
     };
 
-    public sendAuthStateChangeNotification = (data: AuthData) => {
-        this._authDataSub.next(data);
-    };
 
     // public isUserAuthenticated = (): boolean => {
     //     const token = localStorage.getItem('token');
@@ -129,5 +126,9 @@ export class AuthenticationService {
 
     public signInWithGoogle(): void {
         this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    }
+
+    public signInWithGoogle$(): Observable<SocialUser> {
+        return of(<SocialUser>{email: 'x@x.com'});
     }
 }
