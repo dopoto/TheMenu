@@ -6,6 +6,9 @@ import {
     ModuleWithProviders,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects/auth.effects';
+
 // import { PortalConfigurationService } from './services/portal-configuration/portal-configuration.service';
 // import { LogService } from './services/log/log.service';
 
@@ -34,7 +37,7 @@ import { CommonModule } from '@angular/common';
  *
  */
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, EffectsModule.forRoot([AuthEffects])],
 })
 export class CoreModule {
     constructor(
