@@ -3,7 +3,7 @@ import { SocialUser } from 'angularx-social-login';
 import { filter, Observable } from 'rxjs';
 import { AuthData } from 'src/app/models/auth-data';
 import { AuthState } from 'src/app/models/auth-state';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({
     selector: 'app-navbar',

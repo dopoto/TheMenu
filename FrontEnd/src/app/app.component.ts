@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { environment } from 'src/environments/environment';
-import { AuthenticationService } from './services/authentication/authentication.service';
 
 @Component({
     selector: 'app-root',
@@ -9,8 +7,6 @@ import { AuthenticationService } from './services/authentication/authentication.
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-    constructor(public authService: AuthenticationService) {}
-
     title = 'FrontEnd';
     version = environment.version;
 }
