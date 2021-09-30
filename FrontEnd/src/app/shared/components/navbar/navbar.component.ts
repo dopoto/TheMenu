@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialUser } from 'angularx-social-login';
 import { filter, Observable } from 'rxjs';
-import { AuthData } from 'src/app/models/auth-data';
-import { AuthState } from 'src/app/models/auth-state';
+import { AuthData } from 'src/app/core/models/auth-data';
+import { AuthState } from 'src/app/core/models/auth-state';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({

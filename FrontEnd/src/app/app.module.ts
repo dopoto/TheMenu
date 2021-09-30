@@ -10,7 +10,6 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { CustomersModule } from './features/customers/customers.module';
 import { LandingModule } from './features/landing/landing.module';
@@ -20,13 +19,9 @@ import { StaffModule } from './features/staff/staff.module';
 @NgModule({
     declarations: [
         AppComponent,
-        NavbarComponent,
+        
     ],
     imports: [
-        BrowserModule,
-        HttpClientModule,
-        SocialLoginModule,
-        AppRoutingModule,
         CoreModule.forRoot(),
         SharedModule,
         CustomersModule,

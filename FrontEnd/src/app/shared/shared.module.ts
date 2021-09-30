@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { SocialLoginModule } from 'angularx-social-login';
+import { AppRoutingModule } from '../app-routing.module';
 
 /**
  * Contains code (components, directives, and pipes) that will be used across feature modules in the app.
@@ -16,16 +21,26 @@ import { CommonModule } from '@angular/common';
  */
 @NgModule({
     declarations: [
+        NavbarComponent
     ],
     imports: [
+        BrowserModule,
+        HttpClientModule,
+        SocialLoginModule,
+        AppRoutingModule,
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
     ],
     exports: [
+        BrowserModule,
+        HttpClientModule,
+        SocialLoginModule,
+        AppRoutingModule,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NavbarComponent
     ],
     providers: [],
     bootstrap: [],

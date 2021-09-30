@@ -5,11 +5,11 @@ import { JwtHelperService } from '@auth0/angular-jwt'; //TODO
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 
-import { ExternalAuth } from 'src/app/models/external-auth';
-import { AuthResponse } from 'src/app/models/auth-response';
-import { AuthData } from 'src/app/models/auth-data';
-import { AuthState } from 'src/app/models/auth-state';
-import { AuthError } from 'src/app/models/auth-error';
+import { ExternalAuth } from 'src/app/core/models/external-auth';
+import { AuthResponse } from 'src/app/core/models/auth-response';
+import { AuthData } from 'src/app/core/models/auth-data';
+import { AuthState } from 'src/app/core/models/auth-state';
+import { AuthError } from 'src/app/core/models/auth-error';
 
 @Injectable({
     providedIn: 'root',
