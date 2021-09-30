@@ -1,0 +1,19 @@
+<nav>
+    <ul>
+        <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+        <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+
+        <li *ngIf="!user">
+            <a (click)="signInWithGoogle()">Sign in</a>
+        </li>
+        <li *ngIf="user">
+           Signed in as {{user.email}} <a (click)="signOut()">Sign out</a>
+        </li>
+
+        
+    </ul>
+</nav>
+
+<!-- <button class="btn btn-info" type="button" (click)="externalLogin()">
+    Google
+</button> -->

@@ -2,6 +2,8 @@
 
 ## Future plans
 - [Run EF Core Migrations in Azure DevOps]
+- https://mherman.org/blog/authentication-in-angular-with-ngrx/
+- it’s a good idea to store tokens in a cookie with httpOnly and secure flags.
 - Frontend / backend unit tests + pipeline runners
 - Cypress
 - Feature flags
