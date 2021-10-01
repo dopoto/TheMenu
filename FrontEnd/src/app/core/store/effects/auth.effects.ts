@@ -15,11 +15,14 @@ export class AuthEffects {
     private router: Router
   ) {}
 
-  login$ = createEffect(() =>
+  loginStarted$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActionTypes.LOGIN_STARTED),
       switchMap(() =>
         this.authService.signInWithGoogle$().pipe(
+          tap((socialUser) => {
+debugger;
+          }),
           map((socialUser) => ({
             type: AuthActionTypes.LOGIN_SUCCESS,
             payload: socialUser,

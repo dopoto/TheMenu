@@ -1,9 +1,9 @@
 {
-  "name": "ngnew",
-  "version": "0.0.0",
+  "name": "front-end",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4210 --ssl --ssl-cert %APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem --ssl-key %APPDATA%\\ASP.NET\\https\\%npm_package_name%.key",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngnew": {
+    "FrontEnd": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,12 +23,13 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ngnew",
+            "outputPath": "dist/FrontEnd",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+	    "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -73,12 +74,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+	  "options": {
+            "browserTarget": "FrontEnd:build",
+            "proxyConfig": "src/proxy.conf.js"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "ngnew:build:production"
+              "browserTarget": "FrontEnd:build:production"
             },
             "development": {
-              "browserTarget": "ngnew:build:development"
+              "browserTarget": "FrontEnd:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +91,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ngnew:build"
+            "browserTarget": "FrontEnd:build"
           }
         },
         "test": {
@@ -105,10 +110,23 @@
               "src/styles.scss"
             ],
             "scripts": []
+          },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
+        },
         }
       }
     }
   },
-  "defaultProject": "ngnew"
+  "defaultProject": "FrontEnd"
 }

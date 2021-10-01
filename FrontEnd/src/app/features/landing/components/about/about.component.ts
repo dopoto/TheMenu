@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { take } from 'rxjs';
+import { take } from 'rxjs/operators';
+
 
 import { environment } from 'src/environments/environment';
 
