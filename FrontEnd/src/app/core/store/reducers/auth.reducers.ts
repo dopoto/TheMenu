@@ -1,43 +1,42 @@
+import { Action, createReducer, on } from '@ngrx/store';
 import { SocialUser } from 'angularx-social-login';
-import { All, AuthActionTypes } from '../actions/user.actions';
+import * as AuthActions from '../actions/user.actions';
 
 export interface State {
-    // is a user authenticated?
-    isAuthenticated: boolean;
-    // if authenticated, there should be a user object
-    user: SocialUser | null;
-    // error message
-    errorMessage: string | null;
+  isAuthenticated: boolean;
+  user: SocialUser | null;
+  errorMessage: string | null;
 }
 
 export const initialState: State = {
+  isAuthenticated: false,
+  user: null,
+  errorMessage: null,
+};
+
+const authReducer = createReducer(
+  initialState,
+  //on(AuthActionTypes.LOGIN_STARTED, state => ({ ...state, initialState })),
+
+  on(AuthActions.loginStarted, (state) => ({
     isAuthenticated: false,
     user: null,
     errorMessage: null,
-};
+  })),
 
-export function reducer(state = initialState, action: All): State {
-    switch (action.type) {
-        case AuthActionTypes.LOGIN_SUCCESS: {
-            debugger;
-            return {
-                ...state,
-                isAuthenticated: true,
-                user: <SocialUser>{
-                    //token: action.payload.token,
-                    email: action.payload.email,
-                },
-                errorMessage: null,
-            };
-        }
-        case AuthActionTypes.LOGIN_FAILURE: {
-            return {
-                ...state,
-                errorMessage: 'Login failed',
-            };
-        }
-        default: {
-            return state;
-        }
-    }
+  on(AuthActions.loginSuccess, (state, { authData }) => ({
+    isAuthenticated: true,
+    user: authData.user,
+    errorMessage: null,
+  })),
+
+  on(AuthActions.loginFailure, (state, { errorMessage }) => ({
+    isAuthenticated: false,
+    user: null,
+    errorMessage: errorMessage,
+  }))
+);
+
+export function reducer(state: State | undefined, action: Action) {
+  return authReducer(state, action);
 }

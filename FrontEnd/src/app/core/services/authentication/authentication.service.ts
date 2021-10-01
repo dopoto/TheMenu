@@ -9,10 +9,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
 import { AuthData } from 'src/app/core/models/auth-data';
-import { AuthState } from 'src/app/core/models/auth-state';
-import { AuthError } from 'src/app/core/models/auth-error';
 import { AppState } from '../../store/app.states';
-import { LogIn, LogInSuccess } from '../../store/actions/user.actions';
+import { loginFailure, loginSuccess } from '../../store/actions/user.actions';
 
 @Injectable({
     providedIn: 'root',
@@ -48,57 +46,25 @@ export class AuthenticationService {
                 if (res.isAuthSuccessful) {
                     localStorage.setItem('token', res.token);
                     const authData: AuthData = {
-                        state: AuthState.SignedInWithGoogle,
-                        data: socialUser,
+                        token: res.token,
+                        user: socialUser,
                     };
-                    this.store.dispatch(new LogInSuccess(authData));
+                    this.store.dispatch(loginSuccess({authData}));
                 } else {
                     this.signOutExternal();
                 }
             },
             error: () => {
-                debugger;
-                console.log('ERROR');
-                const authError: AuthError = {
-                    authErrorMessage: 'Error authenticating',
-                };
-                const authData: AuthData = {
-                    state: AuthState.AuthenticationError,
-                    data: authError,
-                };
-                //this.sendAuthStateChangeNotification(authData);
+                this.store.dispatch(loginFailure({errorMessage: 'Failed to log in'}));
                 this.signOutExternal();
             },
         });
     }
 
-    // public signInWithGoogle(): void {
-    //     this._externalAuthService.signIn(
-    //         GoogleLoginProvider.PROVIDER_ID
-    //     ).then(
-    //         (res) => {
-    //             debugger;
-    //             const user: SocialUser = { ...res };
-    //             console.log(user);
-    //             const externalAuth: ExternalAuth = {
-    //                 provider: user.provider,
-    //                 idToken: user.idToken,
-    //             };
-    //             this.validateExternalAuth(externalAuth);
-    //         },
-    //         (error) => {
-    //             console.log(error);
-    //         }
-    //     );
-    // }
-
     public signOutExternal = () => {
         localStorage.removeItem('token');
-        const authData: AuthData = {
-            state: AuthState.AnonymousUser, data: null
-        };
-        //this.sendAuthStateChangeNotification(authData);
         this._externalAuthService.signOut();
+        // TODO dispatch logout
     };
 
     public externalLogin = (route: string, body: ExternalAuth) => {

@@ -1,24 +1,19 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
+import { AuthData } from '../../models/auth-data';
 
 export enum AuthActionTypes {
-    LOGIN = '[Auth] Login',
-    LOGIN_SUCCESS = '[Auth] Login Success',
-    LOGIN_FAILURE = '[Auth] Login Failure',
+  LOGIN_STARTED = '[Auth] Login Started',
+  LOGIN_SUCCESS = '[Auth] Login Success',
+  LOGIN_FAILURE = '[Auth] Login Failure',
+  // TODO Log out
 }
 
-export class LogIn implements Action {
-    readonly type = AuthActionTypes.LOGIN;
-    constructor() {}
-}
-
-export class LogInSuccess implements Action {
-    readonly type = AuthActionTypes.LOGIN_SUCCESS;
-    constructor(public payload: any) {}
-}
-
-export class LogInFailure implements Action {
-    readonly type = AuthActionTypes.LOGIN_FAILURE;
-    constructor(public payload: any) {}
-}
-
-export type All = LogIn | LogInSuccess | LogInFailure;
+export const loginStarted = createAction(AuthActionTypes.LOGIN_STARTED);
+export const loginSuccess = createAction(
+  AuthActionTypes.LOGIN_SUCCESS,
+  props<{ authData: AuthData }>()
+);
+export const loginFailure = createAction(
+  AuthActionTypes.LOGIN_FAILURE,
+  props<{ errorMessage: string }>()
+);
