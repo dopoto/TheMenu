@@ -30,11 +30,24 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0-rc.1.21464.1" />
+    <PackageReference Include="NSwag.MSBuild" Version="13.13.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <NswagFiles Include="nswag.*.json" />
+  </ItemGroup>
+
+  <Target Name="GenerateTypeScriptModel" AfterTargets="ReBuild" Condition="'$(TF_BUILD)'!='True'">
+    <Message Text="Generate .ts client model" />
+    <!-- Generate API documentation file -->
+    <!-- <Exec Command="$(NSwagExe) run &quot;%(NswagFiles.FullPath)&quot;" /> -->
+  </Target>
 
 </Project>
