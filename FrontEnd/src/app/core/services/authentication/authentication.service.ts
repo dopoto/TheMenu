@@ -11,6 +11,7 @@ import { AuthResponse } from 'src/app/core/models/auth-response';
 import { AuthData } from 'src/app/core/models/auth-data';
 import { AppState } from '../../store/app.states';
 import { loginFailure, loginSuccess } from '../../store/actions/user.actions';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -20,45 +21,36 @@ export class AuthenticationService {
         private _http: HttpClient,
         private _externalAuthService: SocialAuthService,
         private store: Store<AppState>
-    ) {
-        this._externalAuthService.authState.subscribe((user) => {
-            console.log('Logged inL ' + JSON.stringify(user));
-            const externalAuth: ExternalAuth = {
-                provider: user.provider,
-                idToken: user.idToken,
-            };
-            this.validateExternalAuth(user, externalAuth);
-        });
-    }
+    ) {}
 
     // public logout = () => {
     //     localStorage.removeItem('token');
     //     this.sendAuthStateChangeNotification(false);
     // };
 
-    private validateExternalAuth(
-        socialUser: SocialUser,
-        externalAuth: ExternalAuth
-    ) {
-        this.externalLogin('/accounts/external-login', externalAuth).subscribe({
-            next: (res) => {
-                console.log('Logged in Validated ' + JSON.stringify(res));
-                if (res.isAuthSuccessful) {
-                    localStorage.setItem('token', res.token);
-                    const authData: AuthData = {
-                        token: res.token,
-                        user: socialUser,
-                    };
-                    this.store.dispatch(loginSuccess({authData}));
+    private validateExternalAuth$(
+        socialUser: SocialUser
+    ): Observable<SocialUser | string> {
+        const externalAuth: ExternalAuth = {
+            provider: socialUser.provider,
+            idToken: socialUser.idToken,
+        };
+        return this.externalLogin(
+            '/accounts/external-login',
+            externalAuth
+        ).pipe(
+            map((authResponse) => {
+                if (authResponse.isAuthSuccessful) {
+                    localStorage.setItem('token', authResponse.token);
+                    return socialUser;
                 } else {
-                    this.signOutExternal();
+                    return '';
                 }
-            },
-            error: () => {
-                this.store.dispatch(loginFailure({errorMessage: 'Failed to log in'}));
-                this.signOutExternal();
-            },
-        });
+            }),
+            catchError(() => {
+                return '';
+            })
+        );
     }
 
     public signOutExternal = () => {
@@ -71,6 +63,40 @@ export class AuthenticationService {
         return this._http.post<AuthResponse>(route, body);
     };
 
+    public signInWithGoogle$(): Observable<SocialUser | string> {
+        // return of(<SocialUser>{email: 'x@x.com'});
+
+        //    this._externalAuthService.authState.subscribe((user) => {
+        //     console.log('Logged inL ' + JSON.stringify(user));
+        //     const externalAuth: ExternalAuth = {
+        //         provider: user.provider,
+        //         idToken: user.idToken,
+        //     };
+        //     this.validateExternalAuth(user, externalAuth);
+        // });
+
+        const signIn$ = from(
+            this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+        );
+        return signIn$.pipe(
+            switchMap((socialUser) =>
+                this.validateExternalAuth$(socialUser)
+            )
+        );
+
+        //     return this._externalAuthService.authState.pipe(
+        //         map((user) => {
+        //             const externalAuth: ExternalAuth = {
+        //                 provider: user.provider,
+        //                 idToken: user.idToken,
+        //             };
+        //             return this.validateExternalAuth$(res, externalAuth);
+        //         })
+        //     );
+        // }
+
+        //return from(promise);
+    }
 
     // public isUserAuthenticated = (): boolean => {
     //     const token = localStorage.getItem('token');
@@ -89,12 +115,4 @@ export class AuthenticationService {
 
     //     return role === 'Administrator';
     // };
-
-    public signInWithGoogle(): void {
-        this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    }
-
-    public signInWithGoogle$(): Observable<SocialUser> {
-        return of(<SocialUser>{email: 'x@x.com'});
-    }
 }

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { SocialUser } from 'angularx-social-login';
 import { AuthData } from '../../models/auth-data';
 
 export enum AuthActionTypes {
@@ -11,7 +12,7 @@ export enum AuthActionTypes {
 export const loginStarted = createAction(AuthActionTypes.LOGIN_STARTED);
 export const loginSuccess = createAction(
   AuthActionTypes.LOGIN_SUCCESS,
-  props<{ authData: AuthData }>()
+  props<{ socialUser: SocialUser }>()
 );
 export const loginFailure = createAction(
   AuthActionTypes.LOGIN_FAILURE,
