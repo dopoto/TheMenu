@@ -9,7 +9,7 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
 import { AuthData } from 'src/app/core/models/auth-data';
-import { AppState } from '../../store/app.states';
+import { AppState } from '../../store/app.state';
 import { loginFailure, loginSuccess } from '../../store/actions/user.actions';
 import { catchError, map, switchMap } from 'rxjs/operators';
 

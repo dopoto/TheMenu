@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AuthEffects } from './store/effects/auth.effects';
-import { reducers } from './store/app.states';
+import { reducers } from './store/app.state';
 import { environment } from 'src/environments/environment';
 
 // import { PortalConfigurationService } from './services/portal-configuration/portal-configuration.service';

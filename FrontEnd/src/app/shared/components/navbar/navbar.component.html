@@ -3,14 +3,13 @@
         <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
         <li><a routerLink="/about" routerLinkActive="active">About</a></li>
 
-        <li>
+        <li *ngIf="!(user$ | async)">
             <a (click)="signInWithGoogle()">Sign in</a>
         </li>
-        <!-- <li *ngIf="user">
-           Signed in as xxx <a (click)="signOut()">Sign out</a>
-        </li>  -->
-
-        
+        <li *ngIf="user$ | async">
+            Signed in as {{ (user$ | async).email }}
+            <a (click)="signOut()">Sign out</a>
+        </li>
     </ul>
 </nav>
 

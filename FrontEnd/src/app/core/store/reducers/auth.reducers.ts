@@ -1,14 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { SocialUser } from 'angularx-social-login';
+
+import { AuthState } from '../../models/auth-state';
 import * as AuthActions from '../actions/user.actions';
 
-export interface State {
-    isAuthenticated: boolean;
-    user: SocialUser | null;
-    errorMessage: string | null;
-}
-
-export const initialState: State = {
+export const initialState: AuthState = {
     isAuthenticated: false,
     user: null,
     errorMessage: null,
@@ -28,16 +23,6 @@ const authReducer = createReducer(
         user: { ...socialUser }
     })),
     
-    
-    // => {
-    //     debugger;
-    //     return {
-    //         isAuthenticated: true,
-    //         user: socialUser,
-    //         errorMessage: 'by loginsuccess reducer',
-    //     };
-    // }),
-
     on(AuthActions.loginFailure, (state, { errorMessage }) => ({
         isAuthenticated: false,
         user: null,
@@ -45,6 +30,6 @@ const authReducer = createReducer(
     }))
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: AuthState | undefined, action: Action) {
     return authReducer(state, action);
 }
