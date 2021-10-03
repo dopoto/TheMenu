@@ -1,6 +1,7 @@
 # Changelog
 
 ## Future plans
+- https://www.npmjs.com/package/@openapitools/openapi-generator-cli
 - [Run EF Core Migrations in Azure DevOps]
 - https://mherman.org/blog/authentication-in-angular-with-ngrx/
 - it’s a good idea to store tokens in a cookie with httpOnly and secure flags.
@@ -23,6 +24,7 @@
 
 - Angular 13 
 - Sign In with Google authentication - [Google external login setup in ASP.NET Core] / [How to Sign in with Google Using Angular and ASP.NET Core Web API]
+- ASP<span>.NET</span> Core Authentication with JWT and Angular - [ASP.NET Core Authentication with JWT and Angular – Part 1]
 - Set up app secrets - [Safe storage of app secrets in development in ASP.NET Core]
 - Populate secrets in AzureDevops - [Using secrets safely in development with .NET Core]
 - EntityFramework Core Code First Migrations - [Tutorial: Get started with EF Core in an ASP.NET MVC web app]. 
@@ -30,7 +32,7 @@ Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1
 - ApplicationInsights - backend
 - Diagnose / ping
 - ASP<span>.NET</span> Identity + EntityFramework Core Migrations [Scaffold Identity in ASP.NET Core projects]
-- ASP<span>.NET</span> Core Authentication with JWT and Angular - [ASP.NET Core Authentication with JWT and Angular – Part 1]
+
 - [Angular Routing]
 
 ## [0.0.1] (2021-09-23)
