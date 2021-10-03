@@ -22,16 +22,11 @@ namespace BackEnd.Controllers
         }
 
         [HttpGet]
-        public string GetAll()
-        {
-            return GetAppHealth().ToString() + GetDatabaseHealth().ToString();
-        }
-
-        [HttpGet]
         [Route("app-health")]
-        [EndpointName("/api/diagnose/app-health")]
+        [EndpointName("/diagnose/app-health")]
         public int GetAppHealth()
         {
+            // TODO Add more checks here
             return 1;
         }
 

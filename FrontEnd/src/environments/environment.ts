@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiEndpoint: '',
-  version: 'DEV'
+  version: 'DEV',
+  googleSignInClientId: '123382382905-fhngnav6413lmj57lc91ptjqil509cnv.apps.googleusercontent.com' // TODO
 };
 
 /*

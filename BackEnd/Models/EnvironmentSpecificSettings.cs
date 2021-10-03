@@ -25,7 +25,7 @@
         /// The Google SignIn app OAuth client ID.
         /// <see cref="https://developers.google.com/identity/sign-in/web/sign-in"/>
         /// </summary>
-        public string? GoogleSignInClientId {  get; set; }
+        public string? GoogleSignInClientId { get; set; }
 
         /// <summary>
         /// The Google SignIn app OAuth client secret.
@@ -40,5 +40,11 @@
         public string? ApplicationInsightsConnectionString { get; set; }
 
         public string? ApplicationInsightsInstrumentationKey { get; set; }
-    }   
+
+        public string? JwtValidIssuer { get; set; }
+
+        public string? JwtValidAudience { get; set; }
+
+        public string? JwtSecretKey { get; set; }
+    }
 }

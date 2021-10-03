@@ -5,5 +5,6 @@
 export const environment = {
   production: true,
   apiEndpoint: '#{ApiEndpoint}#',
-  version: '#{Build.BuildNumber}#'
+  version: '#{Build.BuildNumber}#',
+  googleSignInClientId: '#{GoogleSignInClientId}#'
 };
