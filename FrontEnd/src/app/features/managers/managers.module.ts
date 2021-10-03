@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
+import { ManagersMainComponent } from './managers-main/managers-main.component';
 
 @NgModule({
-    declarations: [],
+    declarations: [
+    ManagersMainComponent
+  ],
     imports: [SharedModule],
     exports: [],
     bootstrap: [],

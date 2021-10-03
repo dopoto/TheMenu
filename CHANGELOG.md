@@ -25,6 +25,7 @@
 - Angular 13 
 - Sign In with Google authentication - [Google external login setup in ASP.NET Core] / [How to Sign in with Google Using Angular and ASP.NET Core Web API]
 - ASP<span>.NET</span> Core Authentication with JWT and Angular - [ASP.NET Core Authentication with JWT and Angular – Part 1]
+- JWT refresh tokens [Using Refresh Tokens in ASP.NET Core Authentication]
 - Set up app secrets - [Safe storage of app secrets in development in ASP.NET Core]
 - Populate secrets in AzureDevops - [Using secrets safely in development with .NET Core]
 - EntityFramework Core Code First Migrations - [Tutorial: Get started with EF Core in an ASP.NET MVC web app]. 
@@ -70,4 +71,5 @@ Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1
 [Scaffold Identity in ASP.NET Core projects]: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-6.0&tabs=visual-studio#scaffold-identity-into-a-razor-project-without-existing-authorization
 [Run EF Core Migrations in Azure DevOps]: https://dotnetthoughts.net/run-ef-core-migrations-in-azure-devops/
 [ASP.NET Core Authentication with JWT and Angular – Part 1]: https://code-maze.com/authentication-aspnetcore-jwt-1/
+[Using Refresh Tokens in ASP.NET Core Authentication]: https://code-maze.com/using-refresh-tokens-in-asp-net-core-authentication/
 [Angular Routing]: https://angular.io/guide/router

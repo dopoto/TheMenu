@@ -41,7 +41,9 @@ export class AuthenticationService {
         ).pipe(
             map((authResponse) => {
                 if (authResponse.isAuthSuccessful) {
+                    debugger;
                     localStorage.setItem('token', authResponse.token);
+                    localStorage.setItem('refreshtoken', authResponse.refreshToken);
                     return socialUser;
                 } else {
                     return '';
@@ -64,17 +66,6 @@ export class AuthenticationService {
     };
 
     public signInWithGoogle$(): Observable<SocialUser | string> {
-        // return of(<SocialUser>{email: 'x@x.com'});
-
-        //    this._externalAuthService.authState.subscribe((user) => {
-        //     console.log('Logged inL ' + JSON.stringify(user));
-        //     const externalAuth: ExternalAuth = {
-        //         provider: user.provider,
-        //         idToken: user.idToken,
-        //     };
-        //     this.validateExternalAuth(user, externalAuth);
-        // });
-
         const signIn$ = from(
             this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
         );
@@ -83,19 +74,6 @@ export class AuthenticationService {
                 this.validateExternalAuth$(socialUser)
             )
         );
-
-        //     return this._externalAuthService.authState.pipe(
-        //         map((user) => {
-        //             const externalAuth: ExternalAuth = {
-        //                 provider: user.provider,
-        //                 idToken: user.idToken,
-        //             };
-        //             return this.validateExternalAuth$(res, externalAuth);
-        //         })
-        //     );
-        // }
-
-        //return from(promise);
     }
 
     // public isUserAuthenticated = (): boolean => {

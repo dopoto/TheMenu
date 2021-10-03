@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Identity;
@@ -29,7 +30,7 @@ namespace TheMenu.BackEnd.Services
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        private async Task<List<Claim>> GetClaims(TheMenuBackEndUser user)
+        public async Task<List<Claim>> GetClaimsAsync(TheMenuBackEndUser user)
         {
             var claims = new List<Claim>
             {
@@ -51,21 +52,61 @@ namespace TheMenu.BackEnd.Services
                 issuer: _settings.JwtValidIssuer,
                 audience: _settings.JwtValidAudience,
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMinutes(1), //DateTime.Now.AddMinutes(5), //TODO TEMP
                 signingCredentials: signingCredentials);
 
             return tokenOptions;
         }
 
-        public async Task<string> GenerateToken(TheMenuBackEndUser user)
+        public string GenerateToken(IEnumerable<Claim> claims)
         {
             var signingCredentials = GetSigningCredentials();
-            var claims = await GetClaims(user);
-            var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
+            var tokenOptions = GenerateTokenOptions(signingCredentials, claims.ToList());
             var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 
             return token;
         }
+
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
+        }
+
+        public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            var key = Encoding.UTF8.GetBytes(_settings.JwtSecretKey);
+            var secret = new SymmetricSecurityKey(key);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false, //you might want to validate the audience and issuer depending on your use case
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = secret,
+                ValidateLifetime = false //here we are saying that we don't care about the token's expiration date
+            };
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (IsTokenInvalid(jwtSecurityToken))
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+            return principal;
+        }
+
+        private bool IsTokenInvalid(JwtSecurityToken? jwtSecurityToken)
+        {
+            return jwtSecurityToken == null || 
+                !jwtSecurityToken.Header.Alg.Equals(
+                    SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
+        }        
 
         public async Task<GoogleJsonWebSignature.Payload> VerifyGoogleToken(ExternalAuth externalAuth)
         {

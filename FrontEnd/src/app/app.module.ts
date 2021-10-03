@@ -15,6 +15,7 @@ import { CustomersModule } from './features/customers/customers.module';
 import { LandingModule } from './features/landing/landing.module';
 import { ManagersModule } from './features/managers/managers.module';
 import { StaffModule } from './features/staff/staff.module';
+import { AuthGuard } from './core/guards/auth-guard.service';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { StaffModule } from './features/staff/staff.module';
         StaffModule
     ],
     providers: [
+        AuthGuard,
         {
             provide: 'SocialAuthServiceConfig',
             useValue: {

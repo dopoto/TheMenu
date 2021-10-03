@@ -64,8 +64,16 @@ namespace TheMenu.BackEnd.Controllers
 
             //check for the Locked out account
 
-            var token = await _jwtHandlerService.GenerateToken(user);
-            return Ok(new AuthResponse { Token = token, IsAuthSuccessful = true });
+            var claims = await _jwtHandlerService.GetClaimsAsync(user);
+            var token = _jwtHandlerService.GenerateToken(claims);
+            
+            var refreshToken = _jwtHandlerService.GenerateRefreshToken();
+            return Ok(new AuthResponse {
+                Token = token, 
+                RefreshToken = refreshToken, 
+                RefreshTokenExpiryTime = DateTime.Now.AddMinutes(2), //DateTime.Now.AddDays(7), //TODO TEMP
+                IsAuthSuccessful = true 
+            });
         }
     }
 }

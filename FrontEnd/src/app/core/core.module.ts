@@ -13,6 +13,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthEffects } from './store/effects/auth.effects';
 import { reducers } from './store/app.state';
 import { environment } from 'src/environments/environment';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './guards/auth-guard.service';
 
 // import { PortalConfigurationService } from './services/portal-configuration/portal-configuration.service';
 // import { LogService } from './services/log/log.service';
@@ -30,6 +32,10 @@ import { environment } from 'src/environments/environment';
 //         });
 //         return loadConfigPromise;
 //     };
+
+export function tokenGetter() {
+    return localStorage.getItem('token');
+}
 
 /**
  * Module containing providers for the singleton services loaded when the application starts.
@@ -52,7 +58,14 @@ import { environment } from 'src/environments/environment';
             autoPause: true, // Pauses recording actions and state changes when the extension window is not open
         }),
         EffectsModule.forRoot([AuthEffects]),
-    ],
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ['localhost:5000'],
+                disallowedRoutes: [],
+            },
+        }),
+    ]
 })
 export class CoreModule {
     constructor(
