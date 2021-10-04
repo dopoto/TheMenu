@@ -3,6 +3,10 @@
 A sample .NET 6 / Angular project.
 
 
+## Demo
+
+https://themenustorage.z6.web.core.windows.net/
+
 ## Setting up a development environment
 
 ### Prerequisites
