@@ -14,7 +14,7 @@ export class AboutComponent {
 
   constructor(http: HttpClient) {
     http
-      .get<number>( + '/diagnose/app-health')
+      .get<number>('/diagnose/app-health')
       .pipe(take(1))
       .subscribe({
         next: (data: number) => (this.appHealth = data === 1 ? 'OK' : 'Failed'),
