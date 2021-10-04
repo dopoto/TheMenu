@@ -1,7 +1,7 @@
 # This is a Build Deploy Pipeline for .NET 6 Web App to Azure App Service using Azure DevOps Pipeline
 
 trigger:
-- mainx
+- main
 
 pool:
   vmImage: ubuntu-latest
@@ -177,12 +177,16 @@ steps:
 #   condition: succeededOrFailed()
 #   inputs:
 #     PathtoPublish: $(build.artifactstagingdirectory)
-#     TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: SQLScripts'
-  inputs:
-    PathtoPublish: $(Build.SourcesDirectory)/db.sql
-    ArtifactName: SQLScripts
+# #     TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
+
+
+
+
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact: SQLScripts'
+#   inputs:
+#     PathtoPublish: $(Build.SourcesDirectory)/db.sql
+#     ArtifactName: SQLScripts
 
 ##
 ## NOT IN USE - USING Release instead. See Releases\Release Backend to Prod Pipeline
