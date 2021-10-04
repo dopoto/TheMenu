@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {
@@ -16,21 +16,24 @@ import { LandingModule } from './features/landing/landing.module';
 import { ManagersModule } from './features/managers/managers.module';
 import { StaffModule } from './features/staff/staff.module';
 import { AuthGuard } from './core/guards/auth-guard.service';
+import { AppHttpInterceptor } from './core/interceptors/http.interceptor';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        
-    ],
+    declarations: [AppComponent],
     imports: [
         CoreModule.forRoot(),
         SharedModule,
         CustomersModule,
         LandingModule,
         ManagersModule,
-        StaffModule
+        StaffModule,
     ],
     providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppHttpInterceptor,
+            multi: true,
+        },
         AuthGuard,
         {
             provide: 'SocialAuthServiceConfig',

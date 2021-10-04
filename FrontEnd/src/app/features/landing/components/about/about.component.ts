@@ -14,7 +14,7 @@ export class AboutComponent {
 
   constructor(http: HttpClient) {
     http
-      .get<number>(environment.apiEndpoint + '/diagnose/app-health')
+      .get<number>( + '/diagnose/app-health')
       .pipe(take(1))
       .subscribe({
         next: (data: number) => (this.appHealth = data === 1 ? 'OK' : 'Failed'),
@@ -22,7 +22,7 @@ export class AboutComponent {
       });
 
     http
-      .get<number>(environment.apiEndpoint + '/diagnose/database-health')
+      .get<number>('/diagnose/database-health')
       .pipe(take(1))
       .subscribe({
         next: (data: number) => (this.dbHealth = data === 1 ? 'OK' : 'Failed'),
