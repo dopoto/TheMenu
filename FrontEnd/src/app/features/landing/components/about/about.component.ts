@@ -6,30 +6,31 @@ import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+    selector: 'app-about',
+    templateUrl: './about.component.html',
+    styleUrls: ['./about.component.css']
 })
 export class AboutComponent {
 
-  constructor(http: HttpClient) {
-    http
-      .get<number>('/diagnose/app-health')
-      .pipe(take(1))
-      .subscribe({
-        next: (data: number) => (this.appHealth = data === 1 ? 'OK' : 'Failed'),
-        error: (err) => console.log(err), //TODO
-      });
+    version = environment.version;
+    appHealth = 'Checking...';
+    dbHealth = 'Checking...';
 
-    http
-      .get<number>('/diagnose/database-health')
-      .pipe(take(1))
-      .subscribe({
-        next: (data: number) => (this.dbHealth = data === 1 ? 'OK' : 'Failed'),
-        error: (err) => console.log(err), //TODO
-      });
-  }
- 
-  appHealth = 'Checking...';
-  dbHealth = 'Checking...';
+    constructor(http: HttpClient) {
+        http
+            .get<number>('/diagnose/app-health')
+            .pipe(take(1))
+            .subscribe({
+                next: (data: number) => (this.appHealth = data === 1 ? 'OK' : 'Failed'),
+                error: (err) => console.log(err), //TODO
+            });
+
+        http
+            .get<number>('/diagnose/database-health')
+            .pipe(take(1))
+            .subscribe({
+                next: (data: number) => (this.dbHealth = data === 1 ? 'OK' : 'Failed'),
+                error: (err) => console.log(err), //TODO
+            });
+    }
 }

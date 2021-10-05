@@ -17,9 +17,8 @@ export class AppHttpInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        const newUrl = { url: environment.apiEndpoint + req.url };
-        req = Object.assign(req, newUrl);
-        console.log('env:[' + environment.apiEndpoint + ']|hinter:' + req.url);
-        return next.handle(req);
+        const apiReq = req.clone({ url: `${environment.apiEndpoint}/${req.url}` });
+        console.log('apiReq:' + req.url);
+        return next.handle(apiReq);
     }
 }
