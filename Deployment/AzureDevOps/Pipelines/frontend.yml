@@ -59,13 +59,14 @@ steps:
   condition: succeededOrFailed()
   workingDirectory: ./FrontEnd
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'publish code coverage report'
-  condition: succeededOrFailed()
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
-    failIfCoverageEmpty: true  
+## TODO
+# - task: PublishCodeCoverageResults@1
+#   displayName: 'publish code coverage report'
+#   condition: succeededOrFailed()
+#   inputs:
+#     codeCoverageTool: Cobertura
+#     summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
+#     failIfCoverageEmpty: true  
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Output'
