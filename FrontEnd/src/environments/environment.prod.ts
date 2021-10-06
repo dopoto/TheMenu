@@ -1,11 +1,11 @@
-import { IConfiguration } from 'src/app/core/models/configuration';
-import { IServerConfiguration } from 'src/app/core/models/server-configuration';
+import { IConfig } from 'src/app/core/models/config';
+import { IServerConfig } from 'src/app/core/models/server-config';
 
 /**
  * The tokens below are set in Azure DevOps > Pipelines > Library > PROD
  * and are replace during the Azure DevOps release.
  * */
- export const environment: IConfiguration = {
+ export const environment: IConfig = {
     production: true,
     apiEndpoint: '#{ApiEndpoint}#',
     version: '#{Build.BuildNumber}#',
@@ -15,7 +15,7 @@ import { IServerConfiguration } from 'src/app/core/models/server-configuration';
      * In prod mode, these should be set in the AzureDevops Library.
      * These are fetched from a server endpoint when the app is bootstrapped.
      */
-    serverConfiguration: <IServerConfiguration>{
+    serverConfig: <IServerConfig>{
         googleSignInClientId: '',
     },
 };
