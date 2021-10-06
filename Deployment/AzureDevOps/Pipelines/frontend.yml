@@ -40,7 +40,7 @@ steps:
   workingDirectory: ./FrontEnd
 
 - script: |
-    npx ng test --watch=false --karmaConfig karma.conf.js --code-coverage
+    npx ng test --browsers=ChromeHeadless --watch=false --karma-config karma.conf.js --code-coverage
   displayName: 'Perform unit tests'
   workingDirectory: ./FrontEnd
 
