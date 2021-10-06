@@ -46,6 +46,7 @@ let googleSignInClientId = '';
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        HttpClientModule,
         BrowserModule,
         CoreModule.forRoot(),
         SharedModule,
