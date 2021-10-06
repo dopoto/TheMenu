@@ -38,10 +38,31 @@ let googleSignInClientId = '';
 function loadConfigFactory(configService: ConfigurationService) {
     return () =>
         configService.loadConfig$().pipe(
-            tap((value) => {
-                console.log('vl:' + value);
+            tap((config) => {
+                googleSignInClientId = config.googleSignInClientId;
             })
         );
+}
+
+// function loadSocialAuthServiceFactory(configService: ConfigurationService) {
+//     return () => {
+//         debugger;
+//         return {
+//             autoLogin: false,
+//             providers: [
+//                 {
+//                     id: GoogleLoginProvider.PROVIDER_ID,
+//                     provider: new GoogleLoginProvider(googleSignInClientId),
+//                 },
+//             ],
+//         };
+//     };
+// }
+
+export function AppConfigServiceFactory(
+    configService: ConfigurationService
+): () => void {
+    return async () => await configService.load();
 }
 
 @NgModule({
@@ -70,19 +91,36 @@ function loadConfigFactory(configService: ConfigurationService) {
             deps: [ConfigurationService],
         },
         AuthGuard,
+        // {
+        //     provide: 'SocialAuthServiceConfig',
+        //     useValue: {
+        //         autoLogin: false,
+        //         providers: [
+        //             {
+        //                 id: GoogleLoginProvider.PROVIDER_ID,
+        //                 provider: new GoogleLoginProvider(googleSignInClientId),
+        //             },
+        //         ],
+        //     } as SocialAuthServiceConfig,
+        // },
         {
             provide: 'SocialAuthServiceConfig',
-            useValue: {
-                autoLogin: false,
-                providers: [
-                    {
-                        id: GoogleLoginProvider.PROVIDER_ID,
-                        provider: new GoogleLoginProvider(
-                            '123382382905-fhngnav6413lmj57lc91ptjqil509cnv.apps.googleusercontent.com' //TODO
-                        ),
-                    },
-                ],
-            } as SocialAuthServiceConfig,
+            useValue: new Promise(async (resolve) => {
+                // await until the app config service is loaded
+                const config = await ConfigurationService.configFetched();
+
+                resolve({
+                    autoLogin: false,
+                    providers: [
+                        {
+                            id: GoogleLoginProvider.PROVIDER_ID,
+                            provider: new GoogleLoginProvider(
+                                config.serverConfiguration.googleSignInClientId
+                            ),
+                        },
+                    ],
+                } as SocialAuthServiceConfig);
+            }),
         },
     ],
     bootstrap: [AppComponent],
