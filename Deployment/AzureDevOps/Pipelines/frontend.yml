@@ -42,6 +42,7 @@ steps:
 - script: |
     npx ng test --watch=false --karmaConfig karma.conf.js --code-coverage
   displayName: 'Perform unit tests'
+  workingDirectory: ./FrontEnd
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
