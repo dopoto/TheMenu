@@ -14,11 +14,21 @@ import { StaffModule } from './features/staff/staff.module';
 import { AuthGuard } from './core/guards/auth-guard.service';
 import { AppHttpInterceptor } from './core/interceptors/http.interceptor';
 import { ConfigService } from './core/services/config/config.service';
+import { LogService } from './core/services/log/log.service';
+import { AppInsightsService } from './core/services/app-insights/app-insights.service';
 
 export function AppConfigServiceFactory(
-    configService: ConfigService
+    configService: ConfigService, logService: LogService
 ): () => void {
-    return async () => await configService.load();
+    return async () => {
+        await configService.load();
+        const config = await ConfigService.configFetched();
+
+        const aiKey = config.serverConfig.applicationInsightsInstrumentationKey
+        const logToConsole = config.serverConfig.clientLoggingLogToConsole as unknown as boolean;
+        const logToAppInsights = config.serverConfig.clientLoggingLogToApplicationInsights as unknown as boolean;
+        logService.initialize(aiKey, logToConsole, logToAppInsights);
+    };
 }
 
 @NgModule({
@@ -34,6 +44,7 @@ export function AppConfigServiceFactory(
         StaffModule,
     ],
     providers: [
+        LogService,
         ConfigService,
         {
             provide: HTTP_INTERCEPTORS,
@@ -43,7 +54,7 @@ export function AppConfigServiceFactory(
         {
             provide: APP_INITIALIZER,
             useFactory: AppConfigServiceFactory,
-            deps: [ConfigService],
+            deps: [ConfigService, LogService],
             multi: true,
         },
         AuthGuard,

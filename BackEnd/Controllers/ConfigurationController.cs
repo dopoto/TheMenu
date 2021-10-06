@@ -19,11 +19,14 @@ namespace TheMenu.BackEnd.Controllers
         [EndpointName("/configuration/environment-specific")]
         public IActionResult GetEnvironmentSpecificConfiguration()
         {
-            var environmentSettings = _configuration.Get<EnvironmentSpecificSettings>();
+            var es = _configuration.Get<EnvironmentSpecificSettings>();
             return Ok(new Dictionary<string, string>
-        {
-            { "GoogleSignInClientId", environmentSettings.GoogleSignInClientId }
-        });
+            {
+                { "googleSignInClientId", es.GoogleSignInClientId ?? "" },
+                { "applicationInsightsInstrumentationKey", es.ApplicationInsightsInstrumentationKey ?? "" },
+                { "clientLoggingLogToConsole", es.ClientLoggingLogToConsole ?? "true" },
+                { "clientLoggingLogToApplicationInsights", es.ClientLoggingLogToApplicationInsights ?? "true" },
+            });
         }
     }
 }

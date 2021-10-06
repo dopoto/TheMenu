@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "12.2.8",
     "@angular/router": "12.2.8",
     "@auth0/angular-jwt": "~5.0.2",
+    "@microsoft/applicationinsights-web": "~2.7.0",
     "@ngrx/effects": "~12.4.0",
     "@ngrx/store": "~12.4.0",
     "@ngrx/store-devtools": "~12.4.0",

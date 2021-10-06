@@ -46,5 +46,9 @@
         public string? JwtValidAudience { get; set; }
 
         public string? JwtSecretKey { get; set; }
+
+        public string? ClientLoggingLogToConsole { get; set; }
+
+        public string? ClientLoggingLogToApplicationInsights { get; set; }
     }
 }

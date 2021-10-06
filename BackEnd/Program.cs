@@ -10,8 +10,17 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>();
+
+var environmentSettingsEntries = typeof(EnvironmentSpecificSettings).GetProperties();
+foreach (var property in environmentSettingsEntries)
+{
+    var val = property.GetValue(environmentSettings);
+    if (String.IsNullOrEmpty(val?.ToString()))
+    {
+        throw new KeyNotFoundException("Environment value not found for: " + property.Name);
+    }
+}
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -21,6 +30,7 @@ builder.Configuration
 var connectionString = builder.Configuration.GetConnectionString("TheMenuBackEndContextConnection");
 builder.Services.AddDbContext<TheMenuBackEndContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services
     .AddDefaultIdentity<TheMenuBackEndUser>(
         options => options.SignIn.RequireConfirmedAccount = true
@@ -36,7 +46,7 @@ builder.Services.AddScoped<JwtHandlerService>();
 
 builder.Services.AddCors(options =>
 {
-    var frontEndUrl = environmentSettings.FrontEndUrl;
+    var frontEndUrl = environmentSettings.FrontEndUrl ?? "";
     var allowedOrigins = new[] { frontEndUrl };
     options.AddDefaultPolicy(builder =>
     {
@@ -45,6 +55,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
+
+
 
 builder.Services
     .AddAuthentication(opt => {
@@ -61,17 +73,18 @@ builder.Services
             ValidateIssuerSigningKey = true,
             ValidIssuer = environmentSettings.JwtValidIssuer,
             ValidAudience = environmentSettings.JwtValidAudience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(environmentSettings.JwtSecretKey))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(environmentSettings.JwtSecretKey ?? ""))
         };
     })
     .AddGoogle(options =>
     {
-        options.ClientId = environmentSettings.GoogleSignInClientId;
-        options.ClientSecret = environmentSettings.GoogleSignInClientSecret;
+        options.ClientId = environmentSettings.GoogleSignInClientId ?? "";
+        options.ClientSecret = environmentSettings.GoogleSignInClientSecret ?? "";
     });
 
 builder.Services.AddSwaggerGen(c =>
 {
+    // TODO Load actual version
     c.SwaggerDoc("v1", new() { Title = "BackEnd", Version = "v1" });
 });
 builder.Services.AddApplicationInsightsTelemetry(environmentSettings.ApplicationInsightsInstrumentationKey);
@@ -102,11 +115,11 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
+        // TODO Re-enable
         //var logger = services.GetRequiredService<ILogger<Program>>();
         //logger.LogError(ex, "An error occurred creating the DB.");
     }
 }
-
 
 app.Run();
 

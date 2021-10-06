@@ -14,26 +14,8 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { reducers } from './store/app.state';
 import { environment } from 'src/environments/environment';
 import { JwtModule } from '@auth0/angular-jwt';
-import { AuthGuard } from './guards/auth-guard.service';
 
-// import { PortalConfigurationService } from './services/portal-configuration/portal-configuration.service';
-// import { LogService } from './services/log/log.service';
-
-/**
- * @description We need to fetch config data and initialize ApplicationInsights before the application starts
- */
-// const initConfig =
-//     (portalConfigurationService: PortalConfigurationService, logService: LogService) =>
-//     () => {
-//         const loadConfigPromise = portalConfigurationService.initialize();
-//         loadConfigPromise.then(() => {
-//             const instrumentationKey = portalConfigurationService.getData().iKey;
-//             logService.initialize(instrumentationKey);
-//         });
-//         return loadConfigPromise;
-//     };
-
-export function tokenGetter() {
+function tokenGetter() {
     return localStorage.getItem('token');
 }
 
@@ -61,7 +43,7 @@ export function tokenGetter() {
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                allowedDomains: ['localhost:5000'],
+                allowedDomains: ['localhost:5000'], //TODO ?
                 disallowedRoutes: [],
             },
         }),
@@ -83,14 +65,7 @@ export class CoreModule {
     static forRoot(): ModuleWithProviders<CoreModule> {
         return {
             ngModule: CoreModule,
-            providers: [
-                // {
-                //     provide: APP_INITIALIZER,
-                //     useFactory: initConfig,
-                //     multi: true,
-                //     deps: [PortalConfigurationService, LogService],
-                // },
-            ],
+            providers: [],
         };
     }
 }
