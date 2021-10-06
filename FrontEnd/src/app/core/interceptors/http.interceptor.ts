@@ -42,7 +42,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        const apiReq = req.clone({ url: `${environment.apiEndpoint}/${req.url}` });
+        const apiReq = req.clone({ url: `${environment.apiEndpoint}${req.url}` });
         console.log('apiReq:' + req.url);
         return next.handle(apiReq);
     }

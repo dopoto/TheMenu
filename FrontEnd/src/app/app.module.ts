@@ -1,6 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, FactoryProvider, NgModule } from '@angular/core';
 import {
     SocialLoginModule,
     SocialAuthServiceConfig,
@@ -17,10 +17,36 @@ import { ManagersModule } from './features/managers/managers.module';
 import { StaffModule } from './features/staff/staff.module';
 import { AuthGuard } from './core/guards/auth-guard.service';
 import { AppHttpInterceptor } from './core/interceptors/http.interceptor';
+//import { ConfigurationService } from './core/services/configuration/configuration.service';
+import { tap } from 'rxjs/operators';
+
+let googleSignInClientId = '';
+
+// const appInitializerFn = (appConfig: ConfigurationService) => {
+//     return () => {
+//         // let appConfigPromise = appConfig.loadConfig();
+//         // appConfigPromise.then(res => {
+//         //     debugger;
+//         //     googleSignInClientId = appConfig.configuration.serverConfiguration.googleSignInClientId;
+//         // });
+//         // return appConfigPromise;
+//         return Promise.resolve();
+//     };
+// };
+
+// function loadConfigFactory(configService: ConfigurationService) {
+//     return () =>
+//         configService.loadConfig$().pipe(
+//             tap((value) => {
+//                 console.log('vl:' + value);
+//             })
+//         );
+// }
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        BrowserModule,
         CoreModule.forRoot(),
         SharedModule,
         CustomersModule,
@@ -34,6 +60,12 @@ import { AppHttpInterceptor } from './core/interceptors/http.interceptor';
             useClass: AppHttpInterceptor,
             multi: true,
         },
+        // {
+        //     provide: APP_INITIALIZER,
+        //     useFactory: loadConfigFactory,
+        //     multi: true,
+        //     deps: [ConfigurationService],
+        // },
         AuthGuard,
         {
             provide: 'SocialAuthServiceConfig',

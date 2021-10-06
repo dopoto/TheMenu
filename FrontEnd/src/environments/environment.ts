@@ -8,7 +8,7 @@ import { IServerConfiguration } from 'src/app/core/models/server-configuration';
 export const environment: IConfiguration = {
     production: false,
     version: 'DEV',
-    apiEndpoint: 'https://localhost:4210',
+    apiEndpoint: 'http://localhost:5063',
 
     /**
      * Environment-specific variables that should not be source controlled.
