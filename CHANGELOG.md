@@ -15,6 +15,7 @@
 - Content-Security-Policy
 - Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser> https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-6.0&tabs=visual-studio#add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser
 - https://code-maze.com/authentication-aspnetcore-jwt-2/
+- 404 on route refresh in azure
 
 
 ## [0.0.2](https://github.com/dopoto/TheMenu/compare/0.0.1...0.0.2) (unreleased)
@@ -33,6 +34,7 @@
 - Angular routes with auth guard - [Angular Routing]
 - [Angular Routing](https://angular.io/guide/router)
 - Bootstrap 5
+- [Pass ASP.NET Core Appsettings Values to Angular via an API Call](https://elanderson.net/2018/05/pass-asp-net-core-appsettings-values-to-angular-via-an-api-call/)
 
 
 ## [0.0.1](https://github.com/dopoto/TheMenu/releases/tag/0.0.1) (2021-09-23)
