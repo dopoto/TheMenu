@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { take } from 'rxjs/operators';
-//import { ConfigurationService } from 'src/app/core/services/configuration/configuration.service';
+import { ConfigService } from 'src/app/core/services/config/config.service';
 
 @Component({
     selector: 'app-about',
@@ -14,8 +14,8 @@ export class AboutComponent {
     appHealth = 'Checking...';
     dbHealth = 'Checking...';
 
-    constructor(http: HttpClient, /*configurationService: ConfigurationService*/) {
-        this.version = ''; //configurationService.configuration.version;
+    constructor(http: HttpClient) {
+        this.version = ConfigService.config.version;
 
         http
             .get<number>('/diagnose/app-health')

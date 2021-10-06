@@ -21,7 +21,6 @@ export class AuthEffects {
             mergeMap(() =>
                 this.authService.signInWithGoogle$().pipe(
                     map((socialUser) => {
-                        debugger;
                         return {
                             type: AuthActionTypes.LOGIN_SUCCESS,
                             socialUser: socialUser,

@@ -49,10 +49,7 @@ describe('AppInsightsService', () => {
         const expectedData = {
             name: 'some event',
             properties: {
-                currentEnvironment: {
-                    app: 'SetupApp',
-                    tenantId: '1234',
-                },
+                currentEnvironment: 'DEV',
             },
         };
         expect(spy).toHaveBeenCalledWith(expectedData);
@@ -71,7 +68,7 @@ describe('AppInsightsService', () => {
             name: 'some event',
             properties: {
                 someProp: 'some value',
-                currentEnvironment: { app: 'SetupApp', tenantId: '1234' },
+                currentEnvironment: 'DEV',
             },
         };
         expect(spy).toHaveBeenCalledWith(expectedData);
@@ -90,7 +87,7 @@ describe('AppInsightsService', () => {
         const expectedData = {
             name: 'td',
             properties: {
-                currentEnvironment: { app: 'SetupApp', tenantId: '1234' },
+                currentEnvironment: 'DEV',
             },
         };
         expect(spy).toHaveBeenCalledWith(expectedData);

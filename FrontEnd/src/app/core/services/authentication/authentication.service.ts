@@ -19,8 +19,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 export class AuthenticationService {
     constructor(
         private _http: HttpClient,
-        private _externalAuthService: SocialAuthService,
-        private store: Store<AppState>
+        private _externalAuthService: SocialAuthService
     ) {}
 
     // public logout = () => {
@@ -41,7 +40,6 @@ export class AuthenticationService {
         ).pipe(
             map((authResponse) => {
                 if (authResponse.isAuthSuccessful) {
-                    debugger;
                     localStorage.setItem('token', authResponse.token);
                     localStorage.setItem('refreshtoken', authResponse.refreshToken);
                     return socialUser;
