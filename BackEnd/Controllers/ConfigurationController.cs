@@ -3,7 +3,8 @@ using TheMenu.BackEnd.Models;
 
 namespace TheMenu.BackEnd.Controllers
 {
-    [Route("api/configuration")]
+    [ApiController]
+    [Route("[controller]")]
     public class ConfigurationController : ControllerBase
     {
         private readonly IConfiguration _configuration;

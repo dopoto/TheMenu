@@ -2,13 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { IConfiguration } from 'src/app/core/models/configuration';
-import { IServerConfiguration } from 'src/app/core/models/server-configuration';
+import { IConfig } from 'src/app/core/models/config';
+import { IServerConfig } from 'src/app/core/models/server-config';
 
-export const environment: IConfiguration = {
+export const environment: IConfig = {
     production: false,
     version: 'DEV',
-    apiEndpoint: 'https://localhost:4210',
+    apiEndpoint: '',
 
     /**
      * Environment-specific variables that should not be source controlled.
@@ -16,7 +16,7 @@ export const environment: IConfiguration = {
      * @see https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows#enable-secret-storage
      * These are fetched from a server endpoint when the app is bootstrapped.
      */
-    serverConfiguration: <IServerConfiguration>{
+    serverConfig: <IServerConfig>{
         googleSignInClientId: '',
     },
 };
