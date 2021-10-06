@@ -36,9 +36,35 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
+  displayName: 'Do npm install'
+  workingDirectory: ./FrontEnd
+
+- script: |
+    npx ng test --watch=false --karmaConfig karma.conf.js --code-coverage
+  displayName: 'Perform unit tests'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TESTS-*.xml'
+  displayName: 'Publish unit test results'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
     ng build --prod
   displayName: 'npm install and build'
+  condition: succeededOrFailed()
   workingDirectory: ./FrontEnd
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'publish code coverage report'
+  condition: succeededOrFailed()
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(Build.SourcesDirectory)/coverage/cobertura-coverage.xml'
+    failIfCoverageEmpty: true  
 
 - task: PublishPipelineArtifact@1
   displayName: 'Publish Output'
