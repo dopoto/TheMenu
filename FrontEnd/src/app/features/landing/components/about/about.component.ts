@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { take } from 'rxjs/operators';
-
-
-import { environment } from 'src/environments/environment';
+//import { ConfigurationService } from 'src/app/core/services/configuration/configuration.service';
 
 @Component({
     selector: 'app-about',
@@ -12,11 +10,13 @@ import { environment } from 'src/environments/environment';
 })
 export class AboutComponent {
 
-    version = environment.version;
+    version = '';
     appHealth = 'Checking...';
     dbHealth = 'Checking...';
 
-    constructor(http: HttpClient) {
+    constructor(http: HttpClient, /*configurationService: ConfigurationService*/) {
+        this.version = ''; //configurationService.configuration.version;
+
         http
             .get<number>('/diagnose/app-health')
             .pipe(take(1))

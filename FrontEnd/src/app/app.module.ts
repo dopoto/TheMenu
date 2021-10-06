@@ -21,6 +21,8 @@ import { AppHttpInterceptor } from './core/interceptors/http.interceptor';
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        BrowserModule,
+        HttpClientModule,
         CoreModule.forRoot(),
         SharedModule,
         CustomersModule,
@@ -52,4 +54,8 @@ import { AppHttpInterceptor } from './core/interceptors/http.interceptor';
     ],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+    ngDoBootstrap(): void {
+        // this method has to be here, even if it's empty
+    }
+}
