@@ -19,6 +19,7 @@ import { AuthGuard } from './core/guards/auth-guard.service';
 import { AppHttpInterceptor } from './core/interceptors/http.interceptor';
 //import { ConfigurationService } from './core/services/configuration/configuration.service';
 import { tap } from 'rxjs/operators';
+import { ConfigurationService } from './core/services/configuration/configuration.service';
 
 let googleSignInClientId = '';
 
@@ -34,14 +35,14 @@ let googleSignInClientId = '';
 //     };
 // };
 
-// function loadConfigFactory(configService: ConfigurationService) {
-//     return () =>
-//         configService.loadConfig$().pipe(
-//             tap((value) => {
-//                 console.log('vl:' + value);
-//             })
-//         );
-// }
+function loadConfigFactory(configService: ConfigurationService) {
+    return () =>
+        configService.loadConfig$().pipe(
+            tap((value) => {
+                console.log('vl:' + value);
+            })
+        );
+}
 
 @NgModule({
     declarations: [AppComponent],
@@ -56,17 +57,18 @@ let googleSignInClientId = '';
         StaffModule,
     ],
     providers: [
+        ConfigurationService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AppHttpInterceptor,
             multi: true,
         },
-        // {
-        //     provide: APP_INITIALIZER,
-        //     useFactory: loadConfigFactory,
-        //     multi: true,
-        //     deps: [ConfigurationService],
-        // },
+        {
+            provide: APP_INITIALIZER,
+            useFactory: loadConfigFactory,
+            multi: true,
+            deps: [ConfigurationService],
+        },
         AuthGuard,
         {
             provide: 'SocialAuthServiceConfig',

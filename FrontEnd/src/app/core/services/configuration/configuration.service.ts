@@ -6,9 +6,7 @@ import { IConfiguration } from '../../models/configuration';
 import { tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-@Injectable({
-    providedIn: "root"
-  })
+@Injectable()
 export class ConfigurationService {
     public configuration: IConfiguration;
 
@@ -32,13 +30,13 @@ export class ConfigurationService {
     }
 
     loadConfig$() {
-        return of({});
-        // return this.http
-        //     .get<IServerConfiguration>('configuration/environment-specific')
-        //     .pipe(
-        //         tap((result) => {
-        //             this.configuration.serverConfiguration = result;
-        //         })
-        //     );
+        //return of({});
+        return this.http
+            .get<IServerConfiguration>('configuration/environment-specific')
+            .pipe(
+                tap((result) => {
+                    this.configuration.serverConfiguration = result;
+                })
+            );
     }
 }
