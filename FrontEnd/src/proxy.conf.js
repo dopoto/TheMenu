@@ -4,6 +4,8 @@ const PROXY_CONFIG = [
       "/accounts",
       "/configuration",
       "/diagnose",
+      "/locations",
+      "/token",
     ],
     target: "http://localhost:5063",
     secure: false

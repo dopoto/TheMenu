@@ -27,6 +27,23 @@ const authReducer = createReducer(
         isAuthenticated: false,
         user: null,
         errorMessage: 'by loginfailure reducer',
+    })),
+    
+    on(AuthActions.logoutStarted, (state) => ({
+        isAuthenticated: false,
+        user: null,
+        errorMessage: 'by logoutStarted reducer',
+    })),
+
+    on(AuthActions.logoutSuccess, (state) => ({ 
+        ...state,
+        user: null
+    })),
+    
+    on(AuthActions.loginFailure, (state, { errorMessage }) => ({
+        isAuthenticated: false,
+        user: null, //TODO ???
+        errorMessage: 'by logoutfailure reducer',
     }))
 );
 

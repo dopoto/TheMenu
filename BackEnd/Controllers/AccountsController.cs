@@ -4,6 +4,7 @@ using TheMenu.BackEnd.Models;
 using TheMenu.BackEnd.Services;
 using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Areas.Identity.Data;
+using System.Security.Claims;
 
 namespace TheMenu.BackEnd.Controllers
 {
@@ -38,6 +39,12 @@ namespace TheMenu.BackEnd.Controllers
 
             var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
 
+            List<Claim> claims;
+            string token = "";
+            string refreshToken = "";
+
+            var refreshTokenExpiryTime = DateTime.Now.AddMinutes(2); //DateTime.Now.AddDays(7), //TODO TEMP
+
             var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             if (user == null)
             {
@@ -45,7 +52,10 @@ namespace TheMenu.BackEnd.Controllers
 
                 if (user == null)
                 {
-                    user = new TheMenuBackEndUser { Email = payload.Email, UserName = payload.Email };
+                    user = new TheMenuBackEndUser { 
+                        Email = payload.Email, 
+                        UserName = payload.Email, 
+                    };
                     await _userManager.CreateAsync(user);
 
                     // TODO prepare and send an email for the email confirmation
@@ -54,7 +64,8 @@ namespace TheMenu.BackEnd.Controllers
                     await _userManager.AddLoginAsync(user, info);
                 }
                 else
-                {
+                {                    
+                    //TODO check if account is Locked Out
                     await _userManager.AddLoginAsync(user, info);
                 }
             }
@@ -62,16 +73,18 @@ namespace TheMenu.BackEnd.Controllers
             if (user == null)
                 return BadRequest("Invalid External Authentication.");
 
-            //check for the Locked out account
+            claims = await _jwtHandlerService.GetClaimsAsync(user);
+            token = _jwtHandlerService.GenerateToken(claims);
+            refreshToken = _jwtHandlerService.GenerateRefreshToken();
 
-            var claims = await _jwtHandlerService.GetClaimsAsync(user);
-            var token = _jwtHandlerService.GenerateToken(claims);
-            
-            var refreshToken = _jwtHandlerService.GenerateRefreshToken();
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = refreshTokenExpiryTime;
+            await _userManager.UpdateAsync(user);
+
             return Ok(new AuthResponse {
                 Token = token, 
                 RefreshToken = refreshToken, 
-                RefreshTokenExpiryTime = DateTime.Now.AddMinutes(2), //DateTime.Now.AddDays(7), //TODO TEMP
+                RefreshTokenExpiryTime = refreshTokenExpiryTime,
                 IsAuthSuccessful = true 
             });
         }

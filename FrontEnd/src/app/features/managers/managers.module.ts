@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../shared/shared.module';
-import { ManagersMainComponent } from './managers-main/managers-main.component';
+import { ManagersMainComponent } from './components/managers-main/managers-main.component';
+import { LocationsMainComponent } from './components/locations-main/locations-main.component';
 
 @NgModule({
     declarations: [
-    ManagersMainComponent
+    ManagersMainComponent,
+    LocationsMainComponent
   ],
     imports: [SharedModule],
     exports: [],

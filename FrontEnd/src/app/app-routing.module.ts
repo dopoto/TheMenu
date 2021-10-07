@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AboutComponent } from './features/landing/components/about/about.component';
 import { HomeComponent } from './features/landing/components/home/home.component';
-import { ManagersMainComponent } from './features/managers/managers-main/managers-main.component';
+import { ManagersMainComponent } from './features/managers/components/managers-main/managers-main.component';
 import { AuthGuard } from './core/guards/auth-guard.service';
 import { LoginComponent } from './features/landing/components/login/login.component';
 

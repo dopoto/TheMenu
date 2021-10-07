@@ -7,7 +7,7 @@ using TheMenu.BackEnd.Services;
 
 namespace TheMenu.BackEnd.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class TokenController : ControllerBase
     {
@@ -19,8 +19,10 @@ namespace TheMenu.BackEnd.Controllers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));
         }
+
         [HttpPost]
         [Route("refresh")]
+        [EndpointName("/token/refresh")]
         public async Task<IActionResult> Refresh(TokenApiModel tokenApiModel)
         {
             if (tokenApiModel is null)
@@ -52,14 +54,18 @@ namespace TheMenu.BackEnd.Controllers
 
         [HttpPost, Authorize]
         [Route("revoke")]
+        [EndpointName("/token/revoke")]
         public async Task<IActionResult> Revoke()
         {
             var username = User?.Identity?.Name;
-            var loginProvider = "GOOGLE"; // TODO
-            var user = await _userManager.FindByLoginAsync(loginProvider, username);
+            var user = await _userManager.FindByNameAsync(username);
+
             if (user == null) return BadRequest();
+
             user.RefreshToken = null;
+            user.RefreshTokenExpiryTime = DateTime.MinValue;
             await _userManager.UpdateAsync(user);
+
             return NoContent();
         }
     }

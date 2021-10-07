@@ -3,12 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TheMenu.BackEnd.Controllers
 {
+    [ApiController]
+    [Authorize]
+    [Route("[controller]")]
     public class LocationsController : ControllerBase
     {
-        [HttpGet, Authorize]
+        [HttpGet]
+        [EndpointName("/locations")]
         public IEnumerable<string> Get()
         {
-            return new string[] { "John Doe", "Jane Doe" };
+            return new string[] { "Buddha Bar", "Varice" };
         }
     }
 }

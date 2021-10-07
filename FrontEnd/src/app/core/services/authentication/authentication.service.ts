@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { from, Observable, of, Subject } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt'; //TODO
+import { forkJoin, from, Observable, zip } from 'rxjs';
+import {
+    combineLatest,
+    catchError,
+    map,
+    switchMap,
+    withLatestFrom,
+    tap,
+} from 'rxjs/operators';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 
 import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
-import { AuthData } from 'src/app/core/models/auth-data';
-import { AppState } from '../../store/app.state';
-import { loginFailure, loginSuccess } from '../../store/actions/user.actions';
-import { catchError, map, switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -21,11 +23,6 @@ export class AuthenticationService {
         private _http: HttpClient,
         private _externalAuthService: SocialAuthService
     ) {}
-
-    // public logout = () => {
-    //     localStorage.removeItem('token');
-    //     this.sendAuthStateChangeNotification(false);
-    // };
 
     private validateExternalAuth$(
         socialUser: SocialUser
@@ -41,7 +38,10 @@ export class AuthenticationService {
             map((authResponse) => {
                 if (authResponse.isAuthSuccessful) {
                     localStorage.setItem('token', authResponse.token);
-                    localStorage.setItem('refreshtoken', authResponse.refreshToken);
+                    localStorage.setItem(
+                        'refreshtoken',
+                        authResponse.refreshToken
+                    );
                     return socialUser;
                 } else {
                     return '';
@@ -53,12 +53,6 @@ export class AuthenticationService {
         );
     }
 
-    public signOutExternal = () => {
-        localStorage.removeItem('token');
-        this._externalAuthService.signOut();
-        // TODO dispatch logout
-    };
-
     public externalLogin = (route: string, body: ExternalAuth) => {
         return this._http.post<AuthResponse>(route, body);
     };
@@ -68,9 +62,22 @@ export class AuthenticationService {
             this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
         );
         return signIn$.pipe(
-            switchMap((socialUser) =>
-                this.validateExternalAuth$(socialUser)
-            )
+            switchMap((socialUser) => this.validateExternalAuth$(socialUser))
+        );
+    }
+
+    public signOutExternal$(): Observable<void> {
+        const signOutFromExternalProvider$ = from(
+            this._externalAuthService.signOut()
+        );
+        const revokeToken$ = this._http.post('/token/revoke', {});
+
+        return zip(signOutFromExternalProvider$, revokeToken$).pipe(
+            tap(() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('refreshtoken');
+            }),
+            map(() => {})
         );
     }
 

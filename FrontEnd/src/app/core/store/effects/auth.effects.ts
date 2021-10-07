@@ -26,7 +26,7 @@ export class AuthEffects {
                             socialUser: socialUser,
                         };
                     }),
-                    catchError(() => EMPTY)
+                    catchError(() => EMPTY) //TODO
                 )
             )
         )
@@ -40,6 +40,22 @@ export class AuthEffects {
             ),
         { dispatch: false }
     );
+
+    logout$ = createEffect(() =>
+    this.actions$.pipe(
+        ofType(AuthActionTypes.LOGOUT_STARTED),
+        mergeMap(() =>
+            this.authService.signOutExternal$().pipe(
+                map(() => {
+                    return {
+                        type: AuthActionTypes.LOGOUT_SUCCESS
+                    };
+                }),
+                catchError(() => EMPTY) //TODO
+            )
+        )
+    )
+);
 
     // logInFailure$ = createEffect(
     //   () =>

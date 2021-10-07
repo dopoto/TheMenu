@@ -12,6 +12,7 @@ export class AuthGuard implements CanActivate {
     ) {}
 
     async canActivate() {
+        // TODO Check owner / staff
         const token = localStorage.getItem('token');
 
         if (token && !this.jwtHelper.isTokenExpired(token)) {
@@ -28,6 +29,7 @@ export class AuthGuard implements CanActivate {
     }
 
     private async tryRefreshingTokens(token: string): Promise<boolean> {
+        debugger;
         // Try refreshing tokens using refresh token
         const refreshToken: string = localStorage.getItem('refreshToken');
 
