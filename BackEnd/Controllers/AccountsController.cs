@@ -39,11 +39,7 @@ namespace TheMenu.BackEnd.Controllers
 
             var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
 
-            List<Claim> claims;
-            string token = "";
-            string refreshToken = "";
-
-            var refreshTokenExpiryTime = DateTime.Now.AddMinutes(2); //DateTime.Now.AddDays(7), //TODO TEMP
+            var refreshTokenExpiryTime = DateTime.Now.AddMinutes(20); //DateTime.Now.AddDays(7), //TODO TEMP
 
             var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             if (user == null)
@@ -74,9 +70,9 @@ namespace TheMenu.BackEnd.Controllers
             if (user == null)
                 return BadRequest("Invalid External Authentication.");
 
-            claims = await _jwtHandlerService.GetClaimsAsync(user);
-            token = _jwtHandlerService.GenerateToken(claims);
-            refreshToken = _jwtHandlerService.GenerateRefreshToken();
+            var claims = await _jwtHandlerService.GetClaimsAsync(user);
+            var token = _jwtHandlerService.GenerateToken(claims);
+            var refreshToken = _jwtHandlerService.GenerateRefreshToken();
 
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = refreshTokenExpiryTime;

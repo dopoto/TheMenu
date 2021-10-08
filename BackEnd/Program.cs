@@ -98,6 +98,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheMenu BackEnd v1"));
 }
 app.UseCors();
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

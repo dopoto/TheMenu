@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TheMenu.BackEnd.Controllers
 {
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Owner")]
     [Route("[controller]")]
     public class LocationsController : ControllerBase
     {

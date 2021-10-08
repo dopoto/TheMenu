@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, from, Observable, zip } from 'rxjs';
 import {
@@ -84,6 +84,41 @@ export class AuthenticationService {
         );
     }
 
+    public async tryRefreshingTokens(token: string): Promise<boolean> {
+        // Try refreshing tokens using refresh token
+        const refreshToken: string = localStorage.getItem('refreshtoken');
+
+        if (!token || !refreshToken) {
+            return false;
+        }
+
+        const credentials = JSON.stringify({
+            accessToken: token,
+            refreshToken: refreshToken,
+        });
+
+        let isRefreshSuccess: boolean;
+        try {
+            const response = await this._http
+                .post('/token/refresh', credentials, {
+                    headers: new HttpHeaders({
+                        'Content-Type': 'application/json',
+                    }),
+                    observe: 'response',
+                })
+                .toPromise();
+            // If token refresh is successful, set new tokens in local storage.
+            const newToken = (<any>response).body.accessToken;
+            const newRefreshToken = (<any>response).body.refreshToken;
+            localStorage.setItem('token', newToken);
+            localStorage.setItem('refreshToken', newRefreshToken);
+            isRefreshSuccess = true;
+        } catch (ex) {
+            isRefreshSuccess = false;
+        }
+        return isRefreshSuccess;
+    }
+
     // public isUserAuthenticated = (): boolean => {
     //     const token = localStorage.getItem('token');
 
@@ -101,7 +136,7 @@ export class AuthenticationService {
 
     //     return role === 'Administrator';
     // };
-
+ 
     /**
      * Returns true if there's at least one match between one role
      * in @roles and one role in the token roles.

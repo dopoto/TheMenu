@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TheMenu.BackEnd.Controllers
 {
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "StaffMember")]
     [Route("[controller]")]
     public class OrdersController : ControllerBase
     {

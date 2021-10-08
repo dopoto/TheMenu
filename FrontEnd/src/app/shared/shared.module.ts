@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { SocialLoginModule } from 'angularx-social-login';
 import { AppRoutingModule } from '../app-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  * Contains code (components, directives, and pipes) that will be used across feature modules in the app.
@@ -35,6 +36,7 @@ import { AppRoutingModule } from '../app-routing.module';
     exports: [
         BrowserModule,
         HttpClientModule,
+        TranslateModule,
         SocialLoginModule,
         AppRoutingModule,
         CommonModule,

@@ -2,18 +2,18 @@ import {
     NgModule,
     SkipSelf,
     Optional,
-    APP_INITIALIZER,
     ModuleWithProviders,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { JwtModule } from '@auth0/angular-jwt';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AuthEffects } from './store/effects/auth.effects';
 import { reducers } from './store/app.state';
 import { environment } from 'src/environments/environment';
-import { JwtModule } from '@auth0/angular-jwt';
 
 function tokenGetter() {
     return localStorage.getItem('token');
@@ -47,6 +47,9 @@ function tokenGetter() {
                 disallowedRoutes: [],
             },
         }),
+    ],
+    exports: [
+        TranslateModule
     ]
 })
 export class CoreModule {

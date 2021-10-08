@@ -260,3 +260,6 @@ __pycache__/
 
 #KDiff3
 *.orig
+
+# Angular cache
+**/.angular/cache/angular-webpack
