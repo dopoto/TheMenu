@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { AuthState } from '../../models/auth-state';
-import * as AuthActions from '../actions/user.actions';
+import * as AuthActions from '../actions/auth.actions';
 
 export const initialState: AuthState = {
     isAuthenticated: false,
@@ -23,13 +23,13 @@ const authReducer = createReducer(
         user: { ...socialUser }
     })),
     
-    on(AuthActions.loginFailure, (state, { errorMessage }) => ({
+    on(AuthActions.loginFailure, () => ({
         isAuthenticated: false,
         user: null,
         errorMessage: 'by loginfailure reducer',
     })),
     
-    on(AuthActions.logoutStarted, (state) => ({
+    on(AuthActions.logoutStarted, () => ({
         isAuthenticated: false,
         user: null,
         errorMessage: 'by logoutStarted reducer',
@@ -40,7 +40,7 @@ const authReducer = createReducer(
         user: null
     })),
     
-    on(AuthActions.loginFailure, (state, { errorMessage }) => ({
+    on(AuthActions.loginFailure, () => ({
         isAuthenticated: false,
         user: null, //TODO ???
         errorMessage: 'by logoutfailure reducer',

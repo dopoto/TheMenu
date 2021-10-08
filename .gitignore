@@ -262,4 +262,4 @@ __pycache__/
 *.orig
 
 # Angular cache
-**/.angular/cache/angular-webpack
+**/.angular/cache/

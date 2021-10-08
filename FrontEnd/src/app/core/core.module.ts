@@ -12,8 +12,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AuthEffects } from './store/effects/auth.effects';
-import { reducers } from './store/app.state';
+import { metaReducers, reducers } from './store/app.state';
 import { environment } from 'src/environments/environment';
+import { HydrationEffects } from './store/effects/hydration.effects';
 
 function tokenGetter() {
     return localStorage.getItem('token');
@@ -32,14 +33,14 @@ function tokenGetter() {
 @NgModule({
     imports: [
         CommonModule,
-        StoreModule.forRoot(reducers, {}),
+        StoreModule.forRoot(reducers, { metaReducers }),
         // Instrumentation must be imported after importing StoreModule (config is optional)
         StoreDevtoolsModule.instrument({
             maxAge: 25, // Retains last 25 states
             logOnly: environment.production, // Restrict extension to log-only mode
             autoPause: true, // Pauses recording actions and state changes when the extension window is not open
         }),
-        EffectsModule.forRoot([AuthEffects]),
+        EffectsModule.forRoot([HydrationEffects, AuthEffects]),
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
@@ -48,9 +49,7 @@ function tokenGetter() {
             },
         }),
     ],
-    exports: [
-        TranslateModule
-    ]
+    exports: [TranslateModule],
 })
 export class CoreModule {
     constructor(

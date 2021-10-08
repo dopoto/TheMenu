@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SocialUser } from 'angularx-social-login';
 import { Observable } from 'rxjs';
-import { loginStarted, logoutStarted } from 'src/app/core/store/actions/user.actions';
+import { loginStarted, logoutStarted } from 'src/app/core/store/actions/auth.actions';
 import { AppState } from 'src/app/core/store/app.state';
 import { selectAuthUser } from 'src/app/core/store/selectors/user.selectors';
 
