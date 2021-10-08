@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './features/landing/components/about/about.component';
 import { HomeComponent } from './features/landing/components/home/home.component';
 import { ManagersMainComponent } from './features/managers/components/managers-main/managers-main.component';
+import { StaffMainComponent } from './features/staff/components/staff-main/staff-main.component';
 import { AuthGuard } from './core/guards/auth-guard.service';
 import { LoginComponent } from './features/landing/components/login/login.component';
 
@@ -15,6 +16,13 @@ const routes: Routes = [
         path: 'managers',
         component: ManagersMainComponent,
         canActivate: [AuthGuard],
+        data: { roles: ['Owner'] }
+    },
+    {
+        path: 'staff',
+        component: StaffMainComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['StaffMember'] }
     },
     { path: 'about', component: AboutComponent },
     // TODO { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page

@@ -61,6 +61,7 @@ namespace TheMenu.BackEnd.Controllers
                     // TODO prepare and send an email for the email confirmation
 
                     await _userManager.AddToRoleAsync(user, "Owner");
+                    //await _userManager.AddToRoleAsync(user, "StaffMember");
                     await _userManager.AddLoginAsync(user, info);
                 }
                 else

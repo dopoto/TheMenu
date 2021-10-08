@@ -1,23 +1,23 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(
         private jwtHelper: JwtHelperService,
         private router: Router,
-        private http: HttpClient
+        private http: HttpClient,
+        private authService: AuthenticationService,
     ) {}
 
-    async canActivate() {
-        // TODO Check owner / staff
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         const token = localStorage.getItem('token');
 
         if (token && !this.jwtHelper.isTokenExpired(token)) {
-            console.log(this.jwtHelper.decodeToken(token));
-            return true;
+            return this.authService.hasCurentUserAMatchingRole( route.data.roles);
         }
 
         const isRefreshSuccess = await this.tryRefreshingTokens(token);
@@ -25,13 +25,12 @@ export class AuthGuard implements CanActivate {
             this.router.navigate(['login']);
         }
 
-        return isRefreshSuccess;
+        return this.authService.hasCurentUserAMatchingRole( route.data.roles);
     }
 
     private async tryRefreshingTokens(token: string): Promise<boolean> {
-        debugger;
         // Try refreshing tokens using refresh token
-        const refreshToken: string = localStorage.getItem('refreshToken');
+        const refreshToken: string = localStorage.getItem('refreshtoken');
 
         if (!token || !refreshToken) {
             return false;
@@ -44,7 +43,6 @@ export class AuthGuard implements CanActivate {
 
         let isRefreshSuccess: boolean;
         try {
-            // TODO env.apiEndpoint
             const response = await this.http
                 .post('/token/refresh', credentials, {
                     headers: new HttpHeaders({

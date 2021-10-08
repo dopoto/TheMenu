@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-locations-main',
-    templateUrl: './locations-main.component.html',
-    styleUrls: ['./locations-main.component.scss'],
+    selector: 'app-locations',
+    templateUrl: './locations.component.html',
+    styleUrls: ['./locations.component.scss'],
 })
 export class LocationsMainComponent implements OnInit {
     locations$: Observable<string[]>;

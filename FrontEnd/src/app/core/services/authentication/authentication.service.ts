@@ -14,6 +14,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 
 import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
+import { UserRoles } from '../../models/user-roles';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
     providedIn: 'root',
@@ -21,7 +23,8 @@ import { AuthResponse } from 'src/app/core/models/auth-response';
 export class AuthenticationService {
     constructor(
         private _http: HttpClient,
-        private _externalAuthService: SocialAuthService
+        private _externalAuthService: SocialAuthService,
+        private _jwtHelper: JwtHelperService
     ) {}
 
     private validateExternalAuth$(
@@ -98,4 +101,21 @@ export class AuthenticationService {
 
     //     return role === 'Administrator';
     // };
+
+    /**
+     * Returns true if there's at least one match between one role
+     * in @roles and one role in the token roles.
+     * @param roles
+     * @returns
+     */
+    public hasCurentUserAMatchingRole = (roles: UserRoles[]): boolean => {
+        const token = localStorage.getItem('token');
+        const decodedToken = this._jwtHelper.decodeToken(token);
+        const decodedRoles =
+            decodedToken[
+                'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+            ];
+        let intersection = roles.filter((x) => decodedRoles.includes(x));
+        return intersection.length > 0;
+    };
 }

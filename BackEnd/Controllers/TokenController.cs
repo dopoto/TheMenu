@@ -33,8 +33,11 @@ namespace TheMenu.BackEnd.Controllers
             string refreshToken = tokenApiModel.RefreshToken;
             var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
             var username = principal?.Identity?.Name; //this is mapped to the Name claim by default
-            var loginProvider = "GOOGLE"; // TODO
-            var user = await _userManager.FindByLoginAsync(loginProvider, username);
+
+            // TODO FindByLoginAsync returns null. Will be needed in case we implement multiple login providers.
+            //var loginProvider = "GOOGLE"; // TODO
+            //var user = await _userManager.FindByLoginAsync(loginProvider, username);
+            var user = await _userManager.FindByNameAsync(username);
             if (user == null || 
                 user.RefreshToken != refreshToken || 
                 user.RefreshTokenExpiryTime <= DateTime.Now)
@@ -58,6 +61,9 @@ namespace TheMenu.BackEnd.Controllers
         public async Task<IActionResult> Revoke()
         {
             var username = User?.Identity?.Name;
+            // TODO FindByLoginAsync returns null. Will be needed in case we implement multiple login providers.
+            //var loginProvider = "GOOGLE"; // TODO
+            //var user = await _userManager.FindByLoginAsync(loginProvider, username);
             var user = await _userManager.FindByNameAsync(username);
 
             if (user == null) return BadRequest();
