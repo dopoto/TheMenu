@@ -1,21 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, from, Observable, zip } from 'rxjs';
+import { from, Observable, zip } from 'rxjs';
 import {
-    combineLatest,
     catchError,
     map,
     switchMap,
-    withLatestFrom,
     tap,
 } from 'rxjs/operators';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Store } from '@ngrx/store';
 
 import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
 import { UserRoles } from '../../models/user-roles';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { logoutStarted } from '../../store/actions/auth.actions';
+import { AppState } from '../../store/app.state';
 
 @Injectable({
     providedIn: 'root',
@@ -24,7 +25,8 @@ export class AuthenticationService {
     constructor(
         private _http: HttpClient,
         private _externalAuthService: SocialAuthService,
-        private _jwtHelper: JwtHelperService
+        private _jwtHelper: JwtHelperService,
+        private readonly store: Store<AppState>
     ) {}
 
     private validateExternalAuth$(
@@ -116,6 +118,11 @@ export class AuthenticationService {
         } catch (ex) {
             isRefreshSuccess = false;
         }
+
+        if(!isRefreshSuccess){
+            this.store.dispatch(logoutStarted());
+        }
+
         return isRefreshSuccess;
     }
 
