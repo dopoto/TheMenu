@@ -15,25 +15,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{0015B332-1EC6-4FA1-89AF-5B1925B5D28D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzurePipelines", "AzurePipelines", "{9A4A5B68-EFA1-4EEE-AD1B-567462CF0D35}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureDevOps", "AzureDevOps", "{9A4A5B68-EFA1-4EEE-AD1B-567462CF0D35}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipelines", "Pipelines", "{C7A92B63-FB67-4485-83C4-C7140296B28C}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment\AzurePipelines\Pipelines\backend.yml = Deployment\AzurePipelines\Pipelines\backend.yml
-		Deployment\AzurePipelines\Pipelines\frontend.yml = Deployment\AzurePipelines\Pipelines\frontend.yml
+		Deployment\AzureDevOps\Pipelines\backend.yml = Deployment\AzureDevOps\Pipelines\backend.yml
+		Deployment\AzureDevOps\Pipelines\frontend.yml = Deployment\AzureDevOps\Pipelines\frontend.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Releases", "Releases", "{E8F8B327-8DB0-48B2-8787-15D5FB7A608E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release Backend to Prod Pipeline", "Release Backend to Prod Pipeline", "{7587972E-51D6-400F-BB1D-9CCF62EE8435}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment\AzurePipelines\Releases\Release Backend to Prod Pipeline\1. FileTransform appsettings.yml = Deployment\AzurePipelines\Releases\Release Backend to Prod Pipeline\1. FileTransform appsettings.yml
-		Deployment\AzurePipelines\Releases\Release Backend to Prod Pipeline\2. Azure App Service Deploy.yml = Deployment\AzurePipelines\Releases\Release Backend to Prod Pipeline\2. Azure App Service Deploy.yml
+		Deployment\AzureDevOps\Releases\Release Backend to Prod Pipeline\1. FileTransform appsettings.yml = Deployment\AzureDevOps\Releases\Release Backend to Prod Pipeline\1. FileTransform appsettings.yml
+		Deployment\AzureDevOps\Releases\Release Backend to Prod Pipeline\2. Azure App Service Deploy.yml = Deployment\AzureDevOps\Releases\Release Backend to Prod Pipeline\2. Azure App Service Deploy.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release Frontend to Prod Pipeline", "Release Frontend to Prod Pipeline", "{EAE041FF-2892-47BC-90AA-7F8463AF3B78}"
 	ProjectSection(SolutionItems) = preProject
-		Deployment\AzurePipelines\Releases\Release Frontend to Prod Pipeline\1. AzureBlob File Copy.yml = Deployment\AzurePipelines\Releases\Release Frontend to Prod Pipeline\1. AzureBlob File Copy.yml
+		Deployment\AzureDevOps\Releases\Release Frontend to Prod Pipeline\1. AzureBlob File Copy.yml = Deployment\AzureDevOps\Releases\Release Frontend to Prod Pipeline\1. AzureBlob File Copy.yml
 	EndProjectSection
 EndProject
 Global
