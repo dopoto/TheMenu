@@ -16,8 +16,8 @@ variables:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '16.6.2'
-  displayName: 'Install Node.js 16.6.2'
+    versionSpec: '16.10'
+  displayName: 'Install Node.js 16.10'
 
 - task: replacetokens@4
   displayName: 'Replace environment.prod.ts tokens'
