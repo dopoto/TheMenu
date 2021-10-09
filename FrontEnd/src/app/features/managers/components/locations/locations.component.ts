@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
     templateUrl: './locations.component.html',
     styleUrls: ['./locations.component.scss'],
 })
-export class LocationsMainComponent implements OnInit {
+export class LocationsComponent implements OnInit {
     locations$: Observable<string[]>;
 
     constructor(public http: HttpClient) {}
