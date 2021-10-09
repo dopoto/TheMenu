@@ -5,6 +5,7 @@
 - it’s a good idea to store tokens in a cookie with httpOnly and secure flags.
 - Frontend / backend unit tests + pipeline runners
 - Cypress
+- https://docs.cypress.io/guides/testing-strategies/google-authentication#Using-the-Google-OAuth-2-0-Playground-to-Create-Testing-Credentials
 - Feature flags
 - ApplicationInsights integration for frontend and backend
 - securityheaders.com 
