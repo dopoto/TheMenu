@@ -31,9 +31,6 @@ import "cypress-mochawesome-reporter/register";
  */
 Cypress.Commands.add("loginByGoogleApi", () => {
     cy.log("Logging in to Google");
-    debugger;
-    var x = Cypress.env('google_client_id');
-
     cy.request({
         method: "POST",
         url: "https://www.googleapis.com/oauth2/v4/token",
