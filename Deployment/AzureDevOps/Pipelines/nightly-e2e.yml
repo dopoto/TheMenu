@@ -27,7 +27,7 @@ jobs:
     continueOnError: True
     inputs:
       targetType: inline
-      script: ./node_modules/cypress/bin/cypress run
+      script: ./node_modules/cypress/bin/cypress run --config-file cypress-ci
       errorActionPreference: continue
       workingDirectory: FrontEnd
   - task: PublishTestResults@2
