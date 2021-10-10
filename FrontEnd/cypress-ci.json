@@ -1,0 +1,8 @@
+{
+    "extends": "./cypress.json",
+    "env": {
+        "google_client_id": "#{GoogleSignInClientId}#",
+        "google_client_secret": "#{GoogleSignInClientSecret}#",
+        "google_client_token": "#{GoogleSignInClientToken}#"
+    }
+}

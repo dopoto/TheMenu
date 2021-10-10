@@ -29,35 +29,6 @@ export class AuthenticationService {
         private readonly store: Store<AppState>
     ) {}
 
-    private validateExternalAuth$(
-        socialUser: SocialUser
-    ): Observable<SocialUser | string> {
-        const externalAuth: ExternalAuth = {
-            provider: socialUser.provider,
-            idToken: socialUser.idToken,
-        };
-        return this.externalLogin(
-            '/accounts/external-login',
-            externalAuth
-        ).pipe(
-            map((authResponse) => {
-                if (authResponse.isAuthSuccessful) {
-                    localStorage.setItem('token', authResponse.token);
-                    localStorage.setItem(
-                        'refreshtoken',
-                        authResponse.refreshToken
-                    );
-                    return socialUser;
-                } else {
-                    return '';
-                }
-            }),
-            catchError(() => {
-                return '';
-            })
-        );
-    }
-
     public externalLogin = (route: string, body: ExternalAuth) => {
         return this._http.post<AuthResponse>(route, body);
     };
@@ -160,4 +131,33 @@ export class AuthenticationService {
         let intersection = roles.filter((x) => decodedRoles.includes(x));
         return intersection.length > 0;
     };
+
+    public validateExternalAuth$(
+        socialUser: SocialUser
+    ): Observable<SocialUser | string> { //TODO Use AuthErrorMessage type instead of string
+        const externalAuth: ExternalAuth = {
+            provider: socialUser.provider,
+            idToken: socialUser.idToken,
+        };
+        return this.externalLogin(
+            '/accounts/external-login',
+            externalAuth
+        ).pipe(
+            map((authResponse) => {
+                if (authResponse.isAuthSuccessful) {
+                    localStorage.setItem('token', authResponse.token);
+                    localStorage.setItem(
+                        'refreshtoken',
+                        authResponse.refreshToken
+                    );
+                    return socialUser;
+                } else {
+                    return '';
+                }
+            }),
+            catchError(() => {
+                return '';
+            })
+        );
+    }
 }

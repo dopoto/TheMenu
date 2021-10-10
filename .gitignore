@@ -263,3 +263,6 @@ __pycache__/
 
 # Angular cache
 **/.angular/cache/
+
+# Cypress
+FrontEnd/cypress-*-config.json

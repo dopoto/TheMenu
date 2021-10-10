@@ -9,11 +9,13 @@
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
 
+//import dotenv from 'dotenv';
+
 const {
     beforeRunHook,
     afterRunHook,
-} = require("cypress-mochawesome-reporter/lib");
-const exec = require("child_process").execSync;
+} = require('cypress-mochawesome-reporter/lib');
+const exec = require('child_process').execSync;
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
@@ -23,20 +25,21 @@ const exec = require("child_process").execSync;
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on) => {
-    on("before:run", async (details) => {
-        console.log("override before:run");
+    on('before:run', async (details) => {
+        console.log('override before:run');
         await beforeRunHook(details);
         //If you are using other than Windows remove below two lines
         await exec(
-            "IF EXIST cypress\\screenshots rmdir /Q /S cypress\\screenshots"
+            'IF EXIST cypress\\screenshots rmdir /Q /S cypress\\screenshots'
         );
-        await exec("IF EXIST cypress\\reports rmdir /Q /S cypress\\reports");
+        await exec('IF EXIST cypress\\reports rmdir /Q /S cypress\\reports');
     });
-    on("after:run", async () => {
-        console.log("override after:run");
+
+    on('after:run', async () => {
+        console.log('override after:run');
         //if you are using other than Windows remove below line (having await exec)
         await exec(
-            "npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml"
+            'npx jrm ./cypress/reports/junitreport.xml ./cypress/reports/junit/*.xml'
         );
         await afterRunHook();
     });
