@@ -4,8 +4,7 @@
 - EF Core Migrations in Azure DevOps - [Run EF Core Migrations in Azure DevOps](https://dotnetthoughts.net/run-ef-core-migrations-in-azure-devops/) (Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1d895c3ce195ba983b1e03d ""Some tools (like EF migrations) use Program.CreateHostBuilder to access the application's IServiceProvider to execute custom logic in the context of the application, these tools have been updated to use a new technique to achieve the same thing. We will work with the ecosystem to make sure tools are all updated to use the new model.") [Run EF Core Migrations in Azure DevOps]
 - it’s a good idea to store tokens in a cookie with httpOnly and secure flags.
 - Frontend / backend unit tests + pipeline runners
-- Cypress
-- https://docs.cypress.io/guides/testing-strategies/google-authentication#Using-the-Google-OAuth-2-0-Playground-to-Create-Testing-Credentials
+- 
 - Feature flags
 - ApplicationInsights integration for frontend and backend
 - securityheaders.com 
@@ -37,6 +36,8 @@
 - [Pass ASP.NET Core Appsettings Values to Angular via an API Call](https://elanderson.net/2018/05/pass-asp-net-core-appsettings-values-to-angular-via-an-api-call/)
 - Localization using [ngx-translate](https://www.npmjs.com/package/@ngx-translate/core)
 - Keep NGRX state on refresh - https://nils-mehlhorn.de/posts/ngrx-keep-state-refresh
+- Cypress E2E tests + CI integration - [Setup Cypress Tests in Azure DevOps Pipeline](https://dzone.com/articles/cypress-azuredevops-pipeline) and [Generate Both XML and HTML Reports in Cypress](7-easy-steps-to-generate-xml-and-html-reports-in-cypress)
+- Cypress - sign in with Google programmatically - [Using the Google OAuth20 Playground to Create Testing Credentials](https://docs.cypress.io/guides/testing-strategies/google-authentication#Using-the-Google-OAuth-2-0-Playground-to-Create-Testing-Credentials)
 
 
 ## [0.0.1](https://github.com/dopoto/TheMenu/releases/tag/0.0.1) (2021-09-23)
