@@ -3,7 +3,7 @@ import { createSpyFromClass } from 'jasmine-auto-spies';
 
 import { LogService } from './log.service';
 import { AppInsightsService } from '../app-insights/app-insights.service';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../../../init/services/config/config.service';
 
 describe('LogService', () => {
     let service: LogService;

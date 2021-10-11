@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { AppInsightsService } from '../app-insights/app-insights.service';
 import { IPageViewTelemetry } from '@microsoft/applicationinsights-web';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '../../../init/services/config/config.service';
 
 /**
  * Provides environment-specific logging.
