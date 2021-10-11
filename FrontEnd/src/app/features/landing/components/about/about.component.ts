@@ -15,7 +15,7 @@ export class AboutComponent {
     dbHealth = 'Checking...';
 
     constructor(http: HttpClient) {
-        this.version = ConfigService.config.version;
+        this.version = 'ab'; //ConfigService.config.version;
 
         http
             .get<number>('/diagnose/app-health')
