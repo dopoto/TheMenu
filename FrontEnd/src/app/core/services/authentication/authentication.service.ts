@@ -44,7 +44,7 @@ export class AuthenticationService {
 
     public signOutExternal$(): Observable<void> {
         const signOutFromExternalProvider$ = from(
-            this._externalAuthService.signOut()
+            this._externalAuthService.signOut(true)
         );
         const revokeToken$ = this._http.post('/token/revoke', {});
 
