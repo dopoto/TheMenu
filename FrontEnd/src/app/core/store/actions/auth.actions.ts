@@ -11,17 +11,21 @@ export enum AuthActionTypes {
 }
 
 export const loginStarted = createAction(AuthActionTypes.LOGIN_STARTED);
+
 export const loginSuccess = createAction(
     AuthActionTypes.LOGIN_SUCCESS,
     props<{ socialUser: SocialUser }>()
 );
+
 export const loginFailure = createAction(
     AuthActionTypes.LOGIN_FAILURE,
     props<{ errorMessage: string }>()
 );
 
 export const logoutStarted = createAction(AuthActionTypes.LOGOUT_STARTED);
+
 export const logoutSuccess = createAction(AuthActionTypes.LOGOUT_SUCCESS);
+
 export const logoutFailure = createAction(
     AuthActionTypes.LOGOUT_FAILURE,
     props<{ errorMessage: string }>()

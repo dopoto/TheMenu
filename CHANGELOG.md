@@ -11,7 +11,7 @@
 - https://www.npmjs.com/package/@openapitools/openapi-generator-cli   or  NSwag - blocked: https://github.com/RicoSuter/NSwag/issues/3630
 - Authorize for all endpoints by default
 - Fix nullable-related warnings
-- Content-Security-Policy
+
 - Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser> https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-6.0&tabs=visual-studio#add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser
 - https://code-maze.com/authentication-aspnetcore-jwt-2/
 - TS Lint
@@ -38,6 +38,7 @@
 - Keep NGRX state on refresh - https://nils-mehlhorn.de/posts/ngrx-keep-state-refresh
 - Cypress E2E tests + CI integration - [Setup Cypress Tests in Azure DevOps Pipeline](https://dzone.com/articles/cypress-azuredevops-pipeline) and [Generate Both XML and HTML Reports in Cypress](7-easy-steps-to-generate-xml-and-html-reports-in-cypress)
 - Cypress - sign in with Google programmatically - [Using the Google OAuth20 Playground to Create Testing Credentials](https://docs.cypress.io/guides/testing-strategies/google-authentication#Using-the-Google-OAuth-2-0-Playground-to-Create-Testing-Credentials)
+- Content Security Policy (CSP)
 
 
 ## [0.0.1](https://github.com/dopoto/TheMenu/releases/tag/0.0.1) (2021-09-23)

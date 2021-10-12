@@ -12,7 +12,7 @@ export const initialState: AuthState = {
 const authReducer = createReducer(
     initialState,
 
-    on(AuthActions.loginStarted, (state) => ({
+    on(AuthActions.loginStarted, () => ({
         isAuthenticated: false,
         user: null,
         errorMessage: 'by loginstarted reducer',

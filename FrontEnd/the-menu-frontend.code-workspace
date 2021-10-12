@@ -27,6 +27,9 @@
 			"statusBarItem.remoteBackground": "#006400",
 			"statusBarItem.remoteForeground": "#e7e7e7"
 		},
-		"peacock.color": "darkgreen"
+		"peacock.color": "darkgreen",
+		"files.exclude": {
+			"**/.angular": true
+		}
 	}
 }

@@ -1,9 +1,12 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import {
     GoogleLoginProvider,
     SocialAuthServiceConfig,
 } from 'angularx-social-login';
 
+import { AuthGuard } from '../core/guards/auth-guard.service';
+import { AppHttpInterceptor } from '../core/interceptors/http.interceptor';
 import { ConfigService } from './services/config/config.service';
 
 async function SocialAuthLoaderFactory(configService: ConfigService) {
@@ -38,6 +41,13 @@ async function SocialAuthLoaderFactory(configService: ConfigService) {
             useFactory: SocialAuthLoaderFactory,
             deps: [ConfigService],
         },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AppHttpInterceptor,
+            multi: true,
+        },
+        { provide: LOCALE_ID, useValue: 'en-US' },
+        AuthGuard,        
     ],
 })
 export class InitModule {}

@@ -14,8 +14,8 @@ export class AboutComponent {
     appHealth = 'Checking...';
     dbHealth = 'Checking...';
 
-    constructor(http: HttpClient) {
-        this.version = 'ab'; //TODO ConfigService.config.version;
+    constructor(http: HttpClient, configService: ConfigService) {
+        this.version = configService.config.version;
 
         http
             .get<number>('/diagnose/app-health')
