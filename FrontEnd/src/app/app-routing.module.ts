@@ -28,6 +28,7 @@ const routes: Routes = [
     },
     { path: 'about', component: AboutComponent },
     // TODO { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
+    { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({

@@ -33,7 +33,7 @@ export class AuthenticationService {
         return this._http.post<AuthResponse>(route, body);
     };
 
-    public signInWithGoogle$(): Observable<SocialUser | string> {
+    public signInWithGoogle$(): Observable<SocialUser> {
         const signIn$ = from(
             this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
         );
@@ -134,7 +134,7 @@ export class AuthenticationService {
 
     public validateExternalAuth$(
         socialUser: SocialUser
-    ): Observable<SocialUser | string> { //TODO Use AuthErrorMessage type instead of string
+    ): Observable<SocialUser> {
         const externalAuth: ExternalAuth = {
             provider: socialUser.provider,
             idToken: socialUser.idToken,
@@ -152,11 +152,8 @@ export class AuthenticationService {
                     );
                     return socialUser;
                 } else {
-                    return '';
+                    return null;
                 }
-            }),
-            catchError(() => {
-                return '';
             })
         );
     }

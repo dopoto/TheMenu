@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { AuthActionTypes } from '../actions/auth.actions';
- 
+import { LogService } from '../../services/log/log.service';
+import {
+    AuthActionTypes,
+    loginError,
+    loginFail,
+    loginSuccess,
+} from '../actions/auth.actions';
 
 @Injectable()
 export class AuthEffects {
     constructor(
         private actions$: Actions,
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private logService: LogService
     ) {}
 
     login$ = createEffect(() =>
@@ -20,14 +26,23 @@ export class AuthEffects {
             mergeMap(() =>
                 this.authService.signInWithGoogle$().pipe(
                     map((socialUser) => {
-                        return {
-                            type: AuthActionTypes.LOGIN_SUCCESS,
-                            socialUser: socialUser,
-                        };
-                    }),
-                    catchError(() => EMPTY) //TODO
+                        if (socialUser !== null) {
+                            return loginSuccess({ socialUser });
+                        } else {
+                            return loginFail({
+                                errorMessage: 'Login ffailed!',
+                            });
+                        }
+                    })
                 )
-            )
+            ),
+            catchError((error) => {
+                this.logService.error(error);
+                const err = loginError({
+                    errorMessage: 'Login error!!!!',
+                });
+                return of(err);
+            })
         )
     );
 
@@ -41,20 +56,20 @@ export class AuthEffects {
     );
 
     logout$ = createEffect(() =>
-    this.actions$.pipe(
-        ofType(AuthActionTypes.LOGOUT_STARTED),
-        mergeMap(() =>
-            this.authService.signOutExternal$().pipe(
-                map(() => {
-                    return {
-                        type: AuthActionTypes.LOGOUT_SUCCESS
-                    };
-                }),
-                catchError(() => EMPTY) //TODO
+        this.actions$.pipe(
+            ofType(AuthActionTypes.LOGOUT_STARTED),
+            mergeMap(() =>
+                this.authService.signOutExternal$().pipe(
+                    map(() => {
+                        return {
+                            type: AuthActionTypes.LOGOUT_SUCCESS,
+                        };
+                    }),
+                    catchError(() => EMPTY) //TODO
+                )
             )
         )
-    )
-);
+    );
 
     // logInFailure$ = createEffect(
     //   () =>

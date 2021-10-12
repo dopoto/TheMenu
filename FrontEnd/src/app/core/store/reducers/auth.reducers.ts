@@ -12,21 +12,32 @@ export const initialState: AuthState = {
 const authReducer = createReducer(
     initialState,
 
-    on(AuthActions.loginStarted, () => ({
+    on(AuthActions.loginStarted, (state) => ({
+        ...state,
         isAuthenticated: false,
         user: null,
-        errorMessage: 'by loginstarted reducer',
+        errorMessage: '',
     })),
 
     on(AuthActions.loginSuccess, (state, { socialUser }) => ({ 
         ...state,
-        user: { ...socialUser }
+        isAuthenticated: true,
+        user: { ...socialUser },
+        errorMessage: '',
     })),
     
-    on(AuthActions.loginFailure, () => ({
+    on(AuthActions.loginFail, (state, { errorMessage }) => ({
+        ...state,
         isAuthenticated: false,
         user: null,
-        errorMessage: 'by loginfailure reducer',
+        errorMessage,
+    })),
+    
+    on(AuthActions.loginError, (state, { errorMessage }) => ({
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        errorMessage,
     })),
     
     on(AuthActions.logoutStarted, () => ({
@@ -37,13 +48,8 @@ const authReducer = createReducer(
 
     on(AuthActions.logoutSuccess, (state) => ({ 
         ...state,
-        user: null
-    })),
-    
-    on(AuthActions.loginFailure, () => ({
-        isAuthenticated: false,
-        user: null, //TODO ???
-        errorMessage: 'by logoutfailure reducer',
+        user: null,
+        errorMessage: ''
     }))
 );
 
