@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SocialUser } from 'angularx-social-login';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication/auth
     selector: 'app-sign-in-with-google',
     templateUrl: './sign-in-with-google.component.html',
     styleUrls: ['./sign-in-with-google.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInWithGoogleComponent implements OnInit {
     sub1: Subscription;

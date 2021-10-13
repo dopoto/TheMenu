@@ -2,6 +2,7 @@
 
 trigger:
 - main
+- backend
 
 pool:
   vmImage: ubuntu-latest

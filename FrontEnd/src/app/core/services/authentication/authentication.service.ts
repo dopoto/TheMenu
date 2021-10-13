@@ -51,7 +51,7 @@ export class AuthenticationService {
         return zip(signOutFromExternalProvider$, revokeToken$).pipe(
             tap(() => {
                 localStorage.removeItem('token');
-                localStorage.removeItem('refreshtoken');
+                localStorage.removeItem('refreshToken');
             }),
             map(() => {})
         );
@@ -59,7 +59,7 @@ export class AuthenticationService {
 
     public async tryRefreshingTokens(token: string): Promise<boolean> {
         // Try refreshing tokens using refresh token
-        const refreshToken: string = localStorage.getItem('refreshtoken');
+        const refreshToken: string = localStorage.getItem('refreshToken');
 
         if (!token || !refreshToken) {
             return false;
@@ -147,7 +147,7 @@ export class AuthenticationService {
                 if (authResponse.isAuthSuccessful) {
                     localStorage.setItem('token', authResponse.token);
                     localStorage.setItem(
-                        'refreshtoken',
+                        'refreshToken',
                         authResponse.refreshToken
                     );
                     return socialUser;

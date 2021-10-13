@@ -29,7 +29,11 @@
 		},
 		"peacock.color": "darkgreen",
 		"files.exclude": {
-			"**/.angular": true
+			"**/.angular": true,
+			"**/cypress/_samples": true,
+			"**/cypress/reports": true,
+			"**/dist": true,
+			"**/node_modules": true
 		}
 	}
 }

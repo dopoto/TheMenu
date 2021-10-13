@@ -11,6 +11,7 @@
 - https://www.npmjs.com/package/@openapitools/openapi-generator-cli   or  NSwag - blocked: https://github.com/RicoSuter/NSwag/issues/3630
 - Authorize for all endpoints by default
 - Fix nullable-related warnings
+- Report CSP endpoint
 
 - Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser> https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-6.0&tabs=visual-studio#add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser
 - https://code-maze.com/authentication-aspnetcore-jwt-2/

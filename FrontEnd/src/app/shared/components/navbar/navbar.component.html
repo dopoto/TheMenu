@@ -36,14 +36,14 @@
         </ul>
         <ul *ngIf="!(user$ | async)" class="nav">
             <li class="nav-item">
-                <a
+                <button
+                    class="mnu-app__button navbar__button"
                     (click)="signInWithGoogle()"
-                    class="nav-link link-dark px-2"
-                    >Login</a
+                    >Login</button
                 >
             </li>
             <li class="nav-item">
-                <a class="nav-link link-dark px-2">Sign up</a>
+                <button class="mnu-app__button navbar__button">Sign up</button>
             </li>
         </ul>
         <div

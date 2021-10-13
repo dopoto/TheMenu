@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-orders',
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrdersComponent implements OnInit {
     orders$: Observable<string[]>;

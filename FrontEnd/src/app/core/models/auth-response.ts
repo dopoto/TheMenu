@@ -1,3 +1,4 @@
+//TODO Should be generated
 export interface AuthResponse {
     isAuthSuccessful: boolean;
     errorMessage: string;

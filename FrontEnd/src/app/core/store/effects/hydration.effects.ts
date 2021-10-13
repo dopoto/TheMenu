@@ -35,9 +35,11 @@ export class HydrationEffects implements OnInitEffects {
                 ),
                 switchMap(() => this.store),
                 distinctUntilChanged(),
-                tap((state) =>
-                    localStorage.setItem('state', JSON.stringify(state))
-                )
+                tap((state) => {
+                    let parsedState = JSON.parse(JSON.stringify(state));
+                    parsedState.auth.notification = null;    
+                    localStorage.setItem('state', JSON.stringify(parsedState));
+                })
             ),
         { dispatch: false }
     );

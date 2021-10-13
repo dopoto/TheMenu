@@ -1,0 +1,9 @@
+<div class="notifications__container">
+    <alert
+        *ngFor="let item of notifications$ | async"
+        [type]="item.type"
+        [dismissible]="item.dismissible"
+    >
+        {{ item.body }}
+    </alert>
+</div>

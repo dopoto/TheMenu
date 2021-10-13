@@ -9,4 +9,9 @@ export const selectAuthState = createFeatureSelector<AppState, AuthState>(
 export const selectAuthUser = createSelector(
     selectAuthState,
     (state: AuthState) => state?.user
-  );
+);
+
+export const selectAuthNotification = createSelector(
+    selectAuthState,
+    (state: AuthState) => state?.notification
+);

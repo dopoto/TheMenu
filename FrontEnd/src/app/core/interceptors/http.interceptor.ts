@@ -17,8 +17,11 @@ export class AppHttpInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
+        const endpoint = req.url.includes('/assets/')
+            ? environment.assetsUrl
+            : environment.apiEndpoint;
         const apiReq = req.clone({
-            url: `${environment.apiEndpoint}${req.url}`,
+            url: `${endpoint}${req.url}`,
         });
         return next.handle(apiReq);
     }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { ConfigService } from 'src/app/init/services/config/config.service';
 

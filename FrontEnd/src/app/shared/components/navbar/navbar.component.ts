@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { SocialUser } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 
-import { loginStarted, logoutStarted } from 'src/app/core/store/actions/auth.actions';
+import {
+    loginStarted,
+    logoutStarted,
+} from 'src/app/core/store/actions/auth.actions';
 import { AppState } from 'src/app/core/store/app.state';
 import { selectAuthUser } from 'src/app/core/store/selectors/user.selectors';
 
@@ -11,12 +14,12 @@ import { selectAuthUser } from 'src/app/core/store/selectors/user.selectors';
     selector: 'app-navbar',
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit {
-
     user$: Observable<SocialUser> | undefined;
-    
-    constructor(private readonly store: Store<AppState>){}
+
+    constructor(private readonly store: Store<AppState>) {}
 
     ngOnInit(): void {
         this.user$ = this.store.pipe(select(selectAuthUser));
