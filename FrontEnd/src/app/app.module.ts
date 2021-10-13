@@ -17,6 +17,7 @@ import { StaffModule } from './features/staff/staff.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { InitModule } from './init/init.module';
+import { environment } from 'src/environments/environment';
 
 /**
  * The http loader factory : Loads the files from define path.
@@ -25,7 +26,7 @@ import { InitModule } from './init/init.module';
  * @constructor
  */
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/locales/', '.json');
+    return new TranslateHttpLoader(http, environment.assetsUrl +  '/assets/locales/', '.json');
 }
 
 @NgModule({

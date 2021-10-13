@@ -8,6 +8,7 @@ import { IServerConfig } from 'src/app/core/models/server-config';
 export const environment: IConfig = {
     production: false,
     version: 'DEV',
+    assetsUrl: '.',
     apiEndpoint: '',
 
     /**
