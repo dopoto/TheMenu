@@ -33,16 +33,16 @@ export class AuthEffects {
                                 errorMessage: 'Login ffailed!',
                             });
                         }
+                    }),
+                    catchError((error) => {
+                        this.logService.error(error);
+                        const err = loginError({
+                            errorMessage: 'Login error!!!!',
+                        });
+                        return of(err);
                     })
                 )
-            ),
-            catchError((error) => {
-                this.logService.error(error);
-                const err = loginError({
-                    errorMessage: 'Login error!!!!',
-                });
-                return of(err);
-            })
+            )
         )
     );
 
