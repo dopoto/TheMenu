@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 
 import { IServerConfig } from '../../../core/models/server-config';
 import { environment } from 'src/environments/environment';
 import { IConfig } from '../../../core/models/config';
-import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -23,7 +23,7 @@ export class ConfigService {
         };
     }
 
-    init() {
+    init(): Promise<void | IServerConfig> {
         this.fetchConfig();
         return this.serverConfigCache$
             .toPromise()

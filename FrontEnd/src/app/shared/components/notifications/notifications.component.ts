@@ -29,9 +29,7 @@ export class NotificationsComponent implements OnInit {
             .getVisibleNotifications$()
             .pipe(map(items => this.sanitizeItems(items)))
     }
-
-    close(alert: any): void {}
-
+    
     private sanitizeItems(items: Notification[]): Notification[] {
         items.forEach(
             (item) =>
