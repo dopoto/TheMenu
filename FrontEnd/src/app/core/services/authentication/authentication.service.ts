@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable, zip } from 'rxjs';
 import {
-    catchError,
     map,
     switchMap,
     tap,
@@ -14,9 +13,9 @@ import { Store } from '@ngrx/store';
 
 import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
-import { UserRoles } from '../../models/user-roles';
 import { logoutStarted } from '../../store/actions/auth.actions';
 import { AppState } from '../../store/app.state';
+import { UserRoles } from '../../models/user-roles';
 
 @Injectable({
     providedIn: 'root',

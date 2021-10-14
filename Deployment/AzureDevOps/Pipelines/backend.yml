@@ -21,7 +21,7 @@ variables:
   value: 'azure-service-connection' # AzureDevOps portal > [Your Project] > Settings | Initially defined in Azure Portal > App Registrations. See https://subhankarsarkar.com/dot-net6-azure-web-app-deployment-using-azure-devops-pipeline/
 #  azureAppServiceName: 'the-menu-backend-02' #get it from your Azure portal
 
-
+# TODO Clean up older files in blob
 
 steps:
 
