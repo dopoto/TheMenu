@@ -8,10 +8,9 @@ variables:
   - group: PROD
 
 steps:
-- task: AzureCLI@2
+- task: AzureCLI@1
   inputs:
     azureSubscription: 'azure-service-connection'
-    scriptType: 'ps'
     scriptLocation: 'inlineScript'
     inlineScript: |
       param(
