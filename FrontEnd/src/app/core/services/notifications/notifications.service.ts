@@ -33,7 +33,7 @@ export class NotificationsService {
     private notifications: Notification[] = [
         {
             triggerAction: AuthActionTypes.LOGIN_STARTED,
-            body: 'Use the Google pop-up to login!', //TODO localize
+            body: 'Use the <strong>Google</strong> pop-up to login!', //TODO localize
             type: NotificationTypes.info,
             dismissible: true,
         },
@@ -45,7 +45,7 @@ export class NotificationsService {
         },
         {
             triggerAction: AuthActionTypes.LOGIN_ERROR,
-            body: 'An error occured while logging you in. Please try again later!', //TODO localize
+            body: 'An <strong>error</strong> occured while logging you in. Please try again later!', //TODO localize
             type: NotificationTypes.danger,
             dismissible: true,
         },

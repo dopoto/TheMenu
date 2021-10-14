@@ -4,6 +4,6 @@
         [type]="item.type"
         [dismissible]="item.dismissible"
     >
-        {{ item.body }}
+    <span [innerHtml]="item.body"></span>
     </alert>
 </div>
