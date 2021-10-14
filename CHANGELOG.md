@@ -17,6 +17,7 @@
 - TS Lint
 - Server-side error handling
 - Client-side error handling (incl. ngrx)
+- Add AppIInsights telemetry in DevOps pipelines https://never-stop-learning.de/build-pipelines-telemetrie/
 
 ## [0.0.2](https://github.com/dopoto/TheMenu/compare/0.0.1...0.0.2) (unreleased)
 - Angular 13
