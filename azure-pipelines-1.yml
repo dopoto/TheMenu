@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
@@ -10,10 +5,29 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'azure-service-connection'
+    scriptType: 'ps'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      param(
+          [parameter(Mandatory = $true)][string]$aiResourceId,
+          [parameter(Mandatory = $true)][string]$releaseName,
+          [parameter(Mandatory = $false)]$releaseProperties = @()
+      )
+      
+      $annotation = @{
+          Id = [GUID]::NewGuid();
+          AnnotationName = $releaseName;
+          EventTime = (Get-Date).ToUniversalTime().GetDateTimeFormats("s")[0];
+          Category = "Deployment";
+          Properties = ConvertTo-Json $releaseProperties -Compress
+      }
+      
+      $body = (ConvertTo-Json $annotation -Compress) -replace '(\\+)"', '$1$1"' -replace "`"", "`"`""
+      az rest --method put --uri "$($aiResourceId)/Annotations?api-version=2015-05-01" --body "$($body) "
+      
+      # Use the following command for Linux Azure DevOps Hosts or other PowerShell scenarios
+      # Invoke-AzRestMethod -Path "$aiResourceId/Annotations?api-version=2015-05-01" -Method PUT -Payload $body
+    arguments: '-aiResourceId "<aiResourceId>" `     -releaseName "<releaseName>" `     -releaseProperties @{"ReleaseDescription"="<a description>";          "TriggerBy"="<Your name>" }'
