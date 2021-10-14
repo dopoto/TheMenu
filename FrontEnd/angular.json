@@ -60,8 +60,8 @@
                                     "with": "src/environments/environment.prod.ts"
                                 },
                                 {
-                                    "replace": "src/index.ts",
-                                    "with": "src/index.prod.ts"
+                                    "replace": "src/index.html",
+                                    "with": "src/index.prod.html"
                                 }
                             ],
                             "outputHashing": "all"

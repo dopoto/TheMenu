@@ -4,14 +4,13 @@
 - EF Core Migrations in Azure DevOps - [Run EF Core Migrations in Azure DevOps](https://dotnetthoughts.net/run-ef-core-migrations-in-azure-devops/) (Waiting for EF tooling for .NET 6 - https://gist.github.com/davidfowl/0e0372c3c1d895c3ce195ba983b1e03d ""Some tools (like EF migrations) use Program.CreateHostBuilder to access the application's IServiceProvider to execute custom logic in the context of the application, these tools have been updated to use a new technique to achieve the same thing. We will work with the ecosystem to make sure tools are all updated to use the new model.") [Run EF Core Migrations in Azure DevOps]
 - it’s a good idea to store tokens in a cookie with httpOnly and secure flags.
 - Frontend / backend unit tests + pipeline runners
-- 
 - Feature flags
 - ApplicationInsights integration for frontend and backend
 - securityheaders.com 
 - https://www.npmjs.com/package/@openapitools/openapi-generator-cli   or  NSwag - blocked: https://github.com/RicoSuter/NSwag/issues/3630
 - Authorize for all endpoints by default
 - Fix nullable-related warnings
-- Report CSP endpoint
+- Report CSP endpoint https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/report-uri
 
 - Add claims to Identity using IUserClaimsPrincipalFactory<ApplicationUser> https://docs.microsoft.com/en-us/aspnet/core/security/authentication/add-user-data?view=aspnetcore-6.0&tabs=visual-studio#add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser
 - https://code-maze.com/authentication-aspnetcore-jwt-2/
