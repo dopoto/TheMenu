@@ -23,9 +23,21 @@ steps:
 - task: replacetokens@4
   displayName: 'Replace environment.prod.ts tokens'
   inputs:
-    targetFiles: |
-      '**/environments/environment.*'
-      '**/index.html'
+    targetFiles: '**/environments/environment.*'
+    encoding: 'auto'
+    tokenPattern: 'default'
+    writeBOM: true
+    actionOnMissing: 'warn'
+    keepToken: false
+    actionOnNoFiles: 'continue'
+    enableTransforms: false
+    useLegacyPattern: false
+    enableTelemetry: true
+
+- task: replacetokens@4
+  displayName: 'Replace index.html tokens'
+  inputs:
+    targetFiles: '**/src/index*'
     encoding: 'auto'
     tokenPattern: 'default'
     writeBOM: true
@@ -57,7 +69,7 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-    ng build
+    ng build --configuration=production
   displayName: 'npm install and build'
   condition: succeededOrFailed()
   workingDirectory: ./FrontEnd
