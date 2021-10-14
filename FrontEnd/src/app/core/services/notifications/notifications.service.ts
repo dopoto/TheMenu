@@ -5,30 +5,51 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Notification } from '../../models/notification';
 import { AppState } from '../../store/app.state';
 import { selectAuthNotification } from 'src/app/core/store/selectors/user.selectors';
+import { AuthActionTypes } from '../../store/actions/auth.actions';
+import { NotificationTypes } from '../../models/notification-types';
 
 @Injectable({
     providedIn: 'root',
 })
 export class NotificationsService {
-    private notifications: Notification[] = [];
-    private visibleNotifications$: BehaviorSubject<Notification[]> = new BehaviorSubject([]);
-
     constructor(private readonly store: Store<AppState>) {
         //TODO unsubscribe
         this.store.pipe(select(selectAuthNotification)).subscribe((result) => {
-            if(result) {
-                // TODO trim / limit to x items?
-                this.notifications.push(result);
-                const visibleNotifications = this.notifications.length > 0 ? [this.notifications.pop()]: [];
-                this.visibleNotifications$.next(visibleNotifications);
-            }
-            else{
-                this.visibleNotifications$.next([]);
-            }
+            const matchingNotification = this.notifications.find(
+                (_) => _.triggerAction === result
+            );
+            // Let's only show one notification at a time for nowL
+            const visibleNotifications = matchingNotification
+                ? [matchingNotification]
+                : [];
+            this.visibleNotifications$.next(visibleNotifications);
         });
     }
 
-    getVisibleNotifications$(): Observable<Notification[]> {        
+    getVisibleNotifications$(): Observable<Notification[]> {
         return this.visibleNotifications$;
     }
+
+    private notifications: Notification[] = [
+        {
+            triggerAction: AuthActionTypes.LOGIN_STARTED,
+            body: 'Use the Google pop-up to login!', //TODO localize
+            type: NotificationTypes.info,
+            dismissible: true,
+        },
+        {
+            triggerAction: AuthActionTypes.LOGIN_FAIL,
+            body: 'Login failed!', //TODO localize
+            type: NotificationTypes.danger,
+            dismissible: true,
+        },
+        {
+            triggerAction: AuthActionTypes.LOGIN_ERROR,
+            body: 'An error occured while logging you in. Please try again later!', //TODO localize
+            type: NotificationTypes.danger,
+            dismissible: true,
+        },
+    ];
+    private visibleNotifications$: BehaviorSubject<Notification[]> =
+        new BehaviorSubject([]);
 }

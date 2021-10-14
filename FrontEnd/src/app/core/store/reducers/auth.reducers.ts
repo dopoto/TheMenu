@@ -1,13 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { AuthState } from '../../models/auth-state';
-import { NotificationTypes } from '../../models/notification-types';
+import { AuthActionTypes } from '../actions/auth.actions';
 import * as AuthActions from '../actions/auth.actions';
+ 
 
 export const initialState: AuthState = {
     isAuthenticated: false,
     user: null,
-    notification: null
+    notificationId: null
 };
 
 const authReducer = createReducer(
@@ -16,49 +17,37 @@ const authReducer = createReducer(
     on(AuthActions.loginStarted, () => ({
         isAuthenticated: false,
         user: null,
-        notification: {
-            body: 'Use the Google pop-up to login', //TODO localize
-            type: NotificationTypes.info,
-            dismissible: true
-        }
+        notificationId: AuthActionTypes.LOGIN_STARTED
     })),
 
     on(AuthActions.loginSuccess, (state, { socialUser }) => ({ 
         isAuthenticated: true,
         user: { ...socialUser },
-        notification: null
+        notificationId: AuthActionTypes.LOGIN_SUCCESS
     })),
     
     on(AuthActions.loginFail, () => ({
         isAuthenticated: false,
         user: null,
-        notification: {
-            body: 'Login failed', //TODO localize
-            type: NotificationTypes.danger,
-            dismissible: true
-        }
+        notificationId: AuthActionTypes.LOGIN_FAIL
     })),
     
     on(AuthActions.loginError, () => ({
         isAuthenticated: false,
         user: null,
-        notification: {
-            body: 'An error occured while logging you in. Please try again later', //TODO localize
-            type: NotificationTypes.danger,
-            dismissible: true
-        }
+        notificationId: AuthActionTypes.LOGIN_ERROR
     })),
     
     on(AuthActions.logoutStarted, () => ({
         isAuthenticated: false,
         user: null,
-        notification: null
+        notificationId: null
     })),
 
     on(AuthActions.logoutSuccess, () => ({ 
         isAuthenticated: false,
         user: null,
-        notification: null
+        notificationId: null
     }))
 );
 

@@ -1,8 +1,8 @@
 import { SocialUser } from "angularx-social-login";
-import { Notification } from "./notification";
+import { AuthActionTypes } from "../store/actions/auth.actions";
 
 export interface AuthState {
     isAuthenticated: boolean;
     user: SocialUser | null;
-    notification: Notification | null;
+    notificationId: AuthActionTypes | null;
 }

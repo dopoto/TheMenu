@@ -13,5 +13,5 @@ export const selectAuthUser = createSelector(
 
 export const selectAuthNotification = createSelector(
     selectAuthState,
-    (state: AuthState) => state?.notification
+    (state: AuthState) => state?.notificationId
 );

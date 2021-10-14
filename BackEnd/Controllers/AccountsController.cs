@@ -31,6 +31,7 @@ namespace TheMenu.BackEnd.Controllers
         public async Task<IActionResult> ExternalLogin(
             [FromBody] ExternalAuth externalAuth)
         {
+            throw new ApplicationException("h");
             var payload = await _jwtHandlerService.VerifyGoogleToken(externalAuth);
             if (payload == null)
             {
