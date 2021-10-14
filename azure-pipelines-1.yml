@@ -32,4 +32,4 @@ steps:
       
       # Use the following command for Linux Azure DevOps Hosts or other PowerShell scenarios
       Invoke-AzRestMethod -Path "$aiResourceId/Annotations?api-version=2015-05-01" -Method PUT -Payload $body
-    arguments: '-aiResourceId "<aiResourceId>" `     -releaseName "<releaseName>" `     -releaseProperties @{"ReleaseDescription"="<a description>";          "TriggerBy"="<Your name>" }'
+    arguments: '-aiResourceId "<aiResourceId>" -releaseName "<releaseName>" -releaseProperties @{"ReleaseDescription"="<a description>"; "TriggerBy"="<Your name>" }'
