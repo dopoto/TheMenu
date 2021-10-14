@@ -2,7 +2,7 @@ import { IConfig } from 'src/app/core/models/config';
 import { IServerConfig } from 'src/app/core/models/server-config';
 
 /**
- * The #{..}# tokens below are set in Azure DevOps > Pipelines > Library > PROD
+ * The hashtag/bracket tokens below are set in Azure DevOps > Pipelines > Library > PROD
  * and are replaced during the Azure DevOps release.
  * */
  export const environment: IConfig = {
