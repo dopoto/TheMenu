@@ -23,7 +23,9 @@ steps:
 - task: replacetokens@4
   displayName: 'Replace environment.prod.ts tokens'
   inputs:
-    targetFiles: '**/environments/environment.*'
+    targetFiles: |
+      '**/environments/environment.*'
+      '**/index.html'
     encoding: 'auto'
     tokenPattern: 'default'
     writeBOM: true
