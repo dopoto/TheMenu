@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using TheMenu.BackEnd.Models;
 using TheMenu.BackEnd.Services;
-using TheMenu.BackEnd.Data;
 using TheMenu.BackEnd.Areas.Identity.Data;
-using System.Security.Claims;
 
 namespace TheMenu.BackEnd.Controllers
 {
@@ -31,7 +29,6 @@ namespace TheMenu.BackEnd.Controllers
         public async Task<IActionResult> ExternalLogin(
             [FromBody] ExternalAuth externalAuth)
         {
-            throw new ApplicationException("h");
             var payload = await _jwtHandlerService.VerifyGoogleToken(externalAuth);
             if (payload == null)
             {

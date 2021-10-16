@@ -1,0 +1,62 @@
+h1 {
+    padding-top: 20px;
+    letter-spacing: -3px;
+    color: #1267b3;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%; /* can also use viewport units (height: 100vh) */
+}
+
+#container {
+    display: flex; /* displays flex-items (children) inline */
+    flex-direction: column; /* stacks them vertically */
+    height: 100%; /* needs to take the parents height, alternative: body {display: flex} */
+}
+
+main {
+    flex: 1; /* takes the remaining height of the "container" div */
+    overflow: auto; /* to scroll just the "main" div */
+}
+
+header {
+    //background: #f88;
+}
+
+section {
+    height: 100%; /* takes the visible area of the "main" div */
+    overflow: auto; /* recommended */
+}
+
+section:last-child {
+    border: none;
+}
+footer {
+    background: lightblue;
+    height: $footer-height;
+}
+
+.mnu-app__container {
+    padding: 10px;
+    width: 100%;
+}
+
+.mnu-app__page-description{
+    color: darkgreen;
+    margin-top: -10px;
+    margin-bottom: 18px;
+    font-size: 0.8rem;
+}
+
+.mnu-app__button {
+    border: 1px solid gray;
+}
+
+// TODO Manage Bootstrap customizations better
+.btn-primary {
+    color: #1267b3;
+    background-color: white;
+    border-color: #1267b3;
+}

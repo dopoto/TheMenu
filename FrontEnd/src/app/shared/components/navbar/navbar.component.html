@@ -1,14 +1,10 @@
-<nav class="py-2 bg-light border-bottom">
-    <div class="container d-flex flex-wrap">
+<nav class="sticky-top py-2 bg-light border-bottom">
+    <div class="navbar__container d-flex flex-wrap">
+        <div class="navbar__logo" routerLink="/home">
+            <span class="navbar_logo--the">The</span
+            ><span class="navbar_logo--menu">Menu</span>
+        </div>
         <ul class="nav me-auto">
-            <li>
-                <a
-                    class="nav-link link-dark px-2"
-                    routerLink="/home"
-                    routerLinkActive="active"
-                    >Home</a
-                >
-            </li>
             <li>
                 <a
                     class="nav-link link-dark px-2"
@@ -22,7 +18,7 @@
                     class="nav-link link-dark px-2"
                     routerLink="/staff"
                     routerLinkActive="active"
-                    >Staff</a
+                    >Servers</a
                 >
             </li>
             <li>
@@ -39,20 +35,22 @@
                 <button
                     class="mnu-app__button navbar__button"
                     (click)="signInWithGoogle()"
-                    >Login</button
                 >
+                    Login
+                </button>
             </li>
             <li class="nav-item">
                 <button class="mnu-app__button navbar__button">Sign up</button>
             </li>
         </ul>
-        <div
-            *ngIf="user$ | async"
-            class="dropdown text-end"
-        >
+        <div *ngIf="user$ | async" class="dropdown text-end">
             <a
-
-                class="navbar__user-dropdown d-block link-dark text-decoration-none"
+                class="
+                    navbar__user-dropdown
+                    d-block
+                    link-dark
+                    text-decoration-none
+                "
                 id="dropdownUser1"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -64,16 +62,18 @@
                     class="navbar__user-photo rounded-circle"
                 />
                 <div class="navbar__user-details">
-                 <div class="navbar__user-name">{{ (user$ | async).name }}</div>  
-                 <div class="navbar__user-roles">Owner</div>  
+                    <div class="navbar__user-name">
+                        {{ (user$ | async).name }}
+                    </div>
+                    <div class="navbar__user-roles">Owner</div>
                 </div>
             </a>
             <ul
                 class="dropdown-menu text-small"
                 aria-labelledby="dropdownUser1"
             >
-                <li><a class="dropdown-item" >Settings</a></li>
-                <li><a class="dropdown-item" >Profile</a></li>
+                <li><a class="dropdown-item">Settings</a></li>
+                <li><a class="dropdown-item">Profile</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                     <a class="dropdown-item" (click)="signOut()">Sign out</a>

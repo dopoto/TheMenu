@@ -1,0 +1,9 @@
+.managers-main__sections {
+    padding-top:10px;
+}
+
+.managers-main__side-bar {
+    -ms-flex: 0 0 230px;
+    flex: 0 0 230px;
+    height: calc(100vh - 142px); // TODO
+}

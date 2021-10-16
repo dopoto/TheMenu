@@ -13,6 +13,7 @@ export class HydrationEffects implements OnInitEffects {
             ofType(HydrationActions.hydrate),
             map(() => {
                 const storageValue = localStorage.getItem('state');
+                //TODO Does not pick up logged in users correctly (users show up as logged in even when token is expired)
                 if (storageValue) {
                     try {
                         const state = JSON.parse(storageValue);

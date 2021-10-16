@@ -1,3 +1,22 @@
+@import "../../../../styles/variables";
+
+.navbar__container {
+    padding-left: $app-padding-left;
+    padding-right: $app-padding-right;
+    height:$header-height;
+}
+
+.navbar__logo {
+    cursor: poiner;
+    letter-spacing: -2.8px;
+    padding-right: 10px;
+    font-size: 1.8em;
+
+    .navbar_logo--menu {
+        font-weight: bold;
+    }
+}
+
 .navbar__user-dropdown {
     display: flex;
     width: 150px;
@@ -10,7 +29,6 @@
 }
 
 .navbar__user-details {
-    
 }
 
 .navbar__user-name {

@@ -10,6 +10,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { AppRoutingModule } from '../app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 /**
  * Contains code (components, directives, and pipes) that will be used across feature modules in the app.
@@ -26,7 +28,9 @@ import { NotificationsComponent } from './components/notifications/notifications
 @NgModule({
     declarations: [
         NavbarComponent,
-        NotificationsComponent
+        NotificationsComponent,
+        FooterComponent,
+        BreadcrumbComponent
     ],
     imports: [
         BrowserModule,
@@ -49,7 +53,9 @@ import { NotificationsComponent } from './components/notifications/notifications
         ReactiveFormsModule,
         AlertModule,
         NavbarComponent,
-        NotificationsComponent
+        BreadcrumbComponent,
+        NotificationsComponent,
+        FooterComponent
     ],
     providers: [],
     bootstrap: [],

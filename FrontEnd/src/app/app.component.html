@@ -1,5 +1,16 @@
-<app-navbar></app-navbar>
-<div class="container d-flex flex-wrap">
-    <router-outlet></router-outlet>
+<div id="container">
+    <header>
+        <app-navbar></app-navbar>
+        <app-breadcrumb></app-breadcrumb>
+    </header>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+    <app-notifications
+        aria-live="polite"
+        aria-atomic="true"
+    ></app-notifications>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
 </div>
-<app-notifications aria-live="polite" aria-atomic="true"></app-notifications>

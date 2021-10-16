@@ -4,10 +4,5 @@
 
 // Global app classes
 
-.mnu-app__container {
-    border: 1px solid gray;
-}
-
-.mnu-app__button {
-    border: 1px solid gray;
-}
+@import "./styles/variables";
+@import "./styles/app";
