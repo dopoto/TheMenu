@@ -20,12 +20,12 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.options = {
-            gridType: GridType.ScrollVertical,
-           //compactType: CompactType.CompactUpAndLeft,
+            gridType: GridType.VerticalFixed,
+            
             minCols: 24,
             maxCols: 24,
-            minRows: 20,
-            maxRows: 20,
+            //minRows: 24,
+            //maxRows: 24,
             pushItems: true,
             draggable: {
                 enabled: true,
@@ -33,9 +33,12 @@ export class DashboardComponent implements OnInit {
             resizable: {
                 enabled: true,
             },
-            fixedRowHeight: 40,
+            fixedRowHeight: 120,
             fixedColWidth:100,
+            rowHeightRatio:1,
             outerMargin: false,
+            keepFixedHeightInMobile:true,
+            keepFixedWidthInMobile: true
         };
 
         this.dashboard = [
