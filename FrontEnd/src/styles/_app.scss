@@ -1,3 +1,5 @@
+@import "./_variables.scss";
+
 h1 {
     padding-top: 20px;
     letter-spacing: -3px;
@@ -19,6 +21,8 @@ body {
 main {
     flex: 1; /* takes the remaining height of the "container" div */
     overflow: auto; /* to scroll just the "main" div */
+    padding-left:$app-padding-left ;
+    padding-right:$app-padding-right ;
 }
 
 header {
@@ -52,6 +56,14 @@ footer {
 
 .mnu-app__button {
     border: 1px solid gray;
+}
+
+.mnu-app__tile-container {
+    padding: 10px;
+    border: 1px solid #f3f3f3;
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 8%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+    border-radius: 5px;
+    height: 99%;
 }
 
 // TODO Manage Bootstrap customizations better

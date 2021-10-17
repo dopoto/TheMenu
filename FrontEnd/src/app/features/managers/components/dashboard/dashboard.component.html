@@ -1,0 +1,66 @@
+<div class="mnu-app__container">
+    <div class="row dashboard__header">
+        <div class="col">
+            <h1>Hi, John!</h1>
+            <div class="mnu-app__page-description">
+                This section allows you to manage locations, menus, tables
+            </div>
+        </div>
+    </div>
+    <div class="row dashboard__contents" style="height: 70vh">
+        <gridster [options]="options" style="height: 60vh">
+            <gridster-item [item]="item" *ngFor="let item of dashboard">
+                <app-tables-tile
+                    *ngIf="item.component === 'tables-tile'"
+                ></app-tables-tile>
+                <app-menus-tile
+                    *ngIf="item.component === 'menus-tile'"
+                ></app-menus-tile>
+                <app-servers-tile
+                    *ngIf="item.component === 'servers-tile'"
+                ></app-servers-tile>
+                <app-overview-tile
+                    *ngIf="item.component === 'overview-tile'"
+                ></app-overview-tile>
+                <app-live-stream-tile
+                    *ngIf="item.component === 'live-stream-tile'"
+                ></app-live-stream-tile>
+            </gridster-item>
+        </gridster>
+    </div>
+    <!-- <div class="dashboard_contents row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">
+                        You are currently viewing data for the Varice location.
+                    </p>
+                    <a href="#" class="btn btn-primary">Manage locations...</a
+                    >&nbsp;<a href="#" class="btn btn-primary"
+                        >Add location...</a
+                    >
+                </div>
+            </div>
+
+            <div class="card-group dashboard__sections">
+
+
+                <div class="card" style="width: 18rem">
+                    <div class="card-body">
+                        <h5 class="card-title">Menus</h5>
+                        <p class="card-text">Manage menus.</p>
+                        <a routerLink="/managers/menus" class="btn btn-primary"
+                            >Go to Menus</a
+                        >
+                    </div>
+                </div>
+
+            </div>
+            <app-locations></app-locations>
+        </div>
+        <div class="col dashboard__side-bar">
+            <app-overview></app-overview>
+            <app-live-stream></app-live-stream>
+        </div>
+    </div> -->
+</div>

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AboutComponent } from './features/landing/components/about/about.component';
 import { HomeComponent } from './features/landing/components/home/home.component';
-import { ManagersMainComponent } from './features/managers/components/managers-main/managers-main.component';
+import { DashboardComponent } from './features/managers/components/dashboard/dashboard.component';
 import { StaffMainComponent } from './features/staff/components/staff-main/staff-main.component';
 import { AuthGuard } from './core/guards/auth-guard.service';
 import { LoginComponent } from './features/landing/components/login/login.component';
@@ -11,7 +11,6 @@ import { SignInWithGoogleComponent } from './features/landing/components/sign-in
 import { TablesComponent } from './features/managers/components/tables/tables.component';
 import { MenusComponent } from './features/managers/components/menus/menus.component';
 import { ServersComponent } from './features/managers/components/servers/servers.component';
-import { StatsComponent } from './features/managers/components/stats/stats.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,7 +22,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     {
         path: 'managers',
-        component: ManagersMainComponent,
+        component: DashboardComponent,
         canActivate: [AuthGuard],
         data: { roles: ['Owner'] },
     },
@@ -42,12 +41,6 @@ const routes: Routes = [
     {
         path: 'managers/servers',
         component: ServersComponent,
-        canActivate: [AuthGuard],
-        data: { roles: ['Owner'] },
-    },
-    {
-        path: 'managers/stats',
-        component: StatsComponent,
         canActivate: [AuthGuard],
         data: { roles: ['Owner'] },
     },

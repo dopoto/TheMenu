@@ -29,6 +29,7 @@
         "@ngx-translate/core": "^13.0.0",
         "@ngx-translate/http-loader": "^6.0.0",
         "@popperjs/core": "^2.10.2",
+        "angular-gridster2": "~12.1.1",
         "angularx-social-login": "~4.0.1",
         "bootstrap": "^5.1.3",
         "ngx-bootstrap": "~7.1.0",

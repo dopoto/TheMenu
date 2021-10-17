@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SocialLoginModule } from 'angularx-social-login';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { GridsterModule } from 'angular-gridster2';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -40,13 +41,15 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        AlertModule
+        AlertModule,
+        GridsterModule 
     ],
     exports: [
         BrowserModule,
         HttpClientModule,
         TranslateModule,
         SocialLoginModule,
+        GridsterModule,
         AppRoutingModule,
         CommonModule,
         FormsModule,

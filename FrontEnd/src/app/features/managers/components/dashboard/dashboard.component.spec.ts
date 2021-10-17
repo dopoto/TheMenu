@@ -1,21 +1,21 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagersMainComponent } from './managers-main.component';
+import { DashboardComponent } from './dashboard.component';
 
-describe('ManagersMainComponent', () => {
-    let component: ManagersMainComponent;
-    let fixture: ComponentFixture<ManagersMainComponent>;
+describe('DashboardComponent', () => {
+    let component: DashboardComponent;
+    let fixture: ComponentFixture<DashboardComponent>;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ManagersMainComponent],
+            declarations: [DashboardComponent],
             schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ManagersMainComponent);
+        fixture = TestBed.createComponent(DashboardComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

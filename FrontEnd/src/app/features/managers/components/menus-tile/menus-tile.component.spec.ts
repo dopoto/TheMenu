@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LiveStreamComponent } from './live-stream.component';
+import { MenusTileComponent } from './menus-tile.component';
 
-describe('LiveStreamComponent', () => {
-  let component: LiveStreamComponent;
-  let fixture: ComponentFixture<LiveStreamComponent>;
+describe('MenusTileComponent', () => {
+  let component: MenusTileComponent;
+  let fixture: ComponentFixture<MenusTileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LiveStreamComponent ]
+      declarations: [ MenusTileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LiveStreamComponent);
+    fixture = TestBed.createComponent(MenusTileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
