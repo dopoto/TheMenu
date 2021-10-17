@@ -13,6 +13,6 @@ export class LiveStreamTileComponent implements OnInit {
 
     ngOnInit(): void {
         const someArray = Array.from(Array(100).keys());
-        this.events = someArray.map(x => <LiveStreamEvent>{ text: 'Some event is here...'});
+        this.events = someArray.map(x => <LiveStreamEvent>{ text: 'Event  ' + x + ' is here...'});
     }
 }

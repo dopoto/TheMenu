@@ -1,20 +1,20 @@
+.dashboard__container {
+    display: flex;
+    flex-direction: column;
+}
+
 .dashboard__header {
-    border-bottom: 3px solid #858585;
+    //border-bottom: 3px solid #858585;
 }
 .dashboard__contents {
-    height: 70vh; // TODO
     margin-top: 13px;
+    flex:2;
 }
 .dashboard__sections {
     padding-top: 10px;
 }
 
-.dashboard__side-bar {
-    -ms-flex: 0 0 230px;
-    flex: 0 0 230px;
-    height: calc(100vh - 142px); // TODO
-}
-
 :host gridster {
-    background: white;
+    //background: white;
+    width: 101%;
 }

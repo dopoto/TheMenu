@@ -20,28 +20,80 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.options = {
-            gridType: GridType.Fit,
+            gridType: GridType.ScrollVertical,
             compactType: CompactType.None,
-            maxCols: 12,
-            maxRows: 20,
+            minCols: 8,
+            //maxCols: 10,
+            minRows: 20,
+           // maxRows: 20,
             pushItems: true,
             draggable: {
-                enabled: false,
+                enabled: true,
             },
             resizable: {
-                enabled:false,
+                enabled: true,
             },
             fixedRowHeight: 60,
+            fixedColWidth:100,
             outerMargin: false,
-            
         };
 
         this.dashboard = [
-            { cols: 2, rows: 2, y: 0, x: 0, component: 'tables-tile' },
-            { cols: 2, rows: 2, y: 0, x: 2 , component: 'menus-tile'},
-            { cols: 2, rows: 2, y: 0, x: 4 , component: 'servers-tile'},
-            { cols: 2, rows: 1, y: 0, x: 6 , component: 'overview-tile'},
-            { cols: 2, rows: 6, y: 1, x: 2 , component: 'live-stream-tile'}
+            {
+                rows: 2,
+                cols: 2,
+                y: 0,
+                x: 0,
+                minItemRows: 2,
+                maxItemRows: 2,
+                minItemCols: 2,
+                maxItemCols: 2,
+                component: 'tables-tile',
+            },
+            {
+                rows: 2,
+                cols: 2,
+                y: 0,
+                x: 2,
+                minItemRows: 2,
+                maxItemRows: 2,
+                minItemCols: 2,
+                maxItemCols: 2,
+                component: 'menus-tile',
+            },
+            {
+                rows: 2,
+                cols: 2,
+                y: 0,
+                x: 4,
+                minItemRows: 2,
+                maxItemRows: 2,
+                minItemCols: 2,
+                maxItemCols: 2,
+                component: 'servers-tile',
+            },
+            {
+                rows: 1,
+                cols: 2,
+                y: 0,
+                x: 6,
+                minItemRows: 1,
+                maxItemRows: 1,
+                minItemCols: 2,
+                maxItemCols: 2,
+                component: 'overview-tile',
+            },
+            {
+                rows: 4,
+                cols: 2,
+                y: 1,
+                x: 6,
+                minItemRows: 4,
+                maxItemRows: 4,
+                minItemCols: 2,
+                maxItemCols: 2,
+                component: 'live-stream-tile',
+            },
         ];
     }
 }
