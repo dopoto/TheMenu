@@ -12,6 +12,7 @@ import { ServersTileComponent } from './components/servers-tile/servers-tile.com
 import { ChartTileComponent } from './components/chart-tile/chart-tile.component';
 import { OverviewTileComponent } from './components/overview-tile/overview-tile.component';
 import { LiveStreamTileComponent } from './components/live-stream-tile/live-stream-tile.component';
+import { TileActionsComponent } from './components/tile-actions/tile-actions.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { LiveStreamTileComponent } from './components/live-stream-tile/live-stre
     ServersTileComponent,
     ChartTileComponent,
     OverviewTileComponent,
-    LiveStreamTileComponent
+    LiveStreamTileComponent,
+    TileActionsComponent
   ],
     imports: [SharedModule],
     exports: [],

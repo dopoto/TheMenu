@@ -37,7 +37,7 @@ namespace TheMenu.BackEnd.Controllers
 
             var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
 
-            var refreshTokenExpiryTime = DateTime.Now.AddMinutes(20); //DateTime.Now.AddDays(7), //TODO TEMP
+            var refreshTokenExpiryTime = DateTime.Now.AddMinutes(200); //DateTime.Now.AddDays(7), //TODO TEMP
 
             var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
             if (user == null)

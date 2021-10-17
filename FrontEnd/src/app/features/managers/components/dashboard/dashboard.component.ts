@@ -20,8 +20,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         this.options = {
-            gridType: GridType.VerticalFixed,
-            
+            gridType: GridType.VerticalFixed,            
             minCols: 24,
             maxCols: 24,
             //minRows: 24,
@@ -33,7 +32,7 @@ export class DashboardComponent implements OnInit {
             resizable: {
                 enabled: true,
             },
-            fixedRowHeight: 120,
+            fixedRowHeight: 80,
             fixedColWidth:100,
             rowHeightRatio:1,
             outerMargin: false,
