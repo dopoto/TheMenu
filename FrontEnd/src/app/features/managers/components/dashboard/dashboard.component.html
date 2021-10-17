@@ -8,7 +8,7 @@
         </div>
         <div class="dashboard__header-location-selector">Loc selctor</div>
     </div>
-    <div class="dashboard__contents" >
+    <div class="dashboard__contents">
         <gridster [options]="options" style="height: 60vh">
             <gridster-item [item]="item" *ngFor="let item of dashboard">
                 <app-tables-tile
@@ -26,6 +26,9 @@
                 <app-live-stream-tile
                     *ngIf="item.component === 'live-stream-tile'"
                 ></app-live-stream-tile>
+                <app-chart-tile
+                    *ngIf="item.component === 'chart-tile'"
+                ></app-chart-tile>
             </gridster-item>
         </gridster>
     </div>

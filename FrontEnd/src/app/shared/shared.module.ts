@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 /**
  * Contains code (components, directives, and pipes) that will be used across feature modules in the app.
@@ -42,7 +43,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         FormsModule,
         ReactiveFormsModule,
         AlertModule,
-        GridsterModule 
+        GridsterModule,
+        NgApexchartsModule
     ],
     exports: [
         BrowserModule,
@@ -50,6 +52,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         TranslateModule,
         SocialLoginModule,
         GridsterModule,
+        NgApexchartsModule,
         AppRoutingModule,
         CommonModule,
         FormsModule,

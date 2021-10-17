@@ -97,6 +97,28 @@ export class DashboardComponent implements OnInit {
                 x: 18,
                 component: 'live-stream-tile',
             },
+            {
+                rows: 1,
+                minItemRows: 1,
+                maxItemRows: 1,
+                cols: 6,
+                minItemCols: 6,
+                maxItemCols: 6,
+                y: 1,
+                x: 0,
+                component: 'chart-tile',
+            },
+            {
+                rows: 1,
+                minItemRows: 1,
+                maxItemRows: 1,
+                cols: 6,
+                minItemCols: 6,
+                maxItemCols: 6,
+                y: 2,
+                x: 0,
+                component: 'chart-tile',
+            },
         ];
     }
 }
