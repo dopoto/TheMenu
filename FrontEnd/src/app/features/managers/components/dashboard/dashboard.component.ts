@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
                 maxItemCols: 6,
                 y: 0,
                 x: 0,
-                component: 'tables-tile',
+                component: 'menus-tile',
             },
             {
                 rows: 1,
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
                 maxItemCols: 6,
                 y: 0,
                 x: 2,
-                component: 'menus-tile',
+                component: 'tables-tile',
             },
             {
                 rows:1,

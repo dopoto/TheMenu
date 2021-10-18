@@ -1,4 +1,5 @@
 {
-    "home": "enus_home",
-    "locations": "enus_Locations"
+    "home": "Home*enus",
+    "locations": "Locations*enus",
+    "tables": "Tables*enus"
 }

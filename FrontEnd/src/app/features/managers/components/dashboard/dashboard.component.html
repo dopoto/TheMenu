@@ -1,12 +1,14 @@
 <div class="mnu-app__container dashboard__container">
-    <div class="dashboard__header">
-        <div class="dashboard__header-nav">
+    <div class="dashboard__header row">
+        <div class="dashboard__header-nav col">
             <h1>Hi, John!</h1>
             <div class="mnu-app__page-description">
                 This section allows you to manage locations, menus, tables
             </div>
         </div>
-        <div class="dashboard__header-location-selector">Loc selctor</div>
+        <div class="dashboard__header-location-selector col">
+            <app-location-selector></app-location-selector>
+        </div>
     </div>
     <div class="dashboard__contents">
         <gridster [options]="options" style="height: 60vh">

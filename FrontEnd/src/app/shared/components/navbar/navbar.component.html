@@ -30,8 +30,16 @@
                 >
             </li>
         </ul>
-        <ul *ngIf="!(user$ | async)" class="nav">
-            <li class="nav-item">
+        <ul  class="nav">
+            <li  class="nav-item">
+                <button
+                    class="mnu-app__button navbar__button"
+                    (click)="signInWithGoogle()"
+                >
+                    Demo
+                </button>
+            </li>
+            <li *ngIf="!(user$ | async)" class="nav-item">
                 <button
                     class="mnu-app__button navbar__button"
                     (click)="signInWithGoogle()"
@@ -39,7 +47,7 @@
                     Login
                 </button>
             </li>
-            <li class="nav-item">
+            <li *ngIf="!(user$ | async)" class="nav-item">
                 <button class="mnu-app__button navbar__button">Sign up</button>
             </li>
         </ul>

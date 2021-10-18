@@ -13,6 +13,8 @@ import { ChartTileComponent } from './components/chart-tile/chart-tile.component
 import { OverviewTileComponent } from './components/overview-tile/overview-tile.component';
 import { LiveStreamTileComponent } from './components/live-stream-tile/live-stream-tile.component';
 import { TileActionsComponent } from './components/tile-actions/tile-actions.component';
+import { LocationSelectorComponent } from './components/location-selector/location-selector.component';
+import { TablesAddEditComponent } from './components/tables-add-edit/tables-add-edit.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,9 @@ import { TileActionsComponent } from './components/tile-actions/tile-actions.com
     ChartTileComponent,
     OverviewTileComponent,
     LiveStreamTileComponent,
-    TileActionsComponent
+    TileActionsComponent,
+    LocationSelectorComponent,
+    TablesAddEditComponent
   ],
     imports: [SharedModule],
     exports: [],

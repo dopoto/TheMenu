@@ -11,6 +11,7 @@ import { SignInWithGoogleComponent } from './features/landing/components/sign-in
 import { TablesComponent } from './features/managers/components/tables/tables.component';
 import { MenusComponent } from './features/managers/components/menus/menus.component';
 import { ServersComponent } from './features/managers/components/servers/servers.component';
+import { TablesAddEditComponent } from './features/managers/components/tables-add-edit/tables-add-edit.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,6 +30,12 @@ const routes: Routes = [
     {
         path: 'managers/tables',
         component: TablesComponent,
+        canActivate: [AuthGuard],
+        data: { roles: ['Owner'] },
+    },
+    {
+        path: 'managers/tables/add-edit',
+        component: TablesAddEditComponent,
         canActivate: [AuthGuard],
         data: { roles: ['Owner'] },
     },
