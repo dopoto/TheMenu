@@ -1,7 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { AuthState } from '../../models/auth-state';
-import { DemoActionTypes } from '../actions/demo.actions';
 import * as DemoActions from '../actions/demo.actions';
 import { AppState } from '../app.state';
 
@@ -10,7 +9,7 @@ export const initialState: AppState = {
         isAuthenticated: false,
         user: null,
         notificationId: null,
-    },
+    }
 };
 
 const demoReducer = createReducer(

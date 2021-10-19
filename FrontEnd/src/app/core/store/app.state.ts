@@ -9,7 +9,7 @@ export interface AppState {
 }
 
 export const reducers: ActionReducerMap<AppState> = {
-    auth: auth.reducer,
+    auth: auth.reducer
 };
 
 export const metaReducers: MetaReducer[] = [hydrationMetaReducer];

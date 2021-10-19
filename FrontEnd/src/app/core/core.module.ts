@@ -15,6 +15,7 @@ import { AuthEffects } from './store/effects/auth.effects';
 import { metaReducers, reducers } from './store/app.state';
 import { environment } from 'src/environments/environment';
 import { HydrationEffects } from './store/effects/hydration.effects';
+import { DemoEffects } from './store/effects/demo.effects';
 
 function tokenGetter() {
     return localStorage.getItem('token');
@@ -40,7 +41,7 @@ function tokenGetter() {
             logOnly: environment.production, // Restrict extension to log-only mode
             autoPause: true, // Pauses recording actions and state changes when the extension window is not open
         }),
-        EffectsModule.forRoot([HydrationEffects, AuthEffects]),
+        EffectsModule.forRoot([HydrationEffects, AuthEffects, DemoEffects]),
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,

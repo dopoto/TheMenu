@@ -16,6 +16,7 @@ import { AuthResponse } from 'src/app/core/models/auth-response';
 import { logoutStarted } from '../../store/actions/auth.actions';
 import { AppState } from '../../store/app.state';
 import { UserRoles } from '../../models/user-roles';
+import { LogService } from '../log/log.service';
 
 @Injectable({
     providedIn: 'root',
@@ -25,7 +26,8 @@ export class AuthenticationService {
         private _http: HttpClient,
         private _externalAuthService: SocialAuthService,
         private _jwtHelper: JwtHelperService,
-        private readonly store: Store<AppState>
+        private readonly store: Store<AppState>,
+        public logService: LogService
     ) {}
 
     public externalLogin = (route: string, body: ExternalAuth) => {
@@ -127,7 +129,8 @@ export class AuthenticationService {
             decodedToken[
                 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
             ];
-        let intersection = roles.filter((x) => decodedRoles.includes(x));
+            this.logService.info(`Matching decoded roles ${JSON.stringify(decodedRoles)} with claim roles ${JSON.stringify(roles)}`);
+        let intersection = roles.filter((x) => decodedRoles?.includes(x));
         return intersection.length > 0;
     };
 

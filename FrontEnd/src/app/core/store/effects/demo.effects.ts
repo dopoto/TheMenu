@@ -1,21 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
-import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { DemoService } from '../../services/demo/demo.service';
 import { LogService } from '../../services/log/log.service';
-import {
-    AuthActionTypes,
-    loginError,
-    loginFail,
-    loginSuccess,
-} from '../actions/auth.actions';
-import { DemoActionTypes, demoStartErrored, demoStartSucceeded } from '../actions/demo.actions';
+import { loginSuccess } from '../actions/auth.actions';
+import { DemoActionTypes, DEMO_START_ERRORED, DEMO_START_SUCCEEDED } from '../actions/demo.actions';
 
 @Injectable()
-export class AuthEffects {
+export class DemoEffects {
     constructor(
         private actions$: Actions,
         private demoService: DemoService,
@@ -27,13 +21,16 @@ export class AuthEffects {
             ofType(DemoActionTypes.DEMO_START_REQUESTED),
             mergeMap(() =>
                 this.demoService.getDemoData$().pipe(
+                    tap((appState)=> {
+                        loginSuccess({socialUser: appState.auth.user});
+                    }),
                     map((appState) => {
-                        return demoStartSucceeded({appState});
+                        return DEMO_START_SUCCEEDED({appState});
                     }),
                     catchError((error) => {
                         this.logService.error(error);
-                        const err = demoStartErrored({
-                            errorMessage: 'Demo start error!!!!',
+                        const err = DEMO_START_ERRORED({
+                            errorMessage: 'Demo start error!',
                         });
                         return of(err);
                     })
