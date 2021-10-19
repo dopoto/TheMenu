@@ -50,11 +50,11 @@ export const DEMO_EXIT_ERRORED = createAction(DemoActionTypes.DEMO_EXIT_ERRORED)
 //     props<{ errorMessage: string }>()
 // );
 
-// export const logoutStarted = createAction(DemoActionTypes.LOGOUT_STARTED);
+// export const logoutStarted = createAction(DemoActionTypes.logoutStart);
 
-// export const logoutSuccess = createAction(DemoActionTypes.LOGOUT_SUCCESS);
+// export const logoutSuccess = createAction(DemoActionTypes.logoutOk);
 
 // export const logoutFailure = createAction(
-//     DemoActionTypes.LOGOUT_FAILURE,
+//     DemoActionTypes.logoutError,
 //     props<{ errorMessage: string }>()
 // );

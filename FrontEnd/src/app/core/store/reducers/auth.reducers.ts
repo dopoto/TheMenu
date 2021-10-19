@@ -1,8 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 import { AuthState } from '../../models/auth-state';
-import { AuthActionTypes } from '../actions/auth.actions';
+
 import * as AuthActions from '../actions/auth.actions';
+import { AuthActionTypes } from '../actions/_app-action-types';
  
 
 export const initialState: AuthState = {
@@ -14,37 +15,37 @@ export const initialState: AuthState = {
 const authReducer = createReducer(
     initialState,
 
-    on(AuthActions.loginStarted, () => ({
+    on(AuthActions.loginStart, () => ({
         isAuthenticated: false,
         user: null,
-        notificationId: AuthActionTypes.LOGIN_STARTED
+        notificationId: AuthActionTypes.loginStart
     })),
 
-    on(AuthActions.loginSuccess, (state, { socialUser }) => ({ 
+    on(AuthActions.loginOk, (state, { socialUser }) => ({ 
         isAuthenticated: true,
         user: { ...socialUser },
-        notificationId: AuthActionTypes.LOGIN_SUCCESS
+        notificationId: AuthActionTypes.loginOk
     })),
     
     on(AuthActions.loginFail, () => ({
         isAuthenticated: false,
         user: null,
-        notificationId: AuthActionTypes.LOGIN_FAIL
+        notificationId: AuthActionTypes.loginFail
     })),
     
     on(AuthActions.loginError, () => ({
         isAuthenticated: false,
         user: null,
-        notificationId: AuthActionTypes.LOGIN_ERROR
+        notificationId: AuthActionTypes.loginError
     })),
     
-    on(AuthActions.logoutStarted, () => ({
+    on(AuthActions.logoutStart, () => ({
         isAuthenticated: false,
         user: null,
         notificationId: null
     })),
 
-    on(AuthActions.logoutSuccess, () => ({ 
+    on(AuthActions.logoutOk, () => ({ 
         isAuthenticated: false,
         user: null,
         notificationId: null

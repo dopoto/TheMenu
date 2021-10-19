@@ -6,11 +6,11 @@ import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { LogService } from '../../services/log/log.service';
 import {
-    AuthActionTypes,
     loginError,
     loginFail,
-    loginSuccess,
+    loginOk,
 } from '../actions/auth.actions';
+import { AuthActionTypes } from '../actions/_app-action-types';
 
 @Injectable()
 export class AuthEffects {
@@ -22,12 +22,12 @@ export class AuthEffects {
 
     login$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(AuthActionTypes.LOGIN_STARTED),
+            ofType(AuthActionTypes.loginStart),
             mergeMap(() =>
                 this.authService.signInWithGoogle$().pipe(
                     map((socialUser) => {
                         if (socialUser !== null) {
-                            return loginSuccess({ socialUser });
+                            return loginOk({ socialUser });
                         } else {
                             return loginFail({
                                 errorMessage: 'Login failed!',
@@ -49,7 +49,7 @@ export class AuthEffects {
     logInSuccess$ = createEffect(
         () =>
             this.actions$.pipe(
-                ofType(AuthActionTypes.LOGIN_SUCCESS),
+                ofType(AuthActionTypes.loginOk),
                 tap(() => {})
             ),
         { dispatch: false }
@@ -57,12 +57,12 @@ export class AuthEffects {
 
     logout$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(AuthActionTypes.LOGOUT_STARTED),
+            ofType(AuthActionTypes.logoutStart),
             mergeMap(() =>
                 this.authService.signOutExternal$().pipe(
                     map(() => {
                         return {
-                            type: AuthActionTypes.LOGOUT_SUCCESS,
+                            type: AuthActionTypes.logoutOk,
                         };
                     }),
                     catchError(() => EMPTY) //TODO
@@ -74,7 +74,7 @@ export class AuthEffects {
     // logInFailure$ = createEffect(
     //   () =>
     //     this.actions$.pipe(
-    //       ofType(AuthActionTypes.LOGIN_FAILURE),
+    //       ofType(AuthActionTypes.loginFailURE),
     //       tap(() => {})
     //     ),
     //   { dispatch: false }

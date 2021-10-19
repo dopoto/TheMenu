@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 
 import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
-import { logoutStarted } from '../../store/actions/auth.actions';
+import { logoutStart } from '../../store/actions/auth.actions';
 import { AppState } from '../../store/app.state';
 import { UserRoles } from '../../models/user-roles';
 import { LogService } from '../log/log.service';
@@ -93,7 +93,7 @@ export class AuthenticationService {
         }
 
         if(!isRefreshSuccess){
-            this.store.dispatch(logoutStarted());
+            this.store.dispatch(logoutStart());
         }
 
         return isRefreshSuccess;

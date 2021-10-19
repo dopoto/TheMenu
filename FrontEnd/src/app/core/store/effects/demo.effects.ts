@@ -5,7 +5,7 @@ import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
 import { DemoService } from '../../services/demo/demo.service';
 import { LogService } from '../../services/log/log.service';
-import { loginSuccess } from '../actions/auth.actions';
+import { loginOk } from '../actions/auth.actions';
 import {
     DemoActionTypes,
     DEMO_START_ERRORED,
@@ -26,7 +26,7 @@ export class DemoEffects {
             mergeMap(() =>
                 this.demoService.getDemoData$().pipe(
                     tap((appState)=> {
-                        loginSuccess({socialUser: appState.auth.user});
+                        loginOk({socialUser: appState.auth.user});
                     }),
                     map((appState) => {
                         return demoSuccess({ appState });
@@ -57,7 +57,7 @@ export class DemoEffects {
     // logInSuccess$ = createEffect(
     //     () =>
     //         this.actions$.pipe(
-    //             ofType(AuthActionTypes.LOGIN_SUCCESS),
+    //             ofType(AuthActionTypes.loginOk),
     //             tap(() => {})
     //         ),
     //     { dispatch: false }
@@ -65,12 +65,12 @@ export class DemoEffects {
 
     // logout$ = createEffect(() =>
     //     this.actions$.pipe(
-    //         ofType(AuthActionTypes.LOGOUT_STARTED),
+    //         ofType(AuthActionTypes.logoutStart),
     //         mergeMap(() =>
     //             this.authService.signOutExternal$().pipe(
     //                 map(() => {
     //                     return {
-    //                         type: AuthActionTypes.LOGOUT_SUCCESS,
+    //                         type: AuthActionTypes.logoutOk,
     //                     };
     //                 }),
     //                 catchError(() => EMPTY) //TODO
@@ -82,7 +82,7 @@ export class DemoEffects {
     // logInFailure$ = createEffect(
     //   () =>
     //     this.actions$.pipe(
-    //       ofType(AuthActionTypes.LOGIN_FAILURE),
+    //       ofType(AuthActionTypes.loginFailURE),
     //       tap(() => {})
     //     ),
     //   { dispatch: false }

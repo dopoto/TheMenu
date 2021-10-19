@@ -10,7 +10,7 @@ import {
     AuthActionTypes,
     loginError,
     loginFail,
-    loginSuccess,
+    loginOk,
 } from '../actions/auth.actions';
 import { ManagerDemoActionTypes, managerDemoSuccess } from '../actions/manager-demo.actions';
 

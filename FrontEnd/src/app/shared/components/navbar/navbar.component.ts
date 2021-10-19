@@ -4,8 +4,8 @@ import { SocialUser } from 'angularx-social-login';
 import { Observable } from 'rxjs';
 
 import {
-    loginStarted,
-    logoutStarted,
+    loginStart,
+    logoutStart,
 } from 'src/app/core/store/actions/auth.actions';
 import { AppState } from 'src/app/core/store/app.state';
 import { selectAuthUser } from 'src/app/core/store/selectors/user.selectors';
@@ -26,10 +26,10 @@ export class NavbarComponent implements OnInit {
     }
 
     signInWithGoogle(): void {
-        this.store.dispatch(loginStarted());
+        this.store.dispatch(loginStart());
     }
 
     signOut(): void {
-        this.store.dispatch(logoutStarted());
+        this.store.dispatch(logoutStart());
     }
 }

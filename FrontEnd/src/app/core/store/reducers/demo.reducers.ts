@@ -34,19 +34,19 @@ const demoReducer = createReducer(
     // on(DemoActions.loginSuccess, (state, { appState }) => ({
     //     isAuthenticated: true,
     //     user: { ...socialUser },
-    //     notificationId: DemoActionTypes.LOGIN_SUCCESS,
+    //     notificationId: DemoActionTypes.loginOk,
     // })),
 
     // on(DemoActions.loginFail, () => ({
     //     isAuthenticated: false,
     //     user: null,
-    //     notificationId: DemoActionTypes.LOGIN_FAIL,
+    //     notificationId: DemoActionTypes.loginFail,
     // })),
 
     // on(DemoActions.loginError, () => ({
     //     isAuthenticated: false,
     //     user: null,
-    //     notificationId: DemoActionTypes.LOGIN_ERROR,
+    //     notificationId: DemoActionTypes.loginError,
     // })),
 
     // on(DemoActions.logoutStarted, () => ({

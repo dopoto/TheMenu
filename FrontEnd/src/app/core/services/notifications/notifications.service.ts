@@ -4,9 +4,9 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { Notification } from '../../models/notification';
 import { AppState } from '../../store/app.state';
-import { selectAuthNotification } from 'src/app/core/store/selectors/user.selectors';
-import { AuthActionTypes } from '../../store/actions/auth.actions';
+import { selectAuthNotification } from 'src/app/core/store/selectors/user.selectors'; 
 import { NotificationTypes } from '../../models/notification-types';
+import { AuthActionTypes } from '../../store/actions/_app-action-types';
 
 @Injectable({
     providedIn: 'root',
@@ -32,19 +32,19 @@ export class NotificationsService {
 
     private notifications: Notification[] = [
         {
-            triggerAction: AuthActionTypes.LOGIN_STARTED,
+            triggerAction: AuthActionTypes.loginStart,
             body: 'Use the <strong>Google</strong> pop-up to login!', //TODO localize
             type: NotificationTypes.info,
             dismissible: true,
         },
         {
-            triggerAction: AuthActionTypes.LOGIN_FAIL,
+            triggerAction: AuthActionTypes.loginFail,
             body: 'Login failed!', //TODO localize
             type: NotificationTypes.danger,
             dismissible: true,
         },
         {
-            triggerAction: AuthActionTypes.LOGIN_ERROR,
+            triggerAction: AuthActionTypes.loginError,
             body: 'An <strong>error</strong> occured while logging you in. Please try again later!', //TODO localize
             type: NotificationTypes.danger,
             dismissible: true,
