@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -10,7 +11,8 @@ describe('HomeComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [HomeComponent],
-            imports: [TranslateModule.forRoot()]
+            schemas: [NO_ERRORS_SCHEMA],
+            imports: [TranslateModule.forRoot()],
         }).compileComponents();
     });
 

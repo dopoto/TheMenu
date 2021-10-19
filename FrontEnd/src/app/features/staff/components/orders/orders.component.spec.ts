@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrdersComponent } from './orders.component';
@@ -9,6 +10,7 @@ xdescribe('OrdersComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [OrdersComponent],
+            schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
     });
 

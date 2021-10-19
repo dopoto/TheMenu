@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore, MockStore } from '@ngrx/store/testing';
 import { cold } from 'jasmine-marbles';
@@ -14,6 +15,7 @@ describe('NavbarComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [NavbarComponent],
+            schemas: [NO_ERRORS_SCHEMA],
             providers: [provideMockStore({ initialState })],
         }).compileComponents();
 

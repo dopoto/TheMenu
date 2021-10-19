@@ -12,10 +12,12 @@ import { TablesComponent } from './features/managers/components/tables/tables.co
 import { MenusComponent } from './features/managers/components/menus/menus.component';
 import { ServersComponent } from './features/managers/components/servers/servers.component';
 import { TablesAddEditComponent } from './features/managers/components/tables-add-edit/tables-add-edit.component';
+import { StartDemoComponent } from './features/landing/components/start-demo/start-demo.component';
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
+    { path: 'start-demo', component: StartDemoComponent },
     {
         path: 'sign-in-with-google/:googleidtoken',
         component: SignInWithGoogleComponent,
