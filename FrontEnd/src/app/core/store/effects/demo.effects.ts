@@ -9,7 +9,7 @@ import { loginSuccess } from '../actions/auth.actions';
 import {
     DemoActionTypes,
     DEMO_START_ERRORED,
-    DEMO_START_SUCCEEDED,
+    demoSuccess,
 } from '../actions/demo.actions';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class DemoEffects {
                         loginSuccess({socialUser: appState.auth.user});
                     }),
                     map((appState) => {
-                        return DEMO_START_SUCCEEDED({ appState });
+                        return demoSuccess({ appState });
                     }),
                     catchError((error) => {
                         this.logService.error(error);

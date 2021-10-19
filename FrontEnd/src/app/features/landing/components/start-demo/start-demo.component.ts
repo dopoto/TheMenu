@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DEMO_START_REQUESTED } from 'src/app/core/store/actions/demo.actions';
+import { hydrateManagerDemo } from 'src/app/core/store/actions/hydration.actions';
+import { managerDemoStart } from 'src/app/core/store/actions/manager-demo.actions';
 
 import { AppState } from 'src/app/core/store/app.state';
 
@@ -18,6 +19,6 @@ export class StartDemoComponent implements OnInit {
     startDemo() {
         // trigger state change
         // redirect to demo route
-        this.store.dispatch(DEMO_START_REQUESTED());
+        this.store.dispatch(hydrateManagerDemo());
     }
 }

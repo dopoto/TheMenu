@@ -10,11 +10,12 @@ export enum DemoActionTypes {
     DEMO_EXIT_ERRORED = 'DEMO_EXIT_ERRORED',
 }
 
-export const DEMO_START_REQUESTED = createAction(
-    DemoActionTypes.DEMO_START_REQUESTED
+export const demoStart = createAction(
+    DemoActionTypes.DEMO_START_REQUESTED,
+    props<{ errorMessage: string }>()
 );
 
-export const DEMO_START_SUCCEEDED = createAction(
+export const demoSuccess = createAction(
     DemoActionTypes.DEMO_START_SUCCEEDED,
     props<{ appState: AppState }>()
 );

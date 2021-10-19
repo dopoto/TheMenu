@@ -27,6 +27,34 @@ export class HydrationEffects implements OnInitEffects {
         )
     );
 
+    hydrateManagerDemo$ = createEffect(() =>
+        this.action$.pipe(
+            ofType(HydrationActions.hydrateManagerDemo),
+            map(() => {
+                const state = <AppState>{
+                    auth: {
+                        isAuthenticated: true,
+                        user: {
+                            firstName: 'Demo',
+                        },
+                    },
+                };
+                return HydrationActions.hydrateSuccess({ state });
+                // const storageValue = localStorage.getItem('state');
+                // //TODO Does not pick up logged in users correctly (users show up as logged in even when token is expired)
+                // if (storageValue) {
+                //     try {
+                //         const state = JSON.parse(storageValue);
+                //         return HydrationActions.hydrateSuccess({ state });
+                //     } catch {
+                //         localStorage.removeItem('state');
+                //     }
+                // }
+                // return HydrationActions.hydrateFailure();
+            })
+        )
+    );
+
     serialize$ = createEffect(
         () =>
             this.action$.pipe(
@@ -38,7 +66,7 @@ export class HydrationEffects implements OnInitEffects {
                 distinctUntilChanged(),
                 tap((state) => {
                     let parsedState = JSON.parse(JSON.stringify(state));
-                    parsedState.auth.notification = null;    
+                    parsedState.auth.notification = null;
                     localStorage.setItem('state', JSON.stringify(parsedState));
                 })
             ),

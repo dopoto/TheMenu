@@ -13,4 +13,4 @@ export const reducers: ActionReducerMap<AppState> = {
     auth: auth.reducer
 };
 
-export const metaReducers: MetaReducer[] = [hydrationMetaReducer, demoMetaReducer];
+export const metaReducers: MetaReducer[] = [hydrationMetaReducer];

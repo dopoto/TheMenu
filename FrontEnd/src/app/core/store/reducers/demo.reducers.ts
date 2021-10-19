@@ -15,7 +15,7 @@ export const initialState: AppState = {
 const demoReducer = createReducer(
     initialState,
 
-    on(DemoActions.DEMO_START_REQUESTED, () => ({
+    on(DemoActions.demoStart, () => ({
         auth: {
             isAuthenticated: false,
             user: null,
@@ -23,7 +23,7 @@ const demoReducer = createReducer(
         },
     })),
 
-    on(DemoActions.DEMO_START_SUCCEEDED, (state, { appState }) => ({
+    on(DemoActions.demoSuccess, (state, { appState }) => ({
         auth: {
             isAuthenticated: true,
             user: { ...appState.auth.user },
