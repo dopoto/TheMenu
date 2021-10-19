@@ -28,8 +28,8 @@ import { AppState } from '../app.state';
 
 function isHydrateSuccess(
     action: Action
-): action is ReturnType<typeof HydrationActions.hydrateSuccess> {
-    return action.type === HydrationActions.hydrateSuccess.type;
+): action is ReturnType<typeof HydrationActions.hydrateOk> {
+    return action.type === HydrationActions.hydrateOk.type;
 }
 
 export const hydrationMetaReducer = (

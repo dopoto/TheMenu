@@ -1,18 +1,24 @@
 import { createAction, props } from '@ngrx/store';
 
 import { AppState } from '../app.state';
+import { HydrateActionTypes } from './_app-action-types';
 
-export enum HydrateActionTypes {
-    HYDRATE_MANAGER_DEMO = '[hydrate] Manager Demo',
-};
+const actions = HydrateActionTypes;
 
-export const hydrate = createAction('[Hydration] Hydrate');
+// Load the app state from local storage:
 
-export const hydrateManagerDemo = createAction(HydrateActionTypes.HYDRATE_MANAGER_DEMO);
-
-export const hydrateSuccess = createAction(
-    '[Hydration] Hydrate Success',
+export const hydrateStart = createAction(actions.hydrateStart);
+export const hydrateOk = createAction(
+    actions.hydrateOk,
     props<{ state: AppState }>()
 );
+export const hydrateError = createAction(actions.hydrateError);
 
-export const hydrateFailure = createAction('[Hydration] Hydrate Failure');
+// Load the app state from demo data:
+
+export const hydrateManagerDemoStart = createAction(actions.hydrateManagerDemoStart);
+export const hydrateManagerDemoOk = createAction(
+    actions.hydrateManagerDemoOk,
+    props<{ state: AppState }>()
+);
+export const hydrateManagerDemoError = createAction(actions.hydrateManagerDemoError);

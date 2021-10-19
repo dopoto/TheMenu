@@ -10,26 +10,26 @@ import { AppState } from '../app.state';
 export class HydrationEffects implements OnInitEffects {
     hydrate$ = createEffect(() =>
         this.action$.pipe(
-            ofType(HydrationActions.hydrate),
+            ofType(HydrationActions.hydrateStart),
             map(() => {
                 const storageValue = localStorage.getItem('state');
                 //TODO Does not pick up logged in users correctly (users show up as logged in even when token is expired)
                 if (storageValue) {
                     try {
                         const state = JSON.parse(storageValue);
-                        return HydrationActions.hydrateSuccess({ state });
+                        return HydrationActions.hydrateOk({ state });
                     } catch {
                         localStorage.removeItem('state');
                     }
                 }
-                return HydrationActions.hydrateFailure();
+                return HydrationActions.hydrateError();
             })
         )
     );
 
     hydrateManagerDemo$ = createEffect(() =>
         this.action$.pipe(
-            ofType(HydrationActions.hydrateManagerDemo),
+            ofType(HydrationActions.hydrateManagerDemoStart),
             map(() => {
                 const state = <AppState>{
                     auth: {
@@ -39,7 +39,7 @@ export class HydrationEffects implements OnInitEffects {
                         },
                     },
                 };
-                return HydrationActions.hydrateSuccess({ state });
+                return HydrationActions.hydrateOk({ state });
                 // const storageValue = localStorage.getItem('state');
                 // //TODO Does not pick up logged in users correctly (users show up as logged in even when token is expired)
                 // if (storageValue) {
@@ -59,8 +59,8 @@ export class HydrationEffects implements OnInitEffects {
         () =>
             this.action$.pipe(
                 ofType(
-                    HydrationActions.hydrateSuccess,
-                    HydrationActions.hydrateFailure
+                    HydrationActions.hydrateOk,
+                    HydrationActions.hydrateError
                 ),
                 switchMap(() => this.store),
                 distinctUntilChanged(),
@@ -76,6 +76,6 @@ export class HydrationEffects implements OnInitEffects {
     constructor(private action$: Actions, private store: Store<AppState>) {}
 
     ngrxOnInitEffects(): Action {
-        return HydrationActions.hydrate();
+        return HydrationActions.hydrateStart();
     }
 }
