@@ -6,7 +6,11 @@ import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { DemoService } from '../../services/demo/demo.service';
 import { LogService } from '../../services/log/log.service';
 import { loginSuccess } from '../actions/auth.actions';
-import { DemoActionTypes, DEMO_START_ERRORED, DEMO_START_SUCCEEDED } from '../actions/demo.actions';
+import {
+    DemoActionTypes,
+    DEMO_START_ERRORED,
+    DEMO_START_SUCCEEDED,
+} from '../actions/demo.actions';
 
 @Injectable()
 export class DemoEffects {
@@ -25,7 +29,7 @@ export class DemoEffects {
                         loginSuccess({socialUser: appState.auth.user});
                     }),
                     map((appState) => {
-                        return DEMO_START_SUCCEEDED({appState});
+                        return DEMO_START_SUCCEEDED({ appState });
                     }),
                     catchError((error) => {
                         this.logService.error(error);
@@ -37,6 +41,17 @@ export class DemoEffects {
                 )
             )
         )
+    );
+
+    demoStartSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(DemoActionTypes.DEMO_START_SUCCEEDED),
+                tap(() => {
+                    console.log('demoStartSuccess');
+                })
+            ),
+        { dispatch: false }
     );
 
     // logInSuccess$ = createEffect(

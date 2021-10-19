@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 
 import { AuthState } from '../../models/auth-state';
 import * as DemoActions from '../actions/demo.actions';
@@ -9,7 +9,7 @@ export const initialState: AppState = {
         isAuthenticated: false,
         user: null,
         notificationId: null,
-    }
+    },
 };
 
 const demoReducer = createReducer(
@@ -23,13 +23,13 @@ const demoReducer = createReducer(
         },
     })),
 
-    on(DemoActions.DEMO_START_SUCCEEDED, (state, { appState }) => ({ 
+    on(DemoActions.DEMO_START_SUCCEEDED, (state, { appState }) => ({
         auth: {
             isAuthenticated: true,
             user: { ...appState.auth.user },
-            notificationId: null
-        }        
-    })),
+            notificationId: null,
+        },
+    }))
 
     // on(DemoActions.loginSuccess, (state, { appState }) => ({
     //     isAuthenticated: true,
@@ -62,6 +62,14 @@ const demoReducer = createReducer(
     // }))
 );
 
-export function reducer(state: AuthState | undefined, action: Action) {
+export function reducer(state: AppState | undefined, action: Action) {
     return demoReducer(state, action);
 }
+
+export const demoMetaReducer = (
+    reducer: ActionReducer<AppState>
+): ActionReducer<AppState> => {
+    return (state, action) => {
+        return reducer(state, action);
+    };
+};

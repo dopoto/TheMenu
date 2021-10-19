@@ -39,8 +39,9 @@ export class AuthenticationService {
             this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
         );
         return signIn$.pipe(
+            // TODO Add security logging here (new logService.security...)
             switchMap((socialUser) => this.validateExternalAuth$(socialUser))
-        );
+        );        
     }
 
     public signOutExternal$(): Observable<void> {

@@ -30,7 +30,7 @@ export class AuthEffects {
                             return loginSuccess({ socialUser });
                         } else {
                             return loginFail({
-                                errorMessage: 'Login ffailed!',
+                                errorMessage: 'Login failed!',
                             });
                         }
                     }),
