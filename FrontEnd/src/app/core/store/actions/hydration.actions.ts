@@ -12,13 +12,20 @@ export const hydrateOk = createAction(
     actions.hydrateOk,
     props<{ state: AppState }>()
 );
-export const hydrateError = createAction(actions.hydrateError);
+export const hydrateError = createAction(
+    actions.hydrateError,
+    props<{ errorMessage: string }>()
+);
 
 // Load the app state from demo data:
 
-export const hydrateManagerDemoStart = createAction(actions.hydrateManagerDemoStart);
+export const hydrateManagerDemoStart = createAction(
+    actions.hydrateManagerDemoStart
+);
 export const hydrateManagerDemoOk = createAction(
     actions.hydrateManagerDemoOk,
     props<{ state: AppState }>()
 );
-export const hydrateManagerDemoError = createAction(actions.hydrateManagerDemoError);
+export const hydrateManagerDemoError = createAction(
+    actions.hydrateManagerDemoError
+);

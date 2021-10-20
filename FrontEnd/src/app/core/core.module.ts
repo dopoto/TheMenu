@@ -11,11 +11,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { AuthEffects } from './store/effects/auth.effects';
-import { metaReducers, reducers } from './store/app.state';
 import { environment } from 'src/environments/environment';
+import { metaReducers, reducers } from './store/app.state';
 import { HydrationEffects } from './store/effects/hydration.effects';
-import { DemoEffects } from './store/effects/demo.effects';
+import { AuthEffects } from './store/effects/auth.effects';
 
 function tokenGetter() {
     return localStorage.getItem('token');
@@ -41,7 +40,7 @@ function tokenGetter() {
             logOnly: environment.production, // Restrict extension to log-only mode
             autoPause: true, // Pauses recording actions and state changes when the extension window is not open
         }),
-        EffectsModule.forRoot([HydrationEffects, AuthEffects, DemoEffects]),
+        EffectsModule.forRoot([HydrationEffects, AuthEffects]),
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,

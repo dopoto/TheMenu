@@ -1,0 +1,16 @@
+{
+    "auth": {
+        "isAuthenticated": true,
+        "user": {
+            "id": "1234",
+            "name": "Demo McManager",
+            "email": "demo@example.com",
+            "photoUrl": "assets/images/demo-face-1.jfif",
+            "firstName": "Demo",
+            "lastName": "McManager",
+
+            "provider": "DEMO"
+        },
+        "notificationId": "[Auth] Login Success"
+    }
+}
