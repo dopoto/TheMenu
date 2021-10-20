@@ -4,12 +4,15 @@ import { Action, Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
     catchError,
+    concatMap,
     distinctUntilChanged,
     map,
     mergeMap,
+    skipUntil,
     switchMap,
     tap,
 } from 'rxjs/operators';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 import { DemoService } from '../../services/demo/demo.service';
 import { LogService } from '../../services/log/log.service';
@@ -24,6 +27,7 @@ export class HydrationEffects implements OnInitEffects {
         private actions$: Actions,
         private store: Store<AppState>,
         private demoService: DemoService,
+        private authService: AuthenticationService,
         private logService: LogService
     ) {}
 
@@ -53,6 +57,10 @@ export class HydrationEffects implements OnInitEffects {
             ofType(HydrationActions.hydrateManagerDemoStart),
             mergeMap(() =>
                 this.demoService.getDemoData$().pipe(
+                    // TODO Save current user state to local storage (to restore it when exiting demo)
+                    switchMap((appState) => {
+                        return this.authService.signInWithDemoAccount$(appState);
+                    }),
                     tap((appState) => {
                         loginOk({ socialUser: appState.auth.user });
                     }),

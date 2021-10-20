@@ -12,5 +12,10 @@
             "provider": "DEMO"
         },
         "notificationId": "[Auth] Login Success"
+    },
+    "meta": {
+        "appVersion": "DEMO",
+        "stateVersion": "1",
+        "initializedOn": "2021-10-20T04:00:17.100Z"
     }
 }

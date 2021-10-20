@@ -83,5 +83,59 @@ namespace TheMenu.BackEnd.Controllers
                 IsAuthSuccessful = true 
             });
         }
+
+        [HttpPost]
+        [Route("demo-login")]
+        [EndpointName("/accounts/demo-login")]
+        public async Task<IActionResult> DemoLogin([FromBody] DemoAuth demoAuth)
+        {
+            var info = new UserLoginInfo("DEMO", "PROVIDER-KEY", "DISPLAYname");
+
+            var refreshTokenExpiryTime = DateTime.Now.AddMinutes(200); //DateTime.Now.AddDays(7), //TODO TEMP
+
+            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+            if (user == null)
+            {
+                user = await _userManager.FindByEmailAsync(demoAuth.Email);
+
+                if (user == null)
+                {
+                    user = new TheMenuBackEndUser
+                    {
+                        Email = demoAuth.Email,
+                        UserName = demoAuth.Email
+                    };
+                    await _userManager.CreateAsync(user);
+
+                    await _userManager.AddToRoleAsync(user, "Owner");
+                    //await _userManager.AddToRoleAsync(user, "StaffMember");
+                    await _userManager.AddLoginAsync(user, info);
+                }
+                else
+                {
+                    //TODO check if account is Locked Out
+                    await _userManager.AddLoginAsync(user, info);
+                }
+            }
+
+            if (user == null)
+                return BadRequest("Invalid External Authentication.");
+
+            var claims = await _jwtHandlerService.GetClaimsAsync(user);
+            var token = _jwtHandlerService.GenerateToken(claims);
+            var refreshToken = _jwtHandlerService.GenerateRefreshToken();
+
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiryTime = refreshTokenExpiryTime;
+            await _userManager.UpdateAsync(user);
+
+            return Ok(new AuthResponse
+            {
+                Token = token,
+                RefreshToken = refreshToken,
+                RefreshTokenExpiryTime = refreshTokenExpiryTime,
+                IsAuthSuccessful = true
+            });
+        }
     }
 }
