@@ -1,6 +1,31 @@
 <section>
     <div class="mnu-app__container">
-        
-        <button (click)="startDemo()">OK, let's go!</button>
+        <app-page-title></app-page-title>
+
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+                Simulate servers activity
+            </label>
+        </div>
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckChecked"
+                checked
+            />
+            <label class="form-check-label" for="flexCheckChecked">
+                Simulate customers activity
+            </label>
+        </div>
+
+        <button (click)="startDemo()">Start demo</button>
     </div>
 </section>
