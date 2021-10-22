@@ -25,3 +25,12 @@ export const logoutError = createAction(
     actions.logoutError,
     props<{ errorMessage: string }>()
 );
+
+export const exitDemo = createAction(actions.exitDemo);
+export const exitDemoOk = createAction(
+    actions.exitDemoOk
+);
+export const exitDemoError = createAction(
+    actions.exitDemoError,
+    props<{ errorMessage: string }>()
+);

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -28,6 +29,7 @@ export class HydrationEffects implements OnInitEffects {
         private store: Store<AppState>,
         private demoService: DemoService,
         private authService: AuthenticationService,
+        private router: Router,
         private logService: LogService
     ) {}
 
@@ -67,6 +69,7 @@ export class HydrationEffects implements OnInitEffects {
                     map((appState) => {
                         return hydrateOk({ state: appState });
                     }),
+                    tap(() => this.router.navigate(['/managers'])),
                     catchError((error) => {
                         this.logService.error(error);
                         const err = hydrateError({

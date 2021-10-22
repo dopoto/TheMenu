@@ -8,6 +8,7 @@ import { AuthActionTypes } from '../actions/_app-action-types';
 
 export const initialState: AuthState = {
     isAuthenticated: false,
+    isDemo: false,
     user: null,
     notificationId: null
 };
@@ -17,36 +18,49 @@ const authReducer = createReducer(
 
     on(AuthActions.loginStart, () => ({
         isAuthenticated: false,
+        isDemo: false,
         user: null,
         notificationId: AuthActionTypes.loginStart
     })),
 
     on(AuthActions.loginOk, (state, { socialUser }) => ({ 
         isAuthenticated: true,
+        isDemo: false,
         user: { ...socialUser },
         notificationId: AuthActionTypes.loginOk
     })),
     
     on(AuthActions.loginFail, () => ({
         isAuthenticated: false,
+        isDemo: false,
         user: null,
         notificationId: AuthActionTypes.loginFail
     })),
     
     on(AuthActions.loginError, () => ({
         isAuthenticated: false,
+        isDemo: false,
         user: null,
         notificationId: AuthActionTypes.loginError
     })),
     
     on(AuthActions.logoutStart, () => ({
         isAuthenticated: false,
+        isDemo: false,
         user: null,
         notificationId: null
     })),
 
     on(AuthActions.logoutOk, () => ({ 
         isAuthenticated: false,
+        isDemo: false,
+        user: null,
+        notificationId: null
+    })),
+
+    on(AuthActions.exitDemo, () => ({ 
+        isAuthenticated: false,
+        isDemo: false,
         user: null,
         notificationId: null
     }))

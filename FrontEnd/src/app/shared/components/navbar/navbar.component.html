@@ -31,7 +31,7 @@
             </li>
         </ul>
         <ul  class="nav">
-            <li  class="nav-item">
+            <li *ngIf="!(isDemo$ | async)"  class="nav-item">
                 <button
                     class="mnu-app__button navbar__button"
                     routerLink="/start-demo"

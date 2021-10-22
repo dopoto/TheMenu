@@ -20,7 +20,8 @@ export const hydrateError = createAction(
 // Load the app state from demo data:
 
 export const hydrateManagerDemoStart = createAction(
-    actions.hydrateManagerDemoStart
+    actions.hydrateManagerDemoStart,
+    props<{ simulateServersActivity: boolean, simulateCustomersActivity: boolean }>()
 );
 export const hydrateManagerDemoOk = createAction(
     actions.hydrateManagerDemoOk,

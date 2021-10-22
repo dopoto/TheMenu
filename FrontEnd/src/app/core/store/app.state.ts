@@ -1,4 +1,4 @@
-import { ActionReducerMap, createReducer, MetaReducer } from '@ngrx/store';
+import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 
 import { AuthState } from '../models/auth-state';
 import { MetaState } from '../models/meta-state';

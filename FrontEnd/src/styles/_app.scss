@@ -1,5 +1,10 @@
 @import "./_variables.scss";
 
+a {
+    color: blue;
+    cursor: pointer;
+}
+
 h1 {
     padding-top: 20px;
     letter-spacing: -3px;

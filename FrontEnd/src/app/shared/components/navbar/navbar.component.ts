@@ -8,7 +8,7 @@ import {
     logoutStart,
 } from 'src/app/core/store/actions/auth.actions';
 import { AppState } from 'src/app/core/store/app.state';
-import { selectAuthUser } from 'src/app/core/store/selectors/user.selectors';
+import { selectAuthUser, selectIsDemo } from 'src/app/core/store/selectors/user.selectors';
 
 @Component({
     selector: 'app-navbar',
@@ -18,11 +18,13 @@ import { selectAuthUser } from 'src/app/core/store/selectors/user.selectors';
 })
 export class NavbarComponent implements OnInit {
     user$: Observable<SocialUser> | undefined;
+    isDemo$: Observable<boolean> | undefined;
 
     constructor(private readonly store: Store<AppState>) {}
 
     ngOnInit(): void {
         this.user$ = this.store.pipe(select(selectAuthUser));
+        this.isDemo$ = this.store.pipe(select(selectIsDemo));
     }
 
     signInWithGoogle(): void {

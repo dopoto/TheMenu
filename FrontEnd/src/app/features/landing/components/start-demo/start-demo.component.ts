@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { hydrateManagerDemoStart } from 'src/app/core/store/actions/hydration.actions';
 
@@ -11,6 +12,9 @@ import { AppState } from 'src/app/core/store/app.state';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartDemoComponent implements OnInit {
+    simulateServersActivityCheckbox = new FormControl(true);
+    simulateCustomersActivityCheckbox = new FormControl(true);
+
     constructor(private readonly store: Store<AppState>) {}
 
     ngOnInit(): void {}
@@ -18,6 +22,11 @@ export class StartDemoComponent implements OnInit {
     startDemo() {
         // trigger state change
         // redirect to demo route
-        this.store.dispatch(hydrateManagerDemoStart());
+        this.store.dispatch(
+            hydrateManagerDemoStart({
+                simulateServersActivity: this.simulateServersActivityCheckbox.value ? true: false,
+                simulateCustomersActivity: this.simulateCustomersActivityCheckbox.value ? true : false
+            })
+        );
     }
 }

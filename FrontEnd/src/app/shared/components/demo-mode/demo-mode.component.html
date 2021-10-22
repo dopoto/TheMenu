@@ -1,0 +1,5 @@
+
+<div class="demo-mode__container" *ngIf="(isDemo$ | async) === true">
+    <div class="demo-mode__text" >You are in demo mode.</div>
+    <div class="demo-mode__links"><a (click)="exitDemo()">Exit demo mode</a></div>
+</div>

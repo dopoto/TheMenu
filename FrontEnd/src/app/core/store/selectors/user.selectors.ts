@@ -15,3 +15,8 @@ export const selectAuthNotification = createSelector(
     selectAuthState,
     (state: AuthState) => state?.notificationId
 );
+
+export const selectIsDemo = createSelector(
+    selectAuthState,
+    (state: AuthState) => state?.isDemo
+);

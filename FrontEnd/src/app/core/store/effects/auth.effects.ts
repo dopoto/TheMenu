@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { LogService } from '../../services/log/log.service';
 import {
+    exitDemoError,
     loginError,
     loginFail,
     loginOk,
@@ -17,6 +19,7 @@ export class AuthEffects {
     constructor(
         private actions$: Actions,
         private authService: AuthenticationService,
+        private router: Router,
         private logService: LogService
     ) {}
 
@@ -70,6 +73,41 @@ export class AuthEffects {
             )
         )
     );
+
+    exitDemo$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActionTypes.exitDemo),
+            mergeMap(() =>
+                this.authService.signOutDemo$().pipe(
+                    map(() => {
+                        return {
+                            type: AuthActionTypes.exitDemoOk,
+                        };
+                    }),
+                    catchError((error) => {
+                        this.logService.error(error);
+                        const err = exitDemoError({
+                            errorMessage: 'Exit demo error!!!!',
+                        });
+                        return of(err);
+                    })
+                )
+            )
+        )
+    );
+
+    exitDemoOk$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActionTypes.exitDemoOk),
+                tap(() => {
+                    this.router.navigate(['/home']);
+                })
+            ),
+        { dispatch: false }
+    );
+
+    //TODO exitdemoError
 
     // logInFailure$ = createEffect(
     //   () =>

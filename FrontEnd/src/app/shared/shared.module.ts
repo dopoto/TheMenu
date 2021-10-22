@@ -15,6 +15,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { PageTitleComponent } from './components/page-title/page-title.component';
+import { DemoModeComponent } from './components/demo-mode/demo-mode.component';
 
 /**
  * Contains code (components, directives, and pipes) that will be used across feature modules in the app.
@@ -34,7 +35,8 @@ import { PageTitleComponent } from './components/page-title/page-title.component
         NotificationsComponent,
         FooterComponent,
         BreadcrumbComponent,
-        PageTitleComponent
+        PageTitleComponent,
+        DemoModeComponent
     ],
     imports: [
         BrowserModule,
@@ -64,7 +66,8 @@ import { PageTitleComponent } from './components/page-title/page-title.component
         BreadcrumbComponent,
         NotificationsComponent,
         FooterComponent,
-        PageTitleComponent
+        PageTitleComponent,
+        DemoModeComponent
     ],
     providers: [],
     bootstrap: [],

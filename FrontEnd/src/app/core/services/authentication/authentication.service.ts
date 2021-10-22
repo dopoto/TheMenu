@@ -61,6 +61,17 @@ export class AuthenticationService {
             map(() => {})
         );
     }
+    
+    public signOutDemo$(): Observable<void> {
+        const revokeToken$ = this.http.post('/token/revoke', {});
+        return revokeToken$.pipe(
+            tap(() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('refreshToken');
+            }),
+            map(() => {})
+        );
+    }
 
     public async tryRefreshingTokens(token: string): Promise<boolean> {
         // Try refreshing tokens using refresh token
@@ -181,6 +192,7 @@ export class AuthenticationService {
                             'refreshToken',
                             authResponse.refreshToken
                         );
+                        demoAppState.auth.isDemo = true;
                         return demoAppState;
                     } else {
                         return null;
