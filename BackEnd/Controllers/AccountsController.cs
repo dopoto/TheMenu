@@ -10,13 +10,13 @@ namespace TheMenu.BackEnd.Controllers
     [Route("[controller]")]
     public class AccountsController : ControllerBase
     {
-        private readonly UserManager<TheMenuBackEndUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly JwtHandlerService _jwtHandlerService;
 
         public AccountsController(
             ILogger<AccountsController> logger,
             IConfiguration configuration,
-            UserManager<TheMenuBackEndUser> userManager,
+            UserManager<AppUser> userManager,
             JwtHandlerService jwtHandlerService)
         {
             _userManager = userManager;
@@ -46,7 +46,7 @@ namespace TheMenu.BackEnd.Controllers
 
                 if (user == null)
                 {
-                    user = new TheMenuBackEndUser { 
+                    user = new AppUser { 
                         Email = payload.Email, 
                         UserName = payload.Email, 
                     };
@@ -100,7 +100,7 @@ namespace TheMenu.BackEnd.Controllers
 
                 if (user == null)
                 {
-                    user = new TheMenuBackEndUser
+                    user = new AppUser
                     {
                         Email = demoAuth.Email,
                         UserName = demoAuth.Email

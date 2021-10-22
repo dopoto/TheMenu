@@ -4,7 +4,7 @@ namespace TheMenu.BackEnd.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(TheMenuBackEndContext context)
+        public static void Initialize(AppDbContext context)
         {
             context.Database.EnsureCreated();
 
@@ -14,11 +14,12 @@ namespace TheMenu.BackEnd.Data
                 return;   // DB has been seeded
             }
 
-            var users = new TheMenuBackEndUser[]
+            // TODO Use a users service method to initialiZe user (re-use it in accountsController too)
+            var users = new AppUser[]
             {
-                new TheMenuBackEndUser {Email="user@example.com"}
+                new AppUser {Email="user@example.com"}
             };
-            foreach (TheMenuBackEndUser s in users)
+            foreach (AppUser s in users)
             {
                 context.Users.Add(s);
             }

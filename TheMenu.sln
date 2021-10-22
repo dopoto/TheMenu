@@ -36,7 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release Frontend to Prod Pi
 		Deployment\AzureDevOps\Releases\Release Frontend to Prod Pipeline\1. AzureBlob File Copy.yml = Deployment\AzureDevOps\Releases\Release Frontend to Prod Pipeline\1. AzureBlob File Copy.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIClientGenerator", "APIClientGenerator\APIClientGenerator.csproj", "{3CB798F6-F095-40CB-8C93-59EE929DD720}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIClientGenerator", "APIClientGenerator\APIClientGenerator.csproj", "{3CB798F6-F095-40CB-8C93-59EE929DD720}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,8 +45,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{68BB2D29-6622-4658-B3F4-5D0D834FD0C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68BB2D29-6622-4658-B3F4-5D0D834FD0C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68BB2D29-6622-4658-B3F4-5D0D834FD0C0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{68BB2D29-6622-4658-B3F4-5D0D834FD0C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BB2D29-6622-4658-B3F4-5D0D834FD0C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68BB2D29-6622-4658-B3F4-5D0D834FD0C0}.Release|Any CPU.Deploy.0 = Release|Any CPU
@@ -55,7 +53,6 @@ Global
 		{CDCCCC71-32AF-41B1-9DD2-43D16567AC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDCCCC71-32AF-41B1-9DD2-43D16567AC7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3CB798F6-F095-40CB-8C93-59EE929DD720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CB798F6-F095-40CB-8C93-59EE929DD720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CB798F6-F095-40CB-8C93-59EE929DD720}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CB798F6-F095-40CB-8C93-59EE929DD720}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

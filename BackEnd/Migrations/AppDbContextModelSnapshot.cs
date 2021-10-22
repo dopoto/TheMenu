@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheMenu.BackEnd.Data;
 
@@ -12,10 +11,9 @@ using TheMenu.BackEnd.Data;
 namespace TheMenu.BackEnd.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210929133004_AddPredefinedRoles")]
-    partial class AddPredefinedRoles
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,15 +51,15 @@ namespace TheMenu.BackEnd.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5558b1ca-43e5-4c75-b824-d8200c02701b",
-                            ConcurrencyStamp = "af53c0bd-d42c-47d3-accc-3e80f4e52b44",
+                            Id = "76c9c780-13c7-452c-ab04-0e1085919f57",
+                            ConcurrencyStamp = "cab98d26-7467-43e4-82f6-e23ec790f1e5",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "670b06e4-dfe4-422a-89f3-e74944913808",
-                            ConcurrencyStamp = "2f435e55-414a-4652-98b8-e2c5022d3824",
+                            Id = "dbade68f-bc8d-4e8e-a28a-3a99d9cb44a2",
+                            ConcurrencyStamp = "bbb695b0-9b32-447f-82ec-c382f52428e8",
                             Name = "StaffMember",
                             NormalizedName = "STAFFMEMBER"
                         });
@@ -218,6 +216,12 @@ namespace TheMenu.BackEnd.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

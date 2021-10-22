@@ -14,9 +14,9 @@ namespace TheMenu.BackEnd.Services
     public class JwtHandlerService
     {
         private readonly EnvironmentSpecificSettings _settings;
-        private readonly UserManager<TheMenuBackEndUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public JwtHandlerService(IConfiguration configuration, UserManager<TheMenuBackEndUser> userManager)
+        public JwtHandlerService(IConfiguration configuration, UserManager<AppUser> userManager)
         {
             _userManager = userManager;
             _settings = configuration.Get<EnvironmentSpecificSettings>();
@@ -30,7 +30,7 @@ namespace TheMenu.BackEnd.Services
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        public async Task<List<Claim>> GetClaimsAsync(TheMenuBackEndUser user)
+        public async Task<List<Claim>> GetClaimsAsync(AppUser user)
         {
             var claims = new List<Claim>
             {

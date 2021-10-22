@@ -11,10 +11,10 @@ namespace BackEnd.Controllers
     {
         private readonly ILogger<DiagnoseController> _logger;
         private readonly IConfiguration _configuration;
-        private readonly TheMenuBackEndContext _dbContext;
+        private readonly AppDbContext _dbContext;
 
         public DiagnoseController(ILogger<DiagnoseController> logger,
-            IConfiguration configuration, TheMenuBackEndContext dbContext)
+            IConfiguration configuration, AppDbContext dbContext)
         {
             _logger = logger;
             _configuration = configuration;

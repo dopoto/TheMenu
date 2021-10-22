@@ -11,7 +11,7 @@ using TheMenu.BackEnd.Data;
 
 namespace TheMenu.BackEnd.Migrations
 {
-    [DbContext(typeof(TheMenuBackEndContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20211003131238_RefreshToken")]
     partial class RefreshToken
     {

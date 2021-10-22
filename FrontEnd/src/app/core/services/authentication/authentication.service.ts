@@ -7,13 +7,12 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Store } from '@ngrx/store';
 
-import { ExternalAuth } from 'src/app/core/models/external-auth';
 import { AuthResponse } from 'src/app/core/models/auth-response';
 import { logoutStart } from '../../store/actions/auth.actions';
 import { AppState } from '../../store/app.state';
 import { UserRoles } from '../../models/user-roles';
 import { LogService } from '../log/log.service';
-import { DemoAuth } from '../../models/demo-auth';
+import { DemoAuth, ExternalAuth } from '../../../../../api/generated-models';
 
 @Injectable({
     providedIn: 'root',

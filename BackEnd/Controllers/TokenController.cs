@@ -11,10 +11,10 @@ namespace TheMenu.BackEnd.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
-        readonly UserManager<TheMenuBackEndUser> _userManager;
+        readonly UserManager<AppUser> _userManager;
         readonly JwtHandlerService _tokenService;
 
-        public TokenController(UserManager<TheMenuBackEndUser> userManager, JwtHandlerService tokenService)
+        public TokenController(UserManager<AppUser> userManager, JwtHandlerService tokenService)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _tokenService = tokenService ?? throw new ArgumentNullException(nameof(tokenService));

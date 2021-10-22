@@ -44,10 +44,13 @@ You can read more about it here:
 ### Running the app
 
 - Open the TheMenu.sln solution
-- Press F5 to run the backend
+- Press F5 or execute ```dot net run``` in the BackEnd folder to run the backend
 - Run `npm serve` to run the frontend
 
 
-TODO
- Run this in the root of the project:
+### Generating TypeScript models
+
+ The client-side code uses TypeScript interfaces generated from the corresponding C# models. To update them, execute this in the root of the project, while the backend is running:
+ ```
  dotnet run --project APIClientGenerator http://localhost:5063/swagger/v1/swagger.json FrontEnd/api/generated-models.ts TypeScript
+ ```

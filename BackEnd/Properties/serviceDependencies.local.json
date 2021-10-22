@@ -8,7 +8,7 @@
     },
     "mssql1": {
       "type": "mssql.local",
-      "connectionId": "ConnectionStrings:TheMenuBackEndContextConnection"
+      "connectionId": "ConnectionStrings:AppDbContextConnection"
     }
   }
 }

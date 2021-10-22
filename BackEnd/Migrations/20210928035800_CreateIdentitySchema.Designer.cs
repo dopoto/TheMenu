@@ -11,7 +11,7 @@ using TheMenu.BackEnd.Data;
 
 namespace TheMenu.BackEnd.Migrations
 {
-    [DbContext(typeof(TheMenuBackEndContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20210928035800_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

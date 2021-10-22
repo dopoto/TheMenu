@@ -27,16 +27,16 @@ builder.Configuration
     .AddUserSecrets<EnvironmentSpecificSettings>(optional: true)
     .AddEnvironmentVariables();
 
-var connectionString = builder.Configuration.GetConnectionString("TheMenuBackEndContextConnection");
-builder.Services.AddDbContext<TheMenuBackEndContext>(options =>
+var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services
-    .AddDefaultIdentity<TheMenuBackEndUser>(
+    .AddDefaultIdentity<AppUser>(
         options => options.SignIn.RequireConfirmedAccount = true
     )
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<TheMenuBackEndContext>();
+    .AddEntityFrameworkStores<AppDbContext>();
 
 // Add services to the container.
 
@@ -111,7 +111,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<TheMenuBackEndContext>();
+        var context = services.GetRequiredService<AppDbContext>();
         DbInitializer.Initialize(context);
     }
     catch (Exception ex)
