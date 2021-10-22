@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+  <Import Project="C:\Users\dorin.potorac\.nuget\packages\nswag.msbuild\13.13.2\build\NSwag.MSBuild.props" Condition="Exists('C:\Users\dorin.potorac\.nuget\packages\nswag.msbuild\13.13.2\build\NSwag.MSBuild.props')" />
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -10,6 +10,7 @@
     <AssemblyName>TheMenu.$(MSBuildProjectName)</AssemblyName>
     <VersionPrefix>0.0.1</VersionPrefix>
     <ApplicationInsightsResourceId>/subscriptions/bc1147f0-62fa-4c84-b4ca-e734292b133f/resourceGroups/the-menu-resource-group/providers/microsoft.insights/components/the-menu-dev-app-insights</ApplicationInsightsResourceId>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.0-rc.2.21511.1" />
+    <PackageReference Include="NSwag.CodeGeneration.TypeScript" Version="13.13.2" />
     <PackageReference Include="NSwag.MSBuild" Version="13.13.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -43,11 +45,21 @@
   <ItemGroup>
     <NswagFiles Include="nswag.*.json" />
   </ItemGroup>
+  
+  <!--<Target Name="GenerateTypeScriptModel2" AfterTargets="ReBuild" Condition="'$(TF_BUILD)'!='True'">
+    <Message Text="Generate .ts client model" Importance="high" />
+    <Message Text="$(NSwagExe_Core30)" Importance="high" />
+    <Message Text="/generate" Importance="high" />
+    <Exec Command="$(NSwagExe_Core30) run nswag.json /variables:Assembly=$(OutDir)TheMenu.BackEnd.dll,Output=xxx.api.ts" />    
+  </Target>-->
 
-  <Target Name="GenerateTypeScriptModel" AfterTargets="ReBuild" Condition="'$(TF_BUILD)'!='True'">
-    <Message Text="Generate .ts client model" />
-    <!-- Generate API documentation file -->
-    <!-- <Exec Command="$(NSwagExe) run &quot;%(NswagFiles.FullPath)&quot;" /> -->
-  </Target>
+  <!--<Target Name="NSwag" AfterTargets="Build">
+    <Message Text="Generate" Importance="high" />
+    <Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)References" />
+    <Message Text="$(NSwagExe_Net50)" Importance="high" />
+    <Exec Command="$(NSwagExe_Net50) run nswag.json /variables:Assembly=$(OutDir)TheMenu.BackEnd.dll,Output=xxx.api.ts" />
+    <RemoveDir Directories="$(OutDir)References" />
+    <Message Text="/Generate" Importance="high" />
+  </Target>-->
 
 </Project>

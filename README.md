@@ -46,3 +46,8 @@ You can read more about it here:
 - Open the TheMenu.sln solution
 - Press F5 to run the backend
 - Run `npm serve` to run the frontend
+
+
+TODO
+ Run this in the root of the project:
+ dotnet run --project APIClientGenerator http://localhost:5063/swagger/v1/swagger.json FrontEnd/api/generated-models.ts TypeScript
