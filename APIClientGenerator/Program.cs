@@ -31,22 +31,12 @@ namespace APIClientGenerator
                 generatePath: generatePath,
                 generateCode: (OpenApiDocument document) =>
                 {
-                    var settings = new TypeScriptClientGeneratorSettings() { 
-                        TypeScriptGeneratorSettings = new TypeScriptGeneratorSettings() {
-                            TypeStyle = TypeScriptTypeStyle.Interface,
-                            TypeScriptVersion = 3.5M,
-                            Ge
+                    var settings = new TypeScriptClientGeneratorSettings();
 
-                        }
-                    }
-                }
+                    settings.TypeScriptGeneratorSettings.TypeStyle = TypeScriptTypeStyle.Interface;
+                    settings.TypeScriptGeneratorSettings.TypeScriptVersion = 3.5M;
+                    settings.TypeScriptGeneratorSettings.DateTimeType = TypeScriptDateTimeType.String;
 
-
-
-
-        //            settings.TypeScriptGeneratorSettings.TypeStyle 
-        //settings.TypeScriptGeneratorSettings.TypeScriptVersion = 3.5M;
-        //            settings.TypeScriptGeneratorSettings.DateTimeType = TypeScriptDateTimeType.String;
                     var generator = new TypeScriptClientGenerator(document, settings);
                     var code = generator.GenerateFile();
 
