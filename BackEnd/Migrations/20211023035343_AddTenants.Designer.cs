@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheMenu.BackEnd.Data;
 
@@ -11,9 +12,10 @@ using TheMenu.BackEnd.Data;
 namespace TheMenu.BackEnd.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211023035343_AddTenants")]
+    partial class AddTenants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +53,15 @@ namespace TheMenu.BackEnd.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "47c3aa0a-2236-46d7-866e-ad78964a8831",
-                            ConcurrencyStamp = "0a53679b-feb8-407a-9a56-2afcc3d6c843",
+                            Id = "9feceacf-58b5-4152-8728-6c09c7440275",
+                            ConcurrencyStamp = "11e66420-da44-4e21-bcbb-8e0b2f3b5ce6",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "89082a33-3021-452b-abd3-81f1de1cc206",
-                            ConcurrencyStamp = "06297c28-08b8-427c-b86c-a6fcca616220",
+                            Id = "1899b07e-7b82-4c92-bb2d-da0d1681777d",
+                            ConcurrencyStamp = "71c7ef49-26ae-4dac-b326-ecb55e845878",
                             Name = "StaffMember",
                             NormalizedName = "STAFFMEMBER"
                         });
@@ -193,15 +195,6 @@ namespace TheMenu.BackEnd.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDemo")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

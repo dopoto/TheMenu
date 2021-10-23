@@ -7,20 +7,21 @@ using TheMenu.BackEnd.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TheMenu.BackEnd.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var environmentSettings = builder.Configuration.Get<EnvironmentSpecificSettings>();
 
 var environmentSettingsEntries = typeof(EnvironmentSpecificSettings).GetProperties();
-foreach (var property in environmentSettingsEntries)
-{
-    var val = property.GetValue(environmentSettings);
-    if (String.IsNullOrEmpty(val?.ToString()))
-    {
-        throw new KeyNotFoundException("Environment value not found for: " + property.Name);
-    }
-}
+//foreach (var property in environmentSettingsEntries)
+//{
+//    var val = property.GetValue(environmentSettings);
+//    if (string.IsNullOrEmpty(val?.ToString()))
+//    {
+//        throw new KeyNotFoundException("TheMenu Init Error: Environment value not found for: " + property.Name);
+//    }
+//}
 
 builder.Configuration
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -41,6 +42,9 @@ builder.Services
 // Add services to the container.
 
 builder.Services.AddScoped<JwtHandlerService>();
+builder.Services.AddScoped<UsersService>();
+builder.Services.AddScoped<ITenantsService, TenantsService>();
+builder.Services.AddScoped<IDemoService, DemoService>();
 
 //builder.Services.AddScoped<IDataRepository<User>, UsersService>();
 
@@ -112,7 +116,8 @@ using (var scope = app.Services.CreateScope())
     try
     {
         var context = services.GetRequiredService<AppDbContext>();
-        DbInitializer.Initialize(context);
+        var usersService = services.GetRequiredService<UsersService>();
+        await DbInitializer.Initialize(context, usersService);
     }
     catch (Exception ex)
     {

@@ -1,29 +1,33 @@
-﻿using TheMenu.BackEnd.Areas.Identity.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using TheMenu.BackEnd.Services;
 
-namespace TheMenu.BackEnd.Data
+namespace TheMenu.BackEnd.Data;
+
+public static class DbInitializer
 {
-    public static class DbInitializer
+    public static async Task Initialize(AppDbContext context, 
+        UsersService usersService)
     {
-        public static void Initialize(AppDbContext context)
+        context.Database.EnsureCreated();
+
+        // Look for any users.
+        if (context.Users.Any())
         {
-            context.Database.EnsureCreated();
-
-            // Look for any users.
-            if (context.Users.Any())
-            {
-                return;   // DB has been seeded
-            }
-
-            // TODO Use a users service method to initialiZe user (re-use it in accountsController too)
-            var users = new AppUser[]
-            {
-                new AppUser {Email="user@example.com"}
-            };
-            foreach (AppUser s in users)
-            {
-                context.Users.Add(s);
-            }
-            context.SaveChanges();
+            return; // DB has been seeded
         }
+
+        await SeedDemoData(usersService);
+    }
+
+    private static async Task SeedDemoData(UsersService usersService)
+    {
+        await usersService.GetOrCreateUserAsync(
+            "demouser@demosite.com",
+            "Demo", 
+            "MacDemo", 
+            true, 
+            new UserLoginInfo("DEMO", "DEMO", "DEMO")
+        );
     }
 }
+

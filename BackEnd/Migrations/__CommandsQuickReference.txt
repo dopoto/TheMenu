@@ -7,3 +7,13 @@ dotnet ef migrations add MigrationNameHere --project BackEnd
 ### Updating the database to the current model in /Migrations
 
 dotnet ef database update --project BackEnd
+
+
+## Cleaning up the db
+
+DELETE FROM [dbo].[__EFMigrationsHistory]
+DELETE FROM [dbo].[Tenants]
+DELETE FROM [dbo].[AspNetRoles]
+DELETE FROM [dbo].[AspNetUserLogins]
+DELETE FROM [dbo].[AspNetUserRoles]
+DELETE FROM [dbo].[AspNetUsers]

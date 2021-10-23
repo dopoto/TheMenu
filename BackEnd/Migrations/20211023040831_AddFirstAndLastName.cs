@@ -1,36 +1,34 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace TheMenu.BackEnd.Migrations
 {
-    public partial class RefreshToken : Migration
+    public partial class AddFirstAndLastName : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "RefreshToken",
+                name: "FirstName",
                 table: "AspNetUsers",
                 type: "nvarchar(max)",
                 nullable: true);
 
-            migrationBuilder.AddColumn<DateTime>(
-                name: "RefreshTokenExpiryTime",
+            migrationBuilder.AddColumn<string>(
+                name: "LastName",
                 table: "AspNetUsers",
-                type: "datetime2",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "RefreshToken",
+                name: "FirstName",
                 table: "AspNetUsers");
 
             migrationBuilder.DropColumn(
-                name: "RefreshTokenExpiryTime",
+                name: "LastName",
                 table: "AspNetUsers");
         }
     }

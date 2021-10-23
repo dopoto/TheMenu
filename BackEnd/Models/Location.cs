@@ -7,10 +7,13 @@ namespace TheMenu.BackEnd.Models
         public Location()
         {
             Name = "";
+            OwnerId = "";
             Owner = new AppUser();
         }
 
         public string Name { get; set; }
+
+        public string OwnerId { get; set; }
 
         public AppUser Owner { get; set; }
     }

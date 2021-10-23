@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheMenu.BackEnd.Data;
 
@@ -11,9 +12,10 @@ using TheMenu.BackEnd.Data;
 namespace TheMenu.BackEnd.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211023040831_AddFirstAndLastName")]
+    partial class AddFirstAndLastName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,15 +53,15 @@ namespace TheMenu.BackEnd.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "47c3aa0a-2236-46d7-866e-ad78964a8831",
-                            ConcurrencyStamp = "0a53679b-feb8-407a-9a56-2afcc3d6c843",
+                            Id = "e5fc1006-c0a6-4804-9359-2847bd37e39d",
+                            ConcurrencyStamp = "d13def35-28a5-4354-91b5-8ed2aafa6c4d",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "89082a33-3021-452b-abd3-81f1de1cc206",
-                            ConcurrencyStamp = "06297c28-08b8-427c-b86c-a6fcca616220",
+                            Id = "f6655767-8430-46d2-973a-9f7a8b3aa86b",
+                            ConcurrencyStamp = "91b73985-0726-4d03-a7f8-e03aa920e0e3",
                             Name = "StaffMember",
                             NormalizedName = "STAFFMEMBER"
                         });
@@ -196,9 +198,6 @@ namespace TheMenu.BackEnd.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDemo")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");

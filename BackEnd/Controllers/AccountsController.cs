@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using TheMenu.BackEnd.Models;
 using TheMenu.BackEnd.Services;
-using TheMenu.BackEnd.Areas.Identity.Data;
 
 namespace TheMenu.BackEnd.Controllers
 {
@@ -10,16 +9,16 @@ namespace TheMenu.BackEnd.Controllers
     [Route("[controller]")]
     public class AccountsController : ControllerBase
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UsersService _usersService;
         private readonly JwtHandlerService _jwtHandlerService;
 
         public AccountsController(
             ILogger<AccountsController> logger,
             IConfiguration configuration,
-            UserManager<AppUser> userManager,
+            UsersService usersService,
             JwtHandlerService jwtHandlerService)
         {
-            _userManager = userManager;
+            _usersService = usersService;
             _jwtHandlerService = jwtHandlerService;
         }
 
@@ -35,38 +34,16 @@ namespace TheMenu.BackEnd.Controllers
                 return BadRequest("Invalid External Authentication.");
             }
 
-            var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
-
             var refreshTokenExpiryTime = DateTime.Now.AddMinutes(200); //DateTime.Now.AddDays(7), //TODO TEMP
 
-            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
-            if (user == null)
-            {
-                user = await _userManager.FindByEmailAsync(payload.Email);
+            var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
+                        
+            var user = await _usersService.GetOrCreateUserAsync(payload.Email, payload.GivenName, 
+                payload.FamilyName, false, info);
 
-                if (user == null)
-                {
-                    user = new AppUser { 
-                        Email = payload.Email, 
-                        UserName = payload.Email, 
-                    };
-                    await _userManager.CreateAsync(user);
-
-                    // TODO prepare and send an email for the email confirmation
-
-                    await _userManager.AddToRoleAsync(user, "Owner");
-                    //await _userManager.AddToRoleAsync(user, "StaffMember");
-                    await _userManager.AddLoginAsync(user, info);
-                }
-                else
-                {                    
-                    //TODO check if account is Locked Out
-                    await _userManager.AddLoginAsync(user, info);
-                }
-            }
-
-            if (user == null)
+            if (user == null) { 
                 return BadRequest("Invalid External Authentication.");
+            }
 
             var claims = await _jwtHandlerService.GetClaimsAsync(user);
             var token = _jwtHandlerService.GenerateToken(claims);
@@ -74,7 +51,7 @@ namespace TheMenu.BackEnd.Controllers
 
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = refreshTokenExpiryTime;
-            await _userManager.UpdateAsync(user);
+            await _usersService.UpdateAsync(user);
 
             return Ok(new AuthResponse {
                 Token = token, 
@@ -89,37 +66,15 @@ namespace TheMenu.BackEnd.Controllers
         [EndpointName("/accounts/demo-login")]
         public async Task<IActionResult> DemoLogin([FromBody] DemoAuth demoAuth)
         {
-            var info = new UserLoginInfo("DEMO", "PROVIDER-KEY", "DISPLAYname");
+            var info = new UserLoginInfo("DEMO", "PROVIDER-KEY", "DISPLAY-NAME"); //TODO
 
             var refreshTokenExpiryTime = DateTime.Now.AddMinutes(200); //DateTime.Now.AddDays(7), //TODO TEMP
 
-            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
-            if (user == null)
-            {
-                user = await _userManager.FindByEmailAsync(demoAuth.Email);
+            var user = await _usersService.GetUserAsync(demoAuth.Email);
 
-                if (user == null)
-                {
-                    user = new AppUser
-                    {
-                        Email = demoAuth.Email,
-                        UserName = demoAuth.Email
-                    };
-                    await _userManager.CreateAsync(user);
-
-                    await _userManager.AddToRoleAsync(user, "Owner");
-                    //await _userManager.AddToRoleAsync(user, "StaffMember");
-                    await _userManager.AddLoginAsync(user, info);
-                }
-                else
-                {
-                    //TODO check if account is Locked Out
-                    await _userManager.AddLoginAsync(user, info);
-                }
-            }
-
-            if (user == null)
+            if (user == null) {
                 return BadRequest("Invalid External Authentication.");
+            }
 
             var claims = await _jwtHandlerService.GetClaimsAsync(user);
             var token = _jwtHandlerService.GenerateToken(claims);
@@ -127,7 +82,7 @@ namespace TheMenu.BackEnd.Controllers
 
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = refreshTokenExpiryTime;
-            await _userManager.UpdateAsync(user);
+            await _usersService.UpdateAsync(user);
 
             return Ok(new AuthResponse
             {

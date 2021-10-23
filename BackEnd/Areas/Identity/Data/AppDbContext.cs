@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TheMenu.BackEnd.Areas.Identity.Data;
 using TheMenu.BackEnd.Configuration;
+using TheMenu.BackEnd.Models;
 
 namespace TheMenu.BackEnd.Data;
 
@@ -15,6 +16,7 @@ public class AppDbContext : IdentityDbContext<AppUser>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
         // Customize the ASP.NET Identity model and override the defaults if needed.
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);
@@ -24,6 +26,6 @@ public class AppDbContext : IdentityDbContext<AppUser>
         //builder.Entity<User>().ToTable("AspNetUsers");
     }
 
-    //public DbSet<User>? Users { get; set; }
+    public DbSet<Tenant> Tenants { get; set; }
  
 }
