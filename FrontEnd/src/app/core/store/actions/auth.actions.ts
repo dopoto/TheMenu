@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { SocialUser } from 'angularx-social-login';
+import { ClientSideUser } from 'api/generated-models';
 
 import { AuthActionTypes } from './_app-action-types';
 
@@ -8,7 +9,7 @@ const actions = AuthActionTypes;
 export const loginStart = createAction(AuthActionTypes.loginStart);
 export const loginOk = createAction(
     actions.loginOk,
-    props<{ socialUser: SocialUser }>()
+    props<{ clientSideUser: ClientSideUser }>()
 );
 export const loginFail = createAction(
     actions.loginFail,

@@ -39,7 +39,7 @@ namespace TheMenu.BackEnd.Controllers
             var info = new UserLoginInfo(externalAuth.Provider, payload.Subject, externalAuth.Provider);
                         
             var user = await _usersService.GetOrCreateUserAsync(payload.Email, payload.GivenName, 
-                payload.FamilyName, false, info);
+                payload.FamilyName, payload.Picture, false, info);
 
             if (user == null) { 
                 return BadRequest("Invalid External Authentication.");

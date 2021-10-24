@@ -2,6 +2,6 @@
 {
     public class DemoData
     {
-        public string Email { get; set; }
+        public ClientSideUser? ClientSideUser { get; set; }
     }
 }

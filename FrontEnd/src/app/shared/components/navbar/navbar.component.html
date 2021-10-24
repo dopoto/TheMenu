@@ -72,7 +72,7 @@
                 />
                 <div class="navbar__user-details">
                     <div class="navbar__user-name">
-                        {{ (user$ | async).name }}
+                        {{ (user$ | async).firstName }}&nbsp;{{ (user$ | async).lastName }}
                     </div>
                     <div class="navbar__user-roles">Owner</div>
                 </div>

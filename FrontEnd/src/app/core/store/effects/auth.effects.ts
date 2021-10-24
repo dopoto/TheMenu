@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { ClientSideUser } from 'api/generated-models';
 import { EMPTY, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 
@@ -30,7 +31,14 @@ export class AuthEffects {
                 this.authService.signInWithGoogle$().pipe(
                     map((socialUser) => {
                         if (socialUser !== null) {
-                            return loginOk({ socialUser });
+                            const clientSideUser: ClientSideUser = {
+                                id: null,
+                                email: socialUser.email,
+                                firstName: socialUser.firstName,
+                                lastName: socialUser.lastName,
+                                photoUrl: socialUser.photoUrl
+                            };
+                            return loginOk({ clientSideUser });
                         } else {
                             return loginFail({
                                 errorMessage: 'Login failed!',

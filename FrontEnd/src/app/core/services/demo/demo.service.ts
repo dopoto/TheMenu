@@ -17,22 +17,17 @@ export class DemoService {
         const demoData$ = this.http.get<DemoData>('/demo', {});
         return demoData$.pipe(
             map((res) => {
+                const csu = res.clientSideUser;
                 const demoData = {
                     auth: {
                         isAuthenticated: true,
                         isDemo: true,
                         user: {
-                            provider: 'DEMO',
-                            id: '1234',
-                            email: res.email,
-                            name: 'Demo McManager',
-                            photoUrl: 'assets/images/demo-face-1.jfif',
-                            firstName: 'Demo',
-                            lastName: 'McManager',
-                            authToken: '',
-                            idToken: '',
-                            authorizationCode: '',
-                            response: '',
+                            id: csu.id,
+                            email: csu.email,
+                            firstName: csu.firstName,
+                            lastName: csu.lastName,
+                            photoUrl: csu.photoUrl
                         },
                         notificationId: '[Auth] Login Success',
                     },

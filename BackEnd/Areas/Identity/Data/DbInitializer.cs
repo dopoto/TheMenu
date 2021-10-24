@@ -24,7 +24,8 @@ public static class DbInitializer
         await usersService.GetOrCreateUserAsync(
             "demouser@demosite.com",
             "Demo", 
-            "MacDemo", 
+            "MacDemo",
+            "assets/images/demo-face-1.jfif",
             true, 
             new UserLoginInfo("DEMO", "DEMO", "DEMO")
         );

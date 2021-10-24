@@ -24,7 +24,14 @@ public class DemoService: IDemoService
 
         return new DemoData
         {
-            Email = demoUser.Email,
+            ClientSideUser = new ClientSideUser
+            {
+                Id = demoUser.Id,
+                Email = demoUser.Email,
+                FirstName = demoUser.FirstName,
+                LastName = demoUser.LastName,
+                PhotoUrl = demoUser.PhotoUrl
+            }
         };
     }
 }

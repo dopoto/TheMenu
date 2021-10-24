@@ -23,10 +23,10 @@ const authReducer = createReducer(
         notificationId: AuthActionTypes.loginStart
     })),
 
-    on(AuthActions.loginOk, (state, { socialUser }) => ({ 
+    on(AuthActions.loginOk, (state, { clientSideUser }) => ({ 
         isAuthenticated: true,
         isDemo: false,
-        user: { ...socialUser },
+        user: { ...clientSideUser },
         notificationId: AuthActionTypes.loginOk
     })),
     

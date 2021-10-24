@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { SocialUser } from 'angularx-social-login';
 import { Observable } from 'rxjs';
+
+import { ClientSideUser } from 'api/generated-models';
 
 import {
     loginStart,
@@ -17,7 +18,7 @@ import { selectAuthUser, selectIsDemo } from 'src/app/core/store/selectors/user.
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit {
-    user$: Observable<SocialUser> | undefined;
+    user$: Observable<ClientSideUser> | undefined;
     isDemo$: Observable<boolean> | undefined;
 
     constructor(private readonly store: Store<AppState>) {}

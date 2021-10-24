@@ -64,7 +64,7 @@ export class HydrationEffects implements OnInitEffects {
                         return this.authService.signInWithDemoAccount$(appState);
                     }),
                     tap((appState) => {
-                        loginOk({ socialUser: appState.auth.user });
+                        loginOk({ clientSideUser: appState.auth.user });
                     }),
                     map((appState) => {
                         return hydrateOk({ state: appState });

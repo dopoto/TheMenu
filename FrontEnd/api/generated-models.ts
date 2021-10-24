@@ -384,12 +384,20 @@ export class Client {
     }
 }
 
+export interface ClientSideUser {
+    id?: string | undefined;
+    email?: string | undefined;
+    firstName?: string | undefined;
+    lastName?: string | undefined;
+    photoUrl?: string | undefined;
+}
+
 export interface DemoAuth {
     email?: string | undefined;
 }
 
 export interface DemoData {
-    email?: string | undefined;
+    clientSideUser?: ClientSideUser;
 }
 
 export interface ExternalAuth {

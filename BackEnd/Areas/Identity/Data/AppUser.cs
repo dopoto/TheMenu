@@ -21,6 +21,8 @@ public class AppUser : IdentityUser
 
     public string? LastName { get; set; }
 
+    public string? PhotoUrl { get; set; }
+
     public bool IsDemo { get; set; }
 }
 

@@ -19,8 +19,18 @@ public class UsersService
         _tenantsService = tenantsService;
     }
 
+    /// <summary>
+    /// TODO Refactor - strange method signature.
+    /// </summary>
+    /// <param name="email"></param>
+    /// <param name="firstName"></param>
+    /// <param name="lastName"></param>
+    /// <param name="photoUrl"></param>
+    /// <param name="isDemo"></param>
+    /// <param name="info"></param>
+    /// <returns></returns>
     public async Task<AppUser> GetOrCreateUserAsync(string email, 
-        string firstName, string lastName, bool isDemo, UserLoginInfo info)
+        string firstName, string lastName, string photoUrl, bool isDemo, UserLoginInfo info)
     {
         var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
         if (user == null)
@@ -35,6 +45,7 @@ public class UsersService
                     UserName = email,
                     FirstName = firstName,
                     LastName = lastName,
+                    PhotoUrl = photoUrl,
                     IsDemo = isDemo,
                 };
                 await _userManager.CreateAsync(user);
