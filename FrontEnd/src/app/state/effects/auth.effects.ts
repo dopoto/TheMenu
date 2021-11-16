@@ -4,9 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ClientSideUser } from 'api/generated-models';
 import { EMPTY, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { LogService } from 'src/app/core/services/log/log.service';
 
-import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { LogService } from '../../services/log/log.service';
 import {
     exitDemoError,
     loginError,

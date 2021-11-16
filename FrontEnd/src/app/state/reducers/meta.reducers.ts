@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { environment } from 'src/environments/environment';
 
-import { MetaState } from '../../models/meta-state';
+import { MetaState } from 'src/app/core/models/meta-state';
+import { environment } from 'src/environments/environment';
 
 export const initialState: MetaState = {
     appVersion: environment.version,

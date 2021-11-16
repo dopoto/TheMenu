@@ -1,11 +1,9 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-
-import { AuthState } from '../models/auth-state';
-import { MetaState } from '../models/meta-state';
+import { AuthState } from '../core/models/auth-state';
+import { MetaState } from '../core/models/meta-state';
 import * as auth from './reducers/auth.reducers';
+import { hydrateMetaReducer } from './reducers/hydrate.reducer';
 import * as meta from './reducers/meta.reducers';
-
-import { hydrationMetaReducer } from './reducers/hydration.reducer';
 
 export interface AppState {
     auth: AuthState;
@@ -17,4 +15,4 @@ export const reducers: ActionReducerMap<AppState> = {
     meta: meta.reducer
 };
 
-export const metaReducers: MetaReducer[] = [hydrationMetaReducer];
+export const metaReducers: MetaReducer[] = [hydrateMetaReducer];

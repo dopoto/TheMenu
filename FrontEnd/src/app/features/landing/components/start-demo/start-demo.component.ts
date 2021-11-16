@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { hydrateManagerDemoStart } from 'src/app/core/store/actions/hydration.actions';
 
-import { AppState } from 'src/app/core/store/app.state';
+import { hydrateManagerDemoStart } from 'src/app/state/actions/hydrate.actions';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
     selector: 'app-start-demo',

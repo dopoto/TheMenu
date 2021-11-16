@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DemoData } from 'api/generated-models';
 import { map, Observable } from 'rxjs';
+import { AppState } from 'src/app/state/app.state';
 
 import { environment } from 'src/environments/environment';
-import { AppState } from '../../store/app.state';
+ 
 import { LogService } from '../log/log.service';
 
 @Injectable({

@@ -1,10 +1,8 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { AuthState } from '../../models/auth-state';
-
+import { AuthState } from 'src/app/core/models/auth-state';
 import * as AuthActions from '../actions/auth.actions';
 import { AuthActionTypes } from '../actions/_app-action-types';
- 
 
 export const initialState: AuthState = {
     isAuthenticated: false,

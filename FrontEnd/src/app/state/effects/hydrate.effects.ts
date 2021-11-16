@@ -5,25 +5,23 @@ import { Action, Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import {
     catchError,
-    concatMap,
     distinctUntilChanged,
     map,
     mergeMap,
-    skipUntil,
     switchMap,
     tap,
 } from 'rxjs/operators';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
 
-import { DemoService } from '../../services/demo/demo.service';
-import { LogService } from '../../services/log/log.service';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
+import { DemoService } from 'src/app/core/services/demo/demo.service';
+import { LogService } from 'src/app/core/services/log/log.service'; 
 import { loginOk } from '../actions/auth.actions';
-import * as HydrationActions from '../actions/hydration.actions';
-import { hydrateError, hydrateOk } from '../actions/hydration.actions';
+import * as HydrationActions from '../actions/hydrate.actions';
+import { hydrateError, hydrateOk } from '../actions/hydrate.actions';
 import { AppState } from '../app.state';
 
 @Injectable()
-export class HydrationEffects implements OnInitEffects {
+export class HydrateEffects implements OnInitEffects {
     constructor(
         private actions$: Actions,
         private store: Store<AppState>,

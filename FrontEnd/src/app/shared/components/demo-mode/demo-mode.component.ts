@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { exitDemo } from 'src/app/core/store/actions/auth.actions';
-import { AppState } from 'src/app/core/store/app.state';
-import { selectIsDemo } from 'src/app/core/store/selectors/user.selectors';
 
+import { exitDemo } from 'src/app/state/actions/auth.actions';
+import { AppState } from 'src/app/state/app.state';
+import { selectIsDemo } from 'src/app/state/selectors/user.selectors';
 @Component({
     selector: 'app-demo-mode',
     templateUrl: './demo-mode.component.html',

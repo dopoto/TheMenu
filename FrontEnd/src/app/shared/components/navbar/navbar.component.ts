@@ -3,13 +3,9 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { ClientSideUser } from 'api/generated-models';
-
-import {
-    loginStart,
-    logoutStart,
-} from 'src/app/core/store/actions/auth.actions';
-import { AppState } from 'src/app/core/store/app.state';
-import { selectAuthUser, selectIsDemo } from 'src/app/core/store/selectors/user.selectors';
+import { loginStart, logoutStart } from 'src/app/state/actions/auth.actions';
+import { AppState } from 'src/app/state/app.state';
+import { selectAuthUser, selectIsDemo } from 'src/app/state/selectors/user.selectors'; 
 
 @Component({
     selector: 'app-navbar',

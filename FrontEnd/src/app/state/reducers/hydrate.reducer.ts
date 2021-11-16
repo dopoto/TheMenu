@@ -23,7 +23,7 @@
 // };
 
 import { Action, ActionReducer } from '@ngrx/store';
-import * as HydrationActions from '../actions/hydration.actions';
+import * as HydrationActions from '../actions/hydrate.actions';
 import { AppState } from '../app.state';
 
 function isHydrateSuccess(
@@ -32,7 +32,7 @@ function isHydrateSuccess(
     return action.type === HydrationActions.hydrateOk.type;
 }
 
-export const hydrationMetaReducer = (
+export const hydrateMetaReducer = (
     reducer: ActionReducer<AppState>
 ): ActionReducer<AppState> => {
     return (state, action) => {

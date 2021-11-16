@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
+import { AuthActionTypes } from 'src/app/state/actions/_app-action-types';
+import { AppState } from 'src/app/state/app.state';
+import { selectAuthNotification } from 'src/app/state/selectors/user.selectors';
 import { Notification } from '../../models/notification';
-import { AppState } from '../../store/app.state';
-import { selectAuthNotification } from 'src/app/core/store/selectors/user.selectors'; 
 import { NotificationTypes } from '../../models/notification-types';
-import { AuthActionTypes } from '../../store/actions/_app-action-types';
+ 
 
 @Injectable({
     providedIn: 'root',

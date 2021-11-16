@@ -1,4 +1,5 @@
-import { AuthActionTypes } from "../store/actions/_app-action-types";
+ 
+import { AuthActionTypes } from "src/app/state/actions/_app-action-types";
 import { NotificationTypes } from "./notification-types";
 
 export interface Notification {
