@@ -1,3 +1,4 @@
+// TODO generic /api settings. see proxy.conf.js
 const PROXY_CONFIG = [
   {
     context: [
