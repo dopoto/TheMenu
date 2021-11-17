@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { MetaState } from 'src/app/core/models/meta-state';
+import { MetaState } from 'src/app/state/models/meta-state';
 import { environment } from 'src/environments/environment';
 
 export const initialState: MetaState = {

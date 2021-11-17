@@ -55,7 +55,7 @@ export class HydrateEffects implements OnInitEffects {
     hydrateManagerDemo$ = createEffect(() =>
         this.actions$.pipe(
             ofType(HydrationActions.hydrateManagerDemoStart),
-            mergeMap(() =>
+            mergeMap((props) =>
                 this.demoService.getDemoData$().pipe(
                     // TODO Save current user state to local storage (to restore it when exiting demo)
                     switchMap((appState) => {

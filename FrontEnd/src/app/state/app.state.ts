@@ -1,6 +1,7 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { AuthState } from '../core/models/auth-state';
-import { MetaState } from '../core/models/meta-state';
+
+import { AuthState } from './models/auth-state';
+import { MetaState } from './models/meta-state';
 import * as auth from './reducers/auth.reducers';
 import { hydrateMetaReducer } from './reducers/hydrate.reducer';
 import * as meta from './reducers/meta.reducers';
