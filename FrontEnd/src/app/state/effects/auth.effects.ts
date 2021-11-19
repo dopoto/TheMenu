@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { ClientSideUser } from 'api/generated-models';
 import { EMPTY, of } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { LogService } from 'src/app/core/services/log/log.service';
 
-import {
-    exitDemoError,
-    loginError,
-    loginFail,
-    loginOk,
-} from '../actions/auth.actions';
+import { loginError, loginFail, loginOk } from '../actions/auth.actions';
 import { AuthActionTypes } from '../actions/_app-action-types';
+import { AppState } from '../app.state';
+import { selectIsDemo } from '../selectors/user.selectors';
 
 @Injectable()
 export class AuthEffects {
     constructor(
         private actions$: Actions,
+        private store: Store<AppState>,
         private authService: AuthenticationService,
         private router: Router,
         private logService: LogService
@@ -36,7 +35,7 @@ export class AuthEffects {
                                 email: socialUser.email,
                                 firstName: socialUser.firstName,
                                 lastName: socialUser.lastName,
-                                photoUrl: socialUser.photoUrl
+                                photoUrl: socialUser.photoUrl,
                             };
                             return loginOk({ clientSideUser });
                         } else {
@@ -69,60 +68,18 @@ export class AuthEffects {
     logout$ = createEffect(() =>
         this.actions$.pipe(
             ofType(AuthActionTypes.logoutStart),
-            mergeMap(() =>
-                this.authService.signOutExternal$().pipe(
+            withLatestFrom(() => this.store.select(selectIsDemo)),
+            mergeMap((s) => {
+                debugger;
+                return this.authService.signOutExternal$().pipe(
                     map(() => {
                         return {
                             type: AuthActionTypes.logoutOk,
                         };
                     }),
                     catchError(() => EMPTY) //TODO
-                )
-            )
+                );
+            })
         )
     );
-
-    exitDemo$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(AuthActionTypes.exitDemo),
-            mergeMap(() =>
-                this.authService.signOutDemo$().pipe(
-                    map(() => {
-                        return {
-                            type: AuthActionTypes.exitDemoOk,
-                        };
-                    }),
-                    catchError((error) => {
-                        this.logService.error(error);
-                        const err = exitDemoError({
-                            errorMessage: 'Exit demo error!!!!',
-                        });
-                        return of(err);
-                    })
-                )
-            )
-        )
-    );
-
-    exitDemoOk$ = createEffect(
-        () =>
-            this.actions$.pipe(
-                ofType(AuthActionTypes.exitDemoOk),
-                tap(() => {
-                    this.router.navigate(['/home']);
-                })
-            ),
-        { dispatch: false }
-    );
-
-    //TODO exitdemoError
-
-    // logInFailure$ = createEffect(
-    //   () =>
-    //     this.actions$.pipe(
-    //       ofType(AuthActionTypes.loginFailURE),
-    //       tap(() => {})
-    //     ),
-    //   { dispatch: false }
-    // );
 }

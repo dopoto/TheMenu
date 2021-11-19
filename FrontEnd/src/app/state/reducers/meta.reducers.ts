@@ -1,4 +1,4 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer } from '@ngrx/store';
 
 import { MetaState } from 'src/app/state/models/meta-state';
 import { environment } from 'src/environments/environment';
@@ -9,10 +9,6 @@ export const initialState: MetaState = {
     initializedOn: new Date(),
 };
 
-const metaReducer = createReducer(
+export const metaReducer = createReducer(
     initialState
 );
-
-export function reducer(state: MetaState | undefined, action: Action) {
-    return metaReducer(state, action);
-}

@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
  
 import * as AuthActions from '../actions/auth.actions';
+import * as DemoActions from '../actions/demo.actions';
 import { AuthActionTypes } from '../actions/_app-action-types';
 import { AuthState } from '../models/auth-state';
 
@@ -11,7 +12,7 @@ export const initialState: AuthState = {
     notificationId: null
 };
 
-const authReducer = createReducer(
+export const authReducer = createReducer(
     initialState,
 
     on(AuthActions.loginStart, () => ({
@@ -55,15 +56,11 @@ const authReducer = createReducer(
         user: null,
         notificationId: null
     })),
-
-    on(AuthActions.exitDemo, () => ({ 
+    
+    on(DemoActions.exitDemoOk, () => ({ 
         isAuthenticated: false,
         isDemo: false,
         user: null,
         notificationId: null
-    }))
+    })),
 );
-
-export function reducer(state: AuthState | undefined, action: Action) {
-    return authReducer(state, action);
-}

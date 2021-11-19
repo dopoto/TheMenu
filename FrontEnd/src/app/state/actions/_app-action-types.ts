@@ -15,7 +15,13 @@ export enum AuthActionTypes {
     logoutStart = '[Auth] Logout Started',
     logoutOk = '[Auth] Logout Success',
     logoutError = '[Auth] Logout Failure',
-    exitDemo = 'exitDemo',
+} 
+
+export enum DemoActionTypes {
+    initDemo = '[Demo] Start',
+    initDemoOk = '[Demo] Started',
+    initDemoError = '[Demo] Error starting',
+    exitDemo = 'exitDemo', //TODO Move
     exitDemoOk = 'exitDemoOk',
     exitDemoError = 'exitDemoError',
 } 

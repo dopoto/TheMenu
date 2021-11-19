@@ -1,8 +1,5 @@
-import { SocialUser } from "angularx-social-login";
 import { ClientSideUser } from "api/generated-models";
 import { AuthActionTypes } from "src/app/state/actions/_app-action-types";
-
- 
 
 export interface AuthState {
     isAuthenticated: boolean;

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { from, Observable, zip } from 'rxjs';
+import { from, Observable, of, zip } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
@@ -8,12 +8,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Store } from '@ngrx/store';
 
 import { AuthResponse } from 'src/app/core/models/auth-response';
- 
+
 import { UserRoles } from '../../models/user-roles';
 import { LogService } from '../log/log.service';
 import { DemoAuth, ExternalAuth } from '../../../../../api/generated-models';
 import { logoutStart } from 'src/app/state/actions/auth.actions';
 import { AppState } from 'src/app/state/app.state';
+import { DemoService } from '../demo/demo.service';
 
 @Injectable({
     providedIn: 'root',
@@ -22,6 +23,7 @@ export class AuthenticationService {
     constructor(
         private http: HttpClient,
         private externalAuthService: SocialAuthService,
+        private demoService: DemoService,
         private jwtHelper: JwtHelperService,
         private readonly store: Store<AppState>,
         public logService: LogService
@@ -41,10 +43,13 @@ export class AuthenticationService {
         );
     }
 
-    public signInWithDemoAccount$(
-        demoAppState: AppState
-    ): Observable<AppState> {
-        return this.validateDemoAuth$(demoAppState);
+    public signInWithDemoAccount$(): Observable<AppState> {
+        console.log('signInWithDemoAccount');
+        return this.demoService.getDemoData$().pipe(
+            switchMap((demoAppState) => {
+                return this.validateDemoAuth$(demoAppState);
+            })
+        );
     }
 
     public signOutExternal$(): Observable<void> {
@@ -53,7 +58,7 @@ export class AuthenticationService {
         );
         const revokeToken$ = this.http.post('/token/revoke', {});
 
-        return zip(signOutFromExternalProvider$, revokeToken$).pipe(
+        return zip(revokeToken$, signOutFromExternalProvider$).pipe(
             tap(() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');
@@ -61,16 +66,21 @@ export class AuthenticationService {
             map(() => {})
         );
     }
-    
+
     public signOutDemo$(): Observable<void> {
-        const revokeToken$ = this.http.post('/token/revoke', {});
-        return revokeToken$.pipe(
-            tap(() => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('refreshToken');
-            }),
-            map(() => {})
-        );
+        // TODO
+        // const revokeToken$ = this.http.post('/token/revoke', {});
+        // return revokeToken$.pipe(
+        //     tap(() => {
+        //         localStorage.removeItem('token');
+        //         localStorage.removeItem('refreshToken');
+        //     }),
+        //     map(() => {})
+        // );
+
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        return of(null);
     }
 
     public async tryRefreshingTokens(token: string): Promise<boolean> {

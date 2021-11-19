@@ -1,37 +1,29 @@
 import { createAction, props } from '@ngrx/store';
-import { SocialUser } from 'angularx-social-login';
-import { ClientSideUser } from 'api/generated-models';
 
+import { ClientSideUser } from 'api/generated-models';
 import { AuthActionTypes } from './_app-action-types';
 
-const actions = AuthActionTypes;
+const actionTypes = AuthActionTypes;
 
-export const loginStart = createAction(AuthActionTypes.loginStart);
+export const loginStart = createAction(actionTypes.loginStart);
 export const loginOk = createAction(
-    actions.loginOk,
+    actionTypes.loginOk,
     props<{ clientSideUser: ClientSideUser }>()
 );
 export const loginFail = createAction(
-    actions.loginFail,
+    actionTypes.loginFail,
     props<{ errorMessage: string }>()
 );
 export const loginError = createAction(
-    actions.loginError,
+    actionTypes.loginError,
     props<{ errorMessage: string }>()
 );
 
-export const logoutStart = createAction(actions.logoutStart);
-export const logoutOk = createAction(actions.logoutOk);
+export const logoutStart = createAction(actionTypes.logoutStart);
+export const logoutOk = createAction(actionTypes.logoutOk);
 export const logoutError = createAction(
-    actions.logoutError,
+    actionTypes.logoutError,
     props<{ errorMessage: string }>()
 );
 
-export const exitDemo = createAction(actions.exitDemo);
-export const exitDemoOk = createAction(
-    actions.exitDemoOk
-);
-export const exitDemoError = createAction(
-    actions.exitDemoError,
-    props<{ errorMessage: string }>()
-);
+

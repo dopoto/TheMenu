@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { exitDemo } from 'src/app/state/actions/demo.actions';
 
-import { exitDemo } from 'src/app/state/actions/auth.actions';
+
 import { AppState } from 'src/app/state/app.state';
 import { selectIsDemo } from 'src/app/state/selectors/user.selectors';
 @Component({
