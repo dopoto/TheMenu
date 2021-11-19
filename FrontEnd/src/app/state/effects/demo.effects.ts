@@ -53,7 +53,7 @@ export class DemoEffects {
         this.actions$.pipe(
             ofType(actions.initDemo),
             switchMap((actionPayload) => {
-                return this.authService.signInWithDemoAccount$().pipe(
+                return this.authService.signInWithDemoAccount$(actionPayload.demoSettings).pipe(
                     map((authenticatedDemoUserAppState) => {
                         return {
                             demoAppState: authenticatedDemoUserAppState,

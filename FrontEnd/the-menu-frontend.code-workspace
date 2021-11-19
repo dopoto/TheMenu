@@ -28,6 +28,7 @@
 		"peacock.color": "darkgreen",
 		"files.exclude": {
 			"**/.angular": true,
+			"**/.cache": true,
 			"**/cypress/_samples": true,
 			"**/cypress/reports": true,
 			"**/dist": true,

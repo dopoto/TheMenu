@@ -15,6 +15,7 @@ import { DemoAuth, ExternalAuth } from '../../../../../api/generated-models';
 import { logoutStart } from 'src/app/state/actions/auth.actions';
 import { AppState } from 'src/app/state/app.state';
 import { DemoService } from '../demo/demo.service';
+import { DemoSettings } from 'src/app/state/models/demo-settings';
 
 @Injectable({
     providedIn: 'root',
@@ -43,9 +44,9 @@ export class AuthenticationService {
         );
     }
 
-    public signInWithDemoAccount$(): Observable<AppState> {
+    public signInWithDemoAccount$(demoSettings: DemoSettings): Observable<AppState> {
         console.log('signInWithDemoAccount');
-        return this.demoService.getDemoData$().pipe(
+        return this.demoService.getDemoData$(demoSettings).pipe(
             switchMap((demoAppState) => {
                 return this.validateDemoAuth$(demoAppState);
             })
