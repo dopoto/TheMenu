@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule } from '@ngx-translate/core';
@@ -41,6 +42,7 @@ import { DemoModeComponent } from './components/demo-mode/demo-mode.component';
     imports: [
         BrowserModule,
         HttpClientModule,
+        BrowserAnimationsModule,
         SocialLoginModule,
         AppRoutingModule,
         CommonModule,
@@ -53,6 +55,7 @@ import { DemoModeComponent } from './components/demo-mode/demo-mode.component';
     exports: [
         BrowserModule,
         HttpClientModule,
+        BrowserAnimationsModule,
         TranslateModule,
         SocialLoginModule,
         GridsterModule,

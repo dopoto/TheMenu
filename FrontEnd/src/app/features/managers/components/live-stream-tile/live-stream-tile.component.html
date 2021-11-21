@@ -1,6 +1,8 @@
 <div class="mnu-app__tile-container live-stream-tile__container">
     <h5>Live Stream</h5>
     <ul class="live-stream-tile__list">
-        <li *ngFor="let item of (activeOrders$ | async)">{{item.date | date: 'medium'}}, table: {{item.tableId}}</li>
+        <li *ngFor="let item of activeOrders$ | async" [@divState]="state">
+            {{ item.date | date: "medium" }}, table: {{ item.tableId }}
+        </li>
     </ul>
 </div>
