@@ -5,7 +5,6 @@ import {
     concatMap,
     delay,
     filter,
-    interval,
     map,
     Observable,
     of,
@@ -27,6 +26,7 @@ import { CurrentLocationState } from 'src/app/state/models/current-location-stat
 import { Menu } from '../../models/menu';
 import { addOrder } from 'src/app/state/actions/current-location.actions';
 import { OrderItem } from '../../models/order-item';
+import { OrderStatusTypes } from '../../models/order-status-types';
 
 @Injectable({
     providedIn: 'root',
@@ -100,6 +100,7 @@ export class DemoService {
                     notes: notes[Math.floor(Math.random() * notes.length)],
                 } as OrderItem,
             ],
+            status: OrderStatusTypes.pending
         } as Order;
     }
 
@@ -173,6 +174,11 @@ export class DemoService {
                             { id: 'T2', name: 'Table 2', seats: 2 },
                             { id: 'T3', name: 'Table 3', seats: 6 },
                         ],
+                        orders: [
+                            this.generateDemoOrder(),
+                            this.generateDemoOrder(),
+                            this.generateDemoOrder()
+                        ]
                     },
                 } as AppState;
                 return demoData;

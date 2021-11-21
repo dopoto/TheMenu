@@ -12,6 +12,4 @@ export class OrdersService {
     constructor(private readonly store: Store) {
         this.isDemo$ = this.store.pipe(select(selectIsDemo));
     }
-
-    
 }
