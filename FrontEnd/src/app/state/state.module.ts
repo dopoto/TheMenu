@@ -8,8 +8,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { reducers, metaReducers } from './app.state';
 import { AuthEffects } from './effects/auth.effects';
+import { CurrentLocationEffects } from './effects/current-location.effects';
 import { DemoEffects } from './effects/demo.effects';
 import { HydrateEffects } from './effects/hydrate.effects';
+import { LocationsEffects } from './effects/locations.effects';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { HydrateEffects } from './effects/hydrate.effects';
         EffectsModule.forRoot([
             HydrateEffects,
             AuthEffects,
-            DemoEffects
+            DemoEffects,
+            LocationsEffects,
+            CurrentLocationEffects
         ]),
     ],
     exports: [

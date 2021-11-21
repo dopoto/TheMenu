@@ -25,3 +25,13 @@ export enum DemoActionTypes {
     exitDemoOk = 'exitDemoOk',
     exitDemoError = 'exitDemoError',
 } 
+
+export enum LocationsActionTypes {
+
+}
+
+export enum CurrentLocationActionTypes {
+    addOrder = '[Current Location] Add order',
+    addOrderOk = '[Current Location] Order added',
+    addOrderError = '[Current Location] Adding order failed',
+}

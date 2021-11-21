@@ -1,8 +1,8 @@
-import { MenuSection } from "./menu-section";
+import { MenuCategory } from "./menu-category";
 
 export interface Menu {
     id: string; // TODO Guid?
     name: string;
-    sections: MenuSection[];
+    categories: MenuCategory[];
     currency: string; // TODO use enum
 }

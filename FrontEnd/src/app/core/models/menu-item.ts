@@ -1,6 +1,6 @@
 export interface MenuItem {
-    id: string; // TODO Guid?
+    id: string;
     name: string;
-    description?: string;
+    description: string;
     price: number;
 }

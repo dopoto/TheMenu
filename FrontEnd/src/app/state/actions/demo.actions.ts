@@ -10,6 +10,7 @@ export const initDemo = createAction(
     actionTypes.initDemo,
     props<{ demoSettings: DemoSettings }>()
 );
+
 export const initDemoOk = createAction(
     actionTypes.initDemoOk,
     props<{
@@ -17,12 +18,15 @@ export const initDemoOk = createAction(
         demoSettings: DemoSettings;
     }>()
 );
+
 export const initDemoError = createAction(actionTypes.initDemoError);
 
 export const exitDemo = createAction(actionTypes.exitDemo);
+
 export const exitDemoOk = createAction(
     actionTypes.exitDemoOk
 );
+
 export const exitDemoError = createAction(
     actionTypes.exitDemoError,
     props<{ errorMessage: string }>()

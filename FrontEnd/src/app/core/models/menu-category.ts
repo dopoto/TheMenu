@@ -1,6 +1,6 @@
 import { MenuItem } from "./menu-item";
 
-export interface MenuSection {
+export interface MenuCategory {
     name: string;
-    menuItems: MenuItem[];
+    items: MenuItem[];
 }

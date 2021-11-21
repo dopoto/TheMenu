@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
+		"git.decorations.enabled":false,
 		"workbench.colorCustomizations": {
 			"activityBar.activeBackground": "#009700",
 			"activityBar.activeBorder": "#2020ff",
@@ -23,7 +24,9 @@
 			"sash.hoverBorder": "#009700",
 			"statusBarItem.remoteBackground": "#006400",
 			"statusBarItem.remoteForeground": "#e7e7e7",
-			"tab.inactiveBackground": "#969696"
+			"tab.inactiveBackground": "#c7c6c6",
+			"gitDecoration.modifiedResourceForeground": "#FFFFFF",
+			"tab.activeForeground": "#000000"
 		},
 		"peacock.color": "darkgreen",
 		"files.exclude": {
