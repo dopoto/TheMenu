@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
+import { Table } from 'src/app/core/models/table';
 import { LogService } from 'src/app/core/services/log/log.service';
-import { Table } from '../../models/table';
 
 @Injectable({
     providedIn: 'root',
@@ -16,10 +16,10 @@ export class TablesService {
         // const url = `/api/tables?location=...`;
         // return this.http.get<Table[]>(url);
         const fakeTables = <Table[]>[
-            {index: 'as345fwe', alias: 'My Table 1', seats: 2},
-            {index: 'xtis06h6', alias: 'Window Table 1', seats: 6},
-            {index: 'asd2waas', alias: 'My Table 3', seats:4},
-            {index: 'cv345rws', alias: 'My Large Table', seats: 12},
+            {id: 'as345fwe', name: 'My Table 1', seats: 2},
+            {id: 'xtis06h6', name: 'Window Table 1', seats: 6},
+            {id: 'asd2waas', name: 'My Table 3', seats:4},
+            {id: 'cv345rws', name: 'My Large Table', seats: 12},
         ];
         return of(fakeTables);
     }

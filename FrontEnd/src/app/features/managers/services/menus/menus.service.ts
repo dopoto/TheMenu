@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { LogService } from 'src/app/core/services/log/log.service';
-import { Menu } from '../../models/menu';
+import { Menu } from 'src/app/core/models/menu';
 
 @Injectable({
     providedIn: 'root',
@@ -19,9 +19,9 @@ export class MenusService {
             {
                 id: 'as345fwe',
                 name: 'My Menu 1',
-                sections: [
-                    { name: 'Drinks', menuItems: [] },
-                    { name: 'Foods', menuItems: [] }
+                categories: [
+                    { name: 'Drinks', items: [] },
+                    { name: 'Foods', items: [] }
                 ],
             },
         ];
