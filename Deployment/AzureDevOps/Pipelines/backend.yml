@@ -132,12 +132,12 @@ steps:
 # - script: ./BackEnd/dotnet ef migrations bundle
 
 
-# - task: UseDotNet@2
-#   displayName: Generate EF migrations script
-#   inputs:
-#     version: $(dotNetVersion)
-#     includePreviewVersions: true
-# - script: dotnet ef migrations script --output db.sql --project BackEnd --context AppDbContextConnection --connectionString '$(ConnectionStrings.AppDbContextConnection)'  --idempotent
+- task: UseDotNet@2
+  displayName: Generate EF migrations script
+  inputs:
+    version: $(dotNetVersion)
+    includePreviewVersions: true
+- script: dotnet ef migrations script --output db.sql --project BackEnd --context AppDbContextConnection --connectionString '$(ConnectionStrings.AppDbContextConnection)'  --idempotent
 
 - task: DotNetCoreCLI@2
   displayName: 'Publish app as .NET 6 self-contained application for Linux runtime'
