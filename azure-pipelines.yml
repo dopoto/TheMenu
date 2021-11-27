@@ -184,7 +184,7 @@ steps:
   inputs:
     script: |
       dotnet new tool-manifest
-      dotnet tool install --global dotnet-ef --version 6.0.0-rc.1.21452.10
-      dotnet tool update --global dotnet-ef --version 6.0.0-rc.1.21452.10
+      dotnet tool install --global dotnet-ef
+      dotnet tool update --global dotnet-ef
       dotnet ef migrations bundle
     workingDirectory: '$(System.DefaultWorkingDirectory)/BackEnd'
