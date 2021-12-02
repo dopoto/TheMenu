@@ -36,8 +36,8 @@ steps:
     script: |
       nuget locals http-cache -clear
       dotnet new tool-manifest
-      dotnet tool install --global dotnet-ef --version 6.0.1
-      dotnet tool update --global dotnet-ef --version 6.0.1
+      dotnet tool install --global dotnet-ef --version 6.0.0
+      dotnet tool update --global dotnet-ef --version 6.0.0
 #      dotnet tool restore --interactive
 
 - task: efcore-migration-script-generator-task@1
