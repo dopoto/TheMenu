@@ -85,7 +85,7 @@ steps:
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0
       dotnet tool update --global dotnet-ef --version 6.0.0
-      dotnet ef migrations bundle
+      dotnet ef migrations bundle --project BackEnd
 
 
 # v2.2
