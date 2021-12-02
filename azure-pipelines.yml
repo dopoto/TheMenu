@@ -30,6 +30,46 @@ steps:
 # /usr/share/dotnet/sdk/5.0.401/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.TargetFrameworkInference.targets(141,5): error NETSDK1045: 
 # The current .NET SDK does not support targeting .NET 6.0.  Either target .NET 5.0 or lower, or use a version of the .NET SDK that supports .NET 6.0. [/home/vsts/work/1/s/BackEnd/BackEnd.csproj]
 
+
+# v2 
+# # ERROR System.ArgumentException: The string argument 'connectionString' cannot be empty.
+# Finding DbContext classes...
+# Finding IDesignTimeDbContextFactory implementations...
+# Finding application service provider in assembly 'TheMenu.BackEnd'...
+# Finding Microsoft.Extensions.Hosting service provider...
+# Using environment 'Development'.
+# Using application service provider from Microsoft.Extensions.Hosting.
+# System.ArgumentException: The string argument 'connectionString' cannot be empty.
+#    at Microsoft.EntityFrameworkCore.Utilities.Check.NotEmpty(String value, String parameterName)
+
+
+# - task: UseDotNet@2
+#   displayName: 'Use .NET Core sdk'
+#   inputs:
+#     packageType: 'sdk'
+#     version: '6.0.x'
+#     includePreviewVersions: true
+    
+# - task: CmdLine@2
+#   displayName: 'Execute EF Migrations'
+#   inputs:
+#     script: |
+#       nuget locals http-cache -clear
+#       dotnet new tool-manifest
+#       dotnet tool install --global dotnet-ef --version 6.0.0
+#       dotnet tool update --global dotnet-ef --version 6.0.0
+# #      dotnet tool restore --interactive
+
+# - task: efcore-migration-script-generator-task@1
+#   inputs:
+#     installdependencies: true
+#     projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
+#     databasecontexts: 'TheMenuBackEndContext'
+#     startupprojectpath: '$(Build.SourcesDirectory)/BackEnd'
+#     targetfolder: '$(build.artifactstagingdirectory)/migrations'
+
+
+# v2.1
 - task: UseDotNet@2
   displayName: 'Use .NET Core sdk'
   inputs:
@@ -45,15 +85,7 @@ steps:
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0
       dotnet tool update --global dotnet-ef --version 6.0.0
-#      dotnet tool restore --interactive
-
-- task: efcore-migration-script-generator-task@1
-  inputs:
-    installdependencies: true
-    projectpath: '$(Build.SourcesDirectory)/BackEnd/BackEnd.csproj'
-    databasecontexts: 'TheMenuBackEndContext'
-    startupprojectpath: '$(Build.SourcesDirectory)/BackEnd'
-    targetfolder: '$(build.artifactstagingdirectory)/migrations'
+      dotnet ef migrations bundle
 
 
 # v2.2
