@@ -71,22 +71,22 @@ steps:
 # ------
 # v2.1
 # ERROR: Unrecognized option '--connection'
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk'
-  inputs:
-    packageType: 'sdk'
-    version: '6.0.x'
-    includePreviewVersions: true
+# - task: UseDotNet@2
+#   displayName: 'Use .NET Core sdk'
+#   inputs:
+#     packageType: 'sdk'
+#     version: '6.0.x'
+#     includePreviewVersions: true
     
-- task: CmdLine@2
-  displayName: 'Execute EF Migrations'
-  inputs:
-    script: |
-      nuget locals http-cache -clear
-      dotnet new tool-manifest
-      dotnet tool install --global dotnet-ef --version 6.0.0
-      dotnet tool update --global dotnet-ef --version 6.0.0
-      dotnet ef migrations bundle --project BackEnd --verbose --connection '$(ConnectionStrings.AppDbContextConnection)'
+# - task: CmdLine@2
+#   displayName: 'Execute EF Migrations'
+#   inputs:
+#     script: |
+#       nuget locals http-cache -clear
+#       dotnet new tool-manifest
+#       dotnet tool install --global dotnet-ef --version 6.0.0
+#       dotnet tool update --global dotnet-ef --version 6.0.0
+#       dotnet ef migrations bundle --project BackEnd --verbose --connection '$(ConnectionStrings.AppDbContextConnection)'
 
 # ------
 # v2.11
