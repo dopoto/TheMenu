@@ -85,8 +85,7 @@ steps:
       dotnet new tool-manifest
       dotnet tool install --global dotnet-ef --version 6.0.0
       dotnet tool update --global dotnet-ef --version 6.0.0
-      dotnet ef migrations bundle --project BackEnd 
-      ./bundle --connection '$(ConnectionStrings.AppDbContextConnection)'
+      dotnet ef migrations bundle --project BackEnd --verbose
 
 
 # v2.2
